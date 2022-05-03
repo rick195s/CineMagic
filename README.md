@@ -1,6 +1,6 @@
 # TIPS
 
-Foi usado scaffold bootstrap:
+Foi usado scaffold bootstrap. Basicamente foram implementadas coisas automaticamente que correspondem ao auth de users e páginas base:
     
     https://hdtuto.com/article/laravel-8-bootstrap-auth-example-step-by-step
 
