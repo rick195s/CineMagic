@@ -1,5 +1,9 @@
 # TIPS
 
+Foi usado scaffold bootstrap:
+    
+    https://hdtuto.com/article/laravel-8-bootstrap-auth-example-step-by-step
+
 Sempre que se criarem controllers usamos: 
     
     php artisan make:controller NomeController --resource
