@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// adicionar rotas de autenticação (login, logout, register, etc)
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
