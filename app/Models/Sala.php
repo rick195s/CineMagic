@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Sala extends Model
 {
     use HasFactory;
+
+    // relation salas 1:n sessoes
+    public function sessoes()
+    {
+        return $this->hasMany(Sessao::class);
+    }
 }
