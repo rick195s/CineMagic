@@ -22,4 +22,10 @@ class Sessao extends Model
     {
         return $this->belongsTo(Filme::class);
     }
+
+    // relation sessoes 1:n bilhetes
+    public function bilhetes()
+    {
+        return $this->hasMany(Bilhete::class);
+    }
 }
