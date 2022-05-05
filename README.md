@@ -64,7 +64,7 @@ Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligaç
             // A user may have or not a phone
             public function phone()
             {
-            return $this->hasOne(Phone::class);
+                return $this->hasOne(Phone::class);
             }
         }
         
@@ -77,8 +77,27 @@ Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligaç
              }
          }
 
+#### Como usar:
 
-      
+``` 
+// vai buscar o numero de telefone do user com id 123
+$phone = User::find(123)->phone;
+$phone->number = '99293283';
+
+// vai buscar o user do numero de telemovel com id 324
+$user = Phone::find(324)->user;
+$str = "I'm calling " . $user->name;
+```
+
+
+
+
+
+
+
+
+
+    
 
 ### Soft Deletes:
 
