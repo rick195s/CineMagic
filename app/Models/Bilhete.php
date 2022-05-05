@@ -20,4 +20,10 @@ class Bilhete extends Model
     {
         return $this->belongsTo(Lugar::class);
     }
+
+    // relation clients 1:n bilhetes
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
 }
