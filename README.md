@@ -72,7 +72,13 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 
 
-Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:
+Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
+
+
+
+belongsTo fica sempre no Modelo em que a tabela tem a foreign_key;
+
+
 
 Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligação entre si.
     Exemplo: 
@@ -107,6 +113,24 @@ $phone->number = '99293283';
 // vai buscar o user do numero de telemovel com id 324
 $user = Phone::find(324)->user;
 $str = "I'm calling " . $user->name;
+```
+
+ir buscar um filme que tenha pelo menos uma sessao:
+
+```
+$sessoes = Filme::has('sessoes')->first();
+```
+
+ir buscar todas as sessoes do filme que tem pelo menos uma sessao:
+
+```
+$sessoes = Filme::has('sessoes')->first()->sessoes;
+```
+
+caso a chave primaria de uma tabela seja diferente de id temos de fazer:
+
+```
+protected $primaryKey = "your_key_name";
 ```
 
 
