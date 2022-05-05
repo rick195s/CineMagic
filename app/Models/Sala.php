@@ -14,4 +14,10 @@ class Sala extends Model
     {
         return $this->hasMany(Sessao::class);
     }
+
+    // relation salas 1:n lugares
+    public function lugares()
+    {
+        return $this->hasMany(Lugar::class);
+    }
 }
