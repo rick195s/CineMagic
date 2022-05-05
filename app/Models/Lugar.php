@@ -16,4 +16,10 @@ class Lugar extends Model
     {
         return $this->belongsTo(Sala::class);
     }
+
+    // relation bilhetes 1:1 lugares
+    public function bilhete()
+    {
+        return $this->hasOne(Bilhete::class);
+    }
 }
