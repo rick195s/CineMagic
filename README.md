@@ -41,7 +41,7 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 ## Models:
 
-##### Criar Modelos usamos:
+### Criar Modelos usamos:
 
 ```
     php artisan make:model NomeModel
@@ -50,7 +50,7 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 
 
-##### Relações entre Modelos:
+### Relações entre Modelos:
 
 Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:
 
@@ -69,7 +69,7 @@ Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligaç
         }
         
         class Phone extends Model
-         {
+        {
              // A phone always belongs to a user
              public function user()
              {    
@@ -80,7 +80,7 @@ Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligaç
 
       
 
-##### Soft Deletes:
+### Soft Deletes:
 
     soft delete consiste em alterar a coluna deleted_at na tabela em vez de eliminar mesmo a linha da tabela
 
