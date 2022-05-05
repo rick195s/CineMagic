@@ -16,4 +16,10 @@ class Sessao extends Model
     {
         return $this->belongsTo(Sala::class);
     }
+
+    // relation filmes 1:n sessoes
+    public function filme()
+    {
+        return $this->belongsTo(Filme::class);
+    }
 }
