@@ -9,6 +9,8 @@ class Sessao extends Model
 {
     use HasFactory;
 
+    protected $table = 'sessoes';
+
     // relation salas 1:n sessoes
     public function sala()
     {
