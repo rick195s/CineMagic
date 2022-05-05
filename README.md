@@ -52,6 +52,26 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 ### Relações entre Modelos:
 
+- salas 1:n sessoes:
+
+- filmes 1:n sessoes;
+
+- sessoes 1:n bilhetes;
+
+- salas 1:n lugares;
+
+- bilhetes 1:1 lugares;
+
+- generos 1:n filmes;
+
+- clientes 1:n bilhetes;
+
+- clientes 1:n recibos;
+
+- recibos 1:n bilhetes;
+
+
+
 Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:
 
 Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligação entre si.
