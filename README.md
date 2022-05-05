@@ -7,7 +7,7 @@ https://laravel.com/docs/7.x/authentication#authentication-quickstart
 https://hdtuto.com/article/laravel-8-bootstrap-auth-example-step-by-step
 
 Sempre que se criarem controllers usamos: 
-    
+
     php artisan make:controller NomeController --resource
 
 --resource vai criar um controlador com metodos default
@@ -15,9 +15,8 @@ Sempre que se criarem controllers usamos:
 https://laravel.com/docs/8.x/controllers#actions-handled-by-resource-controller
 
 Para usarmos os valores nas Rotas usamos: 
- 
-    Route::resource('Url', NomeController::class)
 
+    Route::resource('Url', NomeController::class)
 
 A aplicação vai traduzir as strings automaticamente para português porque no ficheiro config/app.php colocamos o locale a pt_PT. 
 Ao colocamos esse parametro o Laravel vai à pasta resources/lang/pt_PT ver as traduções. 
@@ -37,38 +36,55 @@ Para gerarmos rotas dinamicamente na vista usamos:
     route('nome_dado_à_rota')
 
 Para vermos se estamos numa rota com um certo nome usamos:
-    
+
     Route::currentRouteName() == 'nome_dado_à_rota'
 
-Models:
-    Criar Modelos usamos:
+## Models:
 
-        php artisan make:model NomeModel
+##### Criar Modelos usamos:
 
-    Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre estabelecer as ligações entre objetos ORM, 1:1, 1:n, n:m:
-        Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligação entre si.
-        Exemplo: 
+```
+    php artisan make:model NomeModel
+```
 
-            class User extends Model
+
+
+
+##### Relações entre Modelos:
+
+Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:
+
+Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligação entre si.
+    Exemplo: 
+
+ ```
+
+        class User extends Model
+        {
+            // A user may have or not a phone
+            public function phone()
             {
-                // A user may have or not a phone
-                public function phone()
-                {
-                return $this->hasOne(Phone::class);
-                }
+            return $this->hasOne(Phone::class);
             }
+        }
+        
+        class Phone extends Model
+         {
+             // A phone always belongs to a user
+             public function user()
+             {    
+                 return $this->belongsTo(User::class);
+             }
+         }
 
-            class Phone extends Model
-            {
-                // A phone always belongs to a user
-                public function user()
-                {
-                return $this->belongsTo(User::class);
-                }
-            }
 
-    Soft Deletes:
-        soft delete consiste em alterar a coluna deleted_at na tabela em vez de eliminar mesmo a linha da tabela
+      
+
+##### Soft Deletes:
+
+    soft delete consiste em alterar a coluna deleted_at na tabela em vez de eliminar mesmo a linha da tabela
+
+
 
 É possivel tambem restringir valores passados no Url
 
