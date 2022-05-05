@@ -14,4 +14,10 @@ class Filme extends Model
     {
         return $this->hasMany(Sessao::class);
     }
+
+    // relation generos 1:n filmes
+    public function genero()
+    {
+        return $this->belongsTo(Genero::class);
+    }
 }
