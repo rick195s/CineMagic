@@ -57,7 +57,7 @@ Para ser mais facil fazer pesquisas à base de dados e organizar os Models do pr
 Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligação entre si.
     Exemplo: 
 
- ```
+
 
         class User extends Model
         {
@@ -90,14 +90,6 @@ $str = "I'm calling " . $user->name;
 ```
 
 
-
-
-
-
-
-
-
-    
 
 ### Soft Deletes:
 
