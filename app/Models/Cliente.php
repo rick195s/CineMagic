@@ -14,4 +14,10 @@ class Cliente extends User
     {
         return $this->hasMany(Bilhete::class);
     }
+
+    // relation clients 1:n recibos
+    public function recibos()
+    {
+        return $this->hasMany(Recibo::class);
+    }
 }
