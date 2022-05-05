@@ -14,4 +14,10 @@ class Recibo extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    // relation recibos 1:n bilhetes
+    public function bilhetes()
+    {
+        return $this->hasMany(Bilhete::class);
+    }
 }
