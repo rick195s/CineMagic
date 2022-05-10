@@ -20,4 +20,12 @@ class Cliente extends Model
     {
         return $this->hasMany(Recibo::class);
     }
+
+    // relation clientes 1:1 users
+    // the client have properties that are inside "users" table, so
+    // we need to use the "user" relationship to get the properties
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'id');
+    }
 }

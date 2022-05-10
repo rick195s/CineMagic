@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relation clientes 1:1 users
+    // we can use this relation to verify if a user has a client associated
+    // with it in the "clientes" table
+    public function cliente()
+    {
+        return $this->hasOne(Cliente::class, 'id', 'id');
+    }
 }

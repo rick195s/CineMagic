@@ -10,6 +10,7 @@ use App\Models\Lugar;
 use App\Models\Recibo;
 use App\Models\Sala;
 use App\Models\Sessao;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -39,7 +40,9 @@ class HomeController extends Controller
             dump($bilhete);
         }
 
-
+        // Ir buscar os valores do cliente presentes na tabela "users"
+        $cliente = Cliente::first();
+        dump($cliente->user);
 
         return view('home');
     }
