@@ -68,6 +68,8 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 - clientes 1:n recibos;
 
+- clientes 1:1 users;
+
 - recibos 1:n bilhetes;
 
 
