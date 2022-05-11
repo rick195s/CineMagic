@@ -65,6 +65,8 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 - clientes 1:n recibos;
 
+- clientes 1:1 users;
+
 - recibos 1:n bilhetes;
 
 Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
