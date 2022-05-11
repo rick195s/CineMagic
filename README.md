@@ -134,6 +134,12 @@ Policies -> são usadas para verificar se um user tem autorização para ver rec
 php artisan make:policy BilhetePolicy
 ```
 
+Criar policies com operacoes basicas de CRUD para um model:
+
+```
+php artisan make:policy BilhetePolicy --model=Bilhete
+```
+
 
 
 Gates -> são usados para verificar se um user tem autorizações globais, aceder a coisas que não estão relacionados com models ou recursos, por exemplo quem pode ver a pagina de dashboard
@@ -174,8 +180,6 @@ route...->middleware('can:view,account');
 cannot('view, bilhete') 
 @endcannot
 ```
-
-
 
 ### Soft Deletes:
 
