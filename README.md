@@ -47,9 +47,6 @@ Para vermos se estamos numa rota com um certo nome usamos:
     php artisan make:model NomeModel
 ```
 
-
-
-
 ### Relações entre Modelos:
 
 - salas 1:n sessoes:
@@ -70,20 +67,12 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 - recibos 1:n bilhetes;
 
-
-
 Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
-
-
 
 belongsTo fica sempre no Modelo em que a tabela tem a foreign_key;
 
-
-
 Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligação entre si.
     Exemplo: 
-
-
 
         class User extends Model
         {
@@ -93,7 +82,7 @@ Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligaç
                 return $this->hasOne(Phone::class);
             }
         }
-        
+    
         class Phone extends Model
         {
              // A phone always belongs to a user
@@ -105,7 +94,7 @@ Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligaç
 
 #### Como usar:
 
-``` 
+```
 // vai buscar o numero de telefone do user com id 123
 $phone = User::find(123)->phone;
 $phone->number = '99293283';
@@ -133,13 +122,62 @@ caso a chave primaria de uma tabela seja diferente de id temos de fazer:
 protected $primaryKey = "your_key_name";
 ```
 
+### Policies e Gates:
+
+Estes mecanismos são usados para ajudar na autorização de processos de sistema.
+
+Policies -> são usadas para verificar se um user tem autorização para ver recursos por exmeplo bilhetes, sessões, ficheiros, etc.
+
+```
+php artisan make:policy BilhetePolicy
+```
+
+
+
+Gates -> são usados para verificar se um user tem autorizações globais, aceder a coisas que não estão relacionados com models ou recursos, por exemplo quem pode ver a pagina de dashboard
+
+```
+Para criar temos de ir ao ficheiro
+
+App\Providers\AuthServiceProvider.php
+
+e dentro da funcao boot meter 
+
+Gate::define('access-dashboard', function ($user) {
+// Only "admin" users can "access-dashboard"
+return $user->admin;
+});
+```
+
+#### Como usar:
+
+    Podemos colocar dentro de controllers:
+
+```
+$this->authorize('view', $bilhete);
+```
+
+    Podemos usar dentro de middlewares:
+
+```
+route...->middleware('can:view,account');
+```
+
+    Podemos usar dentro de views:
+
+```
+@can('view, bilhete')
+@endcan
+
+cannot('view, bilhete') 
+@endcannot
+```
+
 
 
 ### Soft Deletes:
 
     soft delete consiste em alterar a coluna deleted_at na tabela em vez de eliminar mesmo a linha da tabela
-
-
 
 É possivel tambem restringir valores passados no Url
 

@@ -4,13 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bilhete;
 use App\Models\Cliente;
-use App\Models\Filme;
-use App\Models\Genero;
-use App\Models\Lugar;
 use App\Models\Recibo;
-use App\Models\Sala;
-use App\Models\Sessao;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
