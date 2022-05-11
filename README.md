@@ -49,25 +49,7 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 ### Relações entre Modelos:
 
-- salas 1:n sessoes:
-
-- filmes 1:n sessoes;
-
-- sessoes 1:n bilhetes;
-
-- salas 1:n lugares;
-
-- bilhetes 1:1 lugares;
-
-- generos 1:n filmes;
-
-- clientes 1:n bilhetes;
-
-- clientes 1:n recibos;
-
-- clientes 1:1 users;
-
-- recibos 1:n bilhetes;
+- 
 
 Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
 
@@ -123,6 +105,49 @@ caso a chave primaria de uma tabela seja diferente de id temos de fazer:
 ```
 protected $primaryKey = "your_key_name";
 ```
+
+### Middlewares:
+
+Servem para executar ou verificar coisas antes do Laravel chamar o controlador.
+
+Por exemplo, podemos criar middlewares para verificar se um user é admin ou para criar logs das ações do users, etc.
+
+#### Como usar:
+
+```
+php artisan make:middleware IsAdmin
+```
+
+depois dentro do ficheiro gerado dentro de App\Http\Middleware existe uma função handle, e é ai onde fazemos a nossa logica.
+
+chamamos o Closure $next quando a operação é permitida ou correu com sucesso.
+
+
+
+Para ser possivel usar o middleware temos de o registar no Kernel, App\Http\Kernel.php.
+
+```
+protected $routeMiddleware = [
+    . . . ,
+    'admin' => \App\Http\Middleware\IsAdmin::class,
+];
+```
+
+usar num controller:
+
+```
+__construct(){
+    $this->middleware('isAdmin');   
+}
+```
+
+usar nas rotas:
+
+``` 
+route...->middleware('isAdmin');
+```
+
+
 
 ### Policies e Gates:
 
@@ -188,3 +213,43 @@ cannot('view, bilhete')
 É possivel tambem restringir valores passados no Url
 
 https://laravel.com/docs/8.x/routing#parameters-regular-expression-constraints
+
+
+
+## O que já foi feito:
+
+##### Laravel UI instalada.
+
+##### Middlewares:
+
+- isAdmin();
+
+##### Policies:
+
+    BilhetePolicy:
+
+-    view(); 
+
+
+
+##### Relações entre modelos:
+
+- salas 1:n sessoes:
+
+- filmes 1:n sessoes;
+
+- sessoes 1:n bilhetes;
+
+- salas 1:n lugares;
+
+- bilhetes 1:1 lugares;
+
+- generos 1:n filmes;
+
+- clientes 1:n bilhetes;
+
+- clientes 1:n recibos;
+
+- clientes 1:1 users;
+
+- recibos 1:n bilhetes;

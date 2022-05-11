@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bilhete;
-use App\Models\Cliente;
-use App\Models\Recibo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,18 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $recibo = Bilhete::first()->recibo;
-        dump($recibo);
-
-        $bilhetes = Recibo::has('bilhetes')->first()->bilhetes->take(2);
-        foreach ($bilhetes  as $bilhete) {
-            dump($bilhete);
-        }
-
-        // Ir buscar os valores do cliente presentes na tabela "users"
-        $cliente = Cliente::first();
-        dump($cliente->user);
-
         return view('home');
     }
 }
