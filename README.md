@@ -23,7 +23,11 @@ Ao colocamos esse parametro o Laravel vai à pasta resources/lang/pt_PT ver as t
 
 Para usar traducoes que estejam dentro de resources/lang/pt_PT.json podemos usar:
 
+    dentro de php:
     echo __('Email');
+    
+    numa view:
+    {{ __('Register') }}
 
 Uma boa pratica é dar nome às rotas:
 
@@ -49,9 +53,7 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 ### Relações entre Modelos:
 
-- 
-
-Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
+- Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
 
 belongsTo fica sempre no Modelo em que a tabela tem a foreign_key;
 
@@ -122,8 +124,6 @@ depois dentro do ficheiro gerado dentro de App\Http\Middleware existe uma funç�
 
 chamamos o Closure $next quando a operação é permitida ou correu com sucesso.
 
-
-
 Para ser possivel usar o middleware temos de o registar no Kernel, App\Http\Kernel.php.
 
 ```
@@ -143,11 +143,9 @@ __construct(){
 
 usar nas rotas:
 
-``` 
+```
 route...->middleware('isAdmin');
 ```
-
-
 
 ### Policies e Gates:
 
@@ -164,8 +162,6 @@ Criar policies com operacoes basicas de CRUD para um model:
 ```
 php artisan make:policy BilhetePolicy --model=Bilhete
 ```
-
-
 
 Gates -> são usados para verificar se um user tem autorizações globais, aceder a coisas que não estão relacionados com models ou recursos, por exemplo quem pode ver a pagina de dashboard
 
@@ -214,8 +210,6 @@ cannot('view, bilhete')
 
 https://laravel.com/docs/8.x/routing#parameters-regular-expression-constraints
 
-
-
 ## O que já foi feito:
 
 ##### Laravel UI instalada.
@@ -229,8 +223,6 @@ https://laravel.com/docs/8.x/routing#parameters-regular-expression-constraints
     BilhetePolicy:
 
 -    view(); 
-
-
 
 ##### Relações entre modelos:
 

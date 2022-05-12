@@ -1,10 +1,10 @@
 {
     
-    "Remember me": "Manter sessão",
+    "Remember Me": "Manter sessão",
     "Email": "Endereço de e-mail",
     "Password": "Senha",
-    "Forgot your password?": "Recuperar senha",
-    "Log in": "Iniciar Sessão",
+    "Forgot Your Password?": "Recuperar senha",
+    "Login": "Iniciar Sessão",
     "Name": "Nome",
     "Confirm": "Confirmar",
     "Confirm Password": "Confirmar senha",
@@ -14,7 +14,7 @@
     "Already registered?": "Já possui uma conta?",
     "Register": "Registar",
     "Home": "Inicio",
-    "Log Out": "Terminar Sessão",
+    "Logout": "Terminar Sessão",
     "Toggle navigation": "Alternar navegação",
     "Verify Your Email Address": "Verifique o seu endereço de email",
     "A fresh verification link has been sent to your email address.": "Foi enviado um novo link de verificação para o seu email",
