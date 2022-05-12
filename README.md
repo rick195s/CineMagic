@@ -210,9 +210,23 @@ cannot('view, bilhete')
 
 https://laravel.com/docs/8.x/routing#parameters-regular-expression-constraints
 
+### Packages que vamos precisar:
+
+#### QRCode:
+
+https://github.com/SimpleSoftwareIO/simple-qrcode
+
+#### Gerar Pdf:
+
+https://github.com/barryvdh/laravel-dompdf
+
 ## O que já foi feito:
 
-##### Laravel UI instalada.
+- Laravel UI instalada.
+
+- Email de recuperar senha a ser enviado
+
+
 
 ##### Middlewares:
 
@@ -245,3 +259,100 @@ https://laravel.com/docs/8.x/routing#parameters-regular-expression-constraints
 - clientes 1:1 users;
 
 - recibos 1:n bilhetes;
+
+## O que temos de fazer:
+
+#### Autentificação, perfil e gestao de utilizadores:
+
+- [ ] Utilizadores não autenticados só podem tentar fazer login e registar-se. Depois de ser registarem um email de verificação tem de ser enviado;
+
+- [ ] Os clientes têm acesso ao seu perfil;
+
+- [ ] Os funcionários não têm acesso ao seu perfil;
+
+- [ ] Um administrador pode consultar, filtrar, criar, alterar, bloquear/desbloquear ou remover contas de funcionarios ou administradores; Excepto a ele proprio.
+
+- [ ] Um administrador não pode aceder ao perfil de um cliente, apenas pode consultar, filtrar a lista de clientes, bloquear/desbloquear ou apagar (soft delete) a conta dos clientes;
+
+#### Filmes em Exibição:
+
+- [ ] Qualquer utilizador pode ver quais os filmes em exibição, e as sessos dos mesmos;
+
+- [ ] Pesquisar (filtrar) filmes;
+
+#### Compra de Bilhetes:
+
+- [ ] Adicionar ou remover bilhetes para qualquer sesssao (ver especificacoes no enunciado);
+
+- [ ] Qualquer utilizador pode adicionar coisas ao carrinho;
+
+- [ ] Só clientes registados é que podem finalizar uma compra;
+
+- [ ] Se uma compra for feita com sucesso a aplicação cria um recibo e gera os bilhetes relativos à compra e limpa o carrinho de compras;
+
+- [ ] Se der erro na compra o carrinho fica como está e o cliente tem de ser avisado;
+
+- [ ] Apagar ou adicionar bilhetes ao carrinho;
+
+- [ ] Limpar o carrinho de compras por completo;
+
+#### Escolha de Lugares:
+
+- [ ] Cada lugar está associado a um bilhete unico, ou a zero bilhetes quando o lugar ainda esta vazio;
+
+- [ ] Quando um utilizador adicionar um bilhete ao carrinho, tem de escolher o lugar que quer;
+
+#### Historico, recibos e bilhetes:
+
+- [ ] Registar o recibo após o pagamento da compra;
+
+- [ ] Enviar o recibo automaticamente por email ao cliente;
+
+- [ ] Recibo tem de estar sempre disponivel em HTML (POLICIES);
+
+- [ ] Gerar recibo em PDF e armazenar permanentemente (POLICIES);
+
+- [ ] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo; 
+
+- [ ] Os bilhetes têm de estar sempre acessiceis em formato HTML (POLICIES);
+
+- [ ] Sempre que o utilizador clicar na opção de fazer download do bilhete, um PDF dinamico é gerado e é feito o download do mesmo, depois disso o PDF não é armazenado;
+
+- [ ] Os clientes devem ter acesso ao histórico de todos os recibos, sendo que podem ver o recibo e os bilhetes em HTML ou descarregra em PDF;
+
+- [ ] Os clientes têm acesso a todos os bilhetes válidos (os que ainda nao foram usados);
+
+#### Controlo de Acesso à sessao:
+
+- [ ] Os funcionarios têm acesso a uma página em que escolherm qual a sessão que estão a controlar; 
+
+- [ ] Depois de escolherem a sessao que estao a controlar o funcionario pode ter acesso a um leitor de qrcode ou alterar o estado do bilhete manualmente;
+
+- [ ] Se o bilhete for invalido a aplicacao avisa o funcionario.
+
+- [ ] Se o bilhete for valido a aplicacao deve mostar os detalhes do bilhete e informa que o bilhete é valido.
+
+- [ ] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
+
+- [ ] O funcionario deve ter um botao na aplicacao que ao clicar confirma o uso do bilhete, colocando o bilhete invalido;
+
+#### Administracao do negocio:
+
+- [ ] Os administradores podem gerir salas, lugares, salas, filmes, sessoes e outros valores que estao no enunciado.
+
+- [ ] O admin pode criar, alterar ou apagar (soft delete) as salas.
+
+- [ ] Para cada sala tem de ser possivel definir os lugares que a sala tem.
+
+- [ ] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
+
+- [ ] 
+- [ ] Para cada filme deve ser possivel fazer upload do cartaz:
+
+- [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
+  
+    
+  
+  
+  
+  
