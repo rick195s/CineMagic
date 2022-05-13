@@ -163,7 +163,21 @@ Criar policies com operacoes basicas de CRUD para um model:
 php artisan make:policy BilhetePolicy --model=Bilhete
 ```
 
-Gates -> são usados para verificar se um user tem autorizações globais, aceder a coisas que não estão relacionados com models ou recursos, por exemplo quem pode ver a pagina de dashboard
+Adicionar a policy:
+
+App/Providers/AuthServiceProvider.php
+
+```
+protected $policies = [
+    User::class => UserPolicy::class,
+]
+```
+
+
+
+
+
+Gates -> são usados para verificar se um user tem autorizações globais e de rotas por exemplo.
 
 ```
 Para criar temos de ir ao ficheiro
@@ -220,13 +234,23 @@ https://github.com/SimpleSoftwareIO/simple-qrcode
 
 https://github.com/barryvdh/laravel-dompdf
 
+## Standards:
+
+#### Routes:
+
+- Rotas de admin têm prefixo de 'admin.' e as funcoes relacionadas com admin nos controladores têm prefixo de 'admin_';
+
+- Rotas de admin têm de estar dentro de middleware 'isAdmin'
+
+#### Controllers:
+
+- Maior parte dos controllers têm de ter o middleware 'auth' no construtor;
+
 ## O que já foi feito:
 
 - Laravel UI instalada.
 
 - Email de recuperar senha a ser enviado
-
-
 
 ##### Middlewares:
 
@@ -234,9 +258,19 @@ https://github.com/barryvdh/laravel-dompdf
 
 ##### Policies:
 
-    BilhetePolicy:
+BilhetePolicy:
 
--    view(); 
+- view(); 
+
+UserPolicy:
+
+- view();
+
+#### Controllers:
+
+- HomeController;
+
+- UserController (Resource);
 
 ##### Relações entre modelos:
 
@@ -266,7 +300,11 @@ https://github.com/barryvdh/laravel-dompdf
 
 - [ ] Utilizadores não autenticados só podem tentar fazer login e registar-se. Depois de ser registarem um email de verificação tem de ser enviado;
 
+- [ ] Quando uma pessoa cria conta tem de ser criado um cliente;
+
 - [ ] Os clientes têm acesso ao seu perfil;
+
+- [ ] Qualquer user pode alterar a sua password;
 
 - [ ] Os funcionários não têm acesso ao seu perfil;
 
@@ -346,13 +384,6 @@ https://github.com/barryvdh/laravel-dompdf
 
 - [ ] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
 
-- [ ] 
 - [ ] Para cada filme deve ser possivel fazer upload do cartaz:
 
 - [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
-  
-    
-  
-  
-  
-  
