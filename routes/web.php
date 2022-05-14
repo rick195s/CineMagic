@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // auth routes (login, logout, register, forgot password, reset password)
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 Route::get('/', function () {
