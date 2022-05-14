@@ -308,6 +308,8 @@ UserPolicy:
 
 - view();
 
+
+
 #### Controllers:
 
 - HomeController;
@@ -315,6 +317,8 @@ UserPolicy:
 - UserController (Resource, Usado no dashboard para editar funcionarios e admins);
 
 - ClienteController(Usado para funções que o cliente pode fazer);
+
+- ChangePasswordController (Usado para alterar a password do user);
 
 ##### Relações entre modelos:
 

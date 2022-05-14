@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// auth routes (login, logout, register, forgot password, reset password)
+// rotas de autentificação, verify => true, faz a verificação de email
 Auth::routes(['verify' => true]);
 
 
@@ -27,19 +28,23 @@ Route::get('/', function () {
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/profile', [ClienteController::class, 'index'])->name('profile');
+Route::get('/profile', [ClienteController::class, 'index'])->name('client.profile');
 
 
-// protected routes (only for admins)
-// routes with prefix admin
-// routes with admin. prefix in the name of the route
+// rotas para alteração da password
+Route::get('/password/change', [ChangePasswordController::class, 'index'])->name('change_password.index');
+Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');
+
+
+// rotas protegidas (só para admins)
+// rotas com prefixo admin
+// rotas com o prefixo admin. no seu nome
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
 
     // // admin dashboard main page
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-    // // admin dashboard manage users
-    // Route::get('/users', [UserController::class, 'admin_index'])->name('users.index');
+    // rotas para gerir users no dashboard admin
     Route::resource('user', UserController::class);
 
     // // admin dashboard manage salas

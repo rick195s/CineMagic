@@ -24,7 +24,6 @@ class ClienteController extends Controller
         if (Auth::user()->cannot('view', 'App\Models\Cliente')) {
             return redirect(route('home'));
         }
-
-        dd(Auth::user());
+        return view('home');
     }
 }
