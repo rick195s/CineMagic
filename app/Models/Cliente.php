@@ -10,6 +10,31 @@ class Cliente extends Model
 {
     use HasFactory, SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+
+    protected $fillable = [
+        'nif',
+        'endereco',
+        'tipo_pagamento',
+        'ref_pagamento'
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+
     // relation clients 1:n bilhetes
     public function bilhetes()
     {
