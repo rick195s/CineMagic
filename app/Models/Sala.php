@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sala extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     // relation salas 1:n sessoes
     public function sessoes()
