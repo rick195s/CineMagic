@@ -17,6 +17,7 @@ class Cliente extends Model
      */
 
     protected $fillable = [
+        'id',
         'nif',
         'endereco',
         'tipo_pagamento',
