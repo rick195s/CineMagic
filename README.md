@@ -350,11 +350,11 @@ UserPolicy:
 
 - [x] Quando uma pessoa cria conta tem de ser criado um cliente;
 
-- [ ] Os clientes têm acesso ao seu perfil;
+- [x] Só clientes têm acesso ao seu perfil;
 
 - [x] Os admin podem ver os detalhes do perfil de qualquer user no dashboard excepto clientes; (UserPolicy->view())
 
-- [ ] Os funcionarios não podem ver o seu perfil no dashboard nem no front; (UserPolicy->view())
+- [x] Os funcionarios não podem ver o seu perfil no dashboard nem no front; (UserPolicy->view(), ClientePolicy-view())
 
 - [ ] Qualquer user pode alterar a sua password;
 
