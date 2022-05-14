@@ -27,18 +27,18 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('user', UserController::class);
 
 // protected routes (only for admins)
 // routes with prefix admin
 // routes with admin. prefix in the name of the route
-Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
 
     // // admin dashboard main page
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     // // admin dashboard manage users
     // Route::get('/users', [UserController::class, 'admin_index'])->name('users.index');
+    Route::resource('user', UserController::class);
 
     // // admin dashboard manage salas
     // Route::get('/salas', [SalaController::class, 'admin_index'])->name('salas.index');

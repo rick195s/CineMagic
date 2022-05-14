@@ -21,16 +21,16 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
-     *
+     * Só os administradores é que podem ver perfis no dashboard
+     * e não podem ver perfis de Clientes
+     * 
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\User  $searchedUser
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, User $searchedUser)
     {
-        //
-        return $searchedUser->tipo != 'F' && $searchedUser->id == $user->id;
+        return  $user->tipo == 'A' && $searchedUser->tipo != 'C';
     }
 
 
@@ -59,15 +59,17 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * So admins é que podem eliminar outros utilizadores
+     * Admins não se podem eliminar a eles próprios
+     * Admins não podem eliminar users já eliminados
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\User  $userToDelete
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, User $userToDelete)
     {
-        //
+        return $user->tipo == 'A' && $user->id != $userToDelete->id && $userToDelete->deleted_at == null;
     }
 
     /**

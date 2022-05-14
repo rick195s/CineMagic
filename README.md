@@ -173,10 +173,6 @@ protected $policies = [
 ]
 ```
 
-
-
-
-
 Gates -> são usados para verificar se um user tem autorizações globais e de rotas por exemplo.
 
 ```
@@ -219,6 +215,52 @@ cannot('view, bilhete')
 ### Soft Deletes:
 
     soft delete consiste em alterar a coluna deleted_at na tabela em vez de eliminar mesmo a linha da tabela
+
+Os modelos que tenham deleted_at têm de use SoftDeletes;
+
+Verificar se um registo foi soft Deleted:
+
+```
+$user->trashed()
+```
+
+### Transacoes:
+
+sempre que duas operacoes na DB só fazem sentido serem feitas se outra foi feita usados transactions.
+
+Por exemplo:
+
+Quando damos softDelete do cliente, temos de dar softDelete do user tambem
+
+```
+     try {
+
+            DB::beginTransaction();
+            $createdUser = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+
+            Cliente::create([
+                'id' => $createdUser->id,
+            ]);
+
+            DB::commit();
+
+            return $createdUser;
+        } catch (\PDOException $e) {
+            DB::rollBack();
+
+            return null;
+        }
+```
+
+### Validações:
+
+Antes de inserirmos alguma coisa na DB temos de fazer as validacoes necessarias.
+
+
 
 É possivel tambem restringir valores passados no Url
 
@@ -270,7 +312,9 @@ UserPolicy:
 
 - HomeController;
 
-- UserController (Resource);
+- UserController (Resource, Usado no dashboard para editar funcionarios e admins);
+
+- ClienteController(Usado para funções que o cliente pode fazer);
 
 ##### Relações entre modelos:
 
@@ -294,21 +338,27 @@ UserPolicy:
 
 - recibos 1:n bilhetes;
 
+#### Models:
+
+- Cliente (fillable, hidden)
+
 ## O que temos de fazer:
 
 #### Autentificação, perfil e gestao de utilizadores:
 
-- [ ] Utilizadores não autenticados só podem tentar fazer login e registar-se. Depois de ser registarem um email de verificação tem de ser enviado;
+- [x] Utilizadores não autenticados só podem tentar fazer login e registar-se. Depois de ser registarem um email de verificação tem de ser enviado;
 
-- [ ] Quando uma pessoa cria conta tem de ser criado um cliente;
+- [x] Quando uma pessoa cria conta tem de ser criado um cliente;
 
 - [ ] Os clientes têm acesso ao seu perfil;
 
+- [x] Os admin podem ver os detalhes do perfil de qualquer user no dashboard excepto clientes; (UserPolicy->view())
+
+- [ ] Os funcionarios não podem ver o seu perfil no dashboard nem no front; (UserPolicy->view())
+
 - [ ] Qualquer user pode alterar a sua password;
 
-- [ ] Os funcionários não têm acesso ao seu perfil;
-
-- [ ] Um administrador pode consultar, filtrar, criar, alterar, bloquear/desbloquear ou remover contas de funcionarios ou administradores; Excepto a ele proprio.
+- [ ] Um administrador pode consultar filtrar, criar, alterar, bloquear/desbloquear ou remover contas de funcionarios ou administradores, excepto a ele proprio; 
 
 - [ ] Um administrador não pode aceder ao perfil de um cliente, apenas pode consultar, filtrar a lista de clientes, bloquear/desbloquear ou apagar (soft delete) a conta dos clientes;
 

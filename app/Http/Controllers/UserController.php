@@ -44,7 +44,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar as informações do user no dashboard.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -52,8 +52,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        // verificar se tem autorizacao 
         $this->authorize('view', $user);
-        dd($id, $user, Auth::user());
     }
 
     /**
@@ -79,13 +79,15 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remover um utilizador através do dashboard.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        // verificar se tem autorizacao 
+        $this->authorize('delete', $user);
     }
 }
