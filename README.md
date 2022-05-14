@@ -360,7 +360,7 @@ UserPolicy:
 
 - [x] Os funcionarios não podem ver o seu perfil no dashboard nem no front; (UserPolicy->view(), ClientePolicy-view())
 
-- [ ] Qualquer user pode alterar a sua password;
+- [x] Qualquer user pode alterar a sua password;
 
 - [ ] Um administrador pode consultar filtrar, criar, alterar, bloquear/desbloquear ou remover contas de funcionarios ou administradores, excepto a ele proprio; 
 
