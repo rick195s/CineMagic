@@ -10,6 +10,8 @@ class Lugar extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
