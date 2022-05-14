@@ -52,8 +52,12 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        // verificar se tem autorizacao 
-        $this->authorize('view', $user);
+
+        if (Auth::user()->cannot('view', $user)) {
+            return redirect(route('home'));
+        }
+
+        dd(Auth::user());
     }
 
     /**
@@ -87,7 +91,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+
         // verificar se tem autorizacao 
-        $this->authorize('delete', $user);
+        if (Auth::user()->cannot('delete', $user)) {
+            return redirect(route('home'));
+        }
+
+        dd(Auth::user());
     }
 }
