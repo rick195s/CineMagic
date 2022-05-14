@@ -31,7 +31,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // protected routes (only for admins)
 // routes with prefix admin
 // routes with admin. prefix in the name of the route
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
 
     // // admin dashboard main page
     // Route::get('/', [DashboardController::class, 'index'])->name('index');

@@ -17,7 +17,6 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
     }
 
     /**
@@ -30,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $searchedUser)
     {
-        return  $user->tipo == 'A' && $searchedUser->tipo != 'C';
+        return $searchedUser->tipo != 'C';
     }
 
 
@@ -69,7 +68,7 @@ class UserPolicy
      */
     public function delete(User $user, User $userToDelete)
     {
-        return $user->tipo == 'A' && $user->id != $userToDelete->id && $userToDelete->deleted_at == null;
+        return $user->id != $userToDelete->id && $userToDelete->deleted_at == null;
     }
 
     /**
