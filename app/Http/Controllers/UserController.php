@@ -22,8 +22,8 @@ class UserController extends Controller
         if (Auth::user()->cannot('viewAny', User::class)) {
             return redirect(route('home'));
         }
-        dump(User::take(40)->get());
-        return view('home');
+        $users = User::paginate(15);
+        return view('admin.users.index', compact('users'));
     }
 
     /**
