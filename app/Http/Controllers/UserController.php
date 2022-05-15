@@ -6,6 +6,7 @@ use App\Http\Requests\CreateUser;
 use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -45,6 +46,7 @@ class UserController extends Controller
     public function store(CreateUser $request)
     {
         $validatedData = $request->validated();
+        $validatedData['password'] = Hash::make($validatedData['password']);
         $user = User::create($validatedData);
 
         if ($validatedData['tipo'] == "C") {
