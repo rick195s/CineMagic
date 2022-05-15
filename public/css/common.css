@@ -1,0 +1,5 @@
+/* Flash Messages style */
+.alert{
+    display: flex;
+    justify-content: space-between;
+}

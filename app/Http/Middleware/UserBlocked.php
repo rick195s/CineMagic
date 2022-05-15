@@ -27,7 +27,7 @@ class UserBlocked
 
             $request->session()->regenerateToken();
 
-            return redirect()->route('login')->with('error', 'Your Account is suspended, please contact Admin.');
+            return redirect()->route('login')->with('error', __('Your Account is suspended, please contact Admin.'));
         }
 
         return $next($request);
