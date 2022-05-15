@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->tipo == 'A';
+        return $user->isAdmin();
     }
 
     /**
@@ -42,7 +42,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUser;
+use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,7 +32,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', User::class);
+        return view('admin.users.create');
     }
 
     /**
@@ -39,9 +42,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUser $request)
     {
-        //
+        $validatedData = $request->validated();
+        $user = User::create($validatedData);
+
+        if ($validatedData['tipo'] == "C") {
+            $validatedData['id'] = $user->id;
+            Cliente::create($validatedData);
+        }
+
+        return redirect()->route('admin.users.index')->with('success', __('User created successfully'));
     }
 
     /**

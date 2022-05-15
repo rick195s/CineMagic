@@ -285,8 +285,6 @@ https://github.com/barryvdh/laravel-dompdf
   ```
   ->with('error', 'Mesangem');
   ```
-  
-  
 
 #### Forms:
 
@@ -305,6 +303,7 @@ https://github.com/barryvdh/laravel-dompdf
 #### Controllers:
 
 - Maior parte dos controllers têm de ter o middleware 'auth' no construtor;
+
 - Quando queremos verificar alguma policy ou gate devemos meter o $this->authorize() dentro de um try catch para depois ser possivel enviar o erro para a vista.
   
   ```
@@ -316,8 +315,6 @@ https://github.com/barryvdh/laravel-dompdf
               return redirect(route('admin.index'))->withErrors(['message' => $th->getMessage()]);
           }
   ```
-  
-  
 
 ## O que já foi feito:
 
@@ -398,7 +395,9 @@ UserPolicy:
 
 - [x] Um utilizador depois de ser bloqueado não pode iniciar sessão;
 
-- [ ] Um administrador pode consultar filtrar, criar, alterar utilizadores; 
+- [x] Um administrador pode criar utilizadores e clientes;
+
+- [ ] Um administrador pode consultar filtrar, alterar utilizadores; 
 
 - [x] Um administrador pode consultar e filtrar a lista de clientes
 
