@@ -396,7 +396,7 @@ UserPolicy:
 
 - [x] Um administrador pode eliminar utilizador/cliente sem ser a ele proprio;
 
-- [ ] Um utilizador depois de ser bloqueado não pode iniciar sessão;
+- [x] Um utilizador depois de ser bloqueado não pode iniciar sessão;
 
 - [ ] Um administrador pode consultar filtrar, criar, alterar utilizadores; 
 
