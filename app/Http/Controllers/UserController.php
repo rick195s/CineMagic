@@ -19,7 +19,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->cannot('viewAny', User::class)) {
+            return redirect(route('home'));
+        }
+        dump(User::take(40)->get());
+        return view('home');
     }
 
     /**
@@ -57,7 +61,8 @@ class UserController extends Controller
             return redirect(route('home'));
         }
 
-        dd(Auth::user());
+        dump($user);
+        return view('home');
     }
 
     /**
@@ -97,6 +102,7 @@ class UserController extends Controller
             return redirect(route('home'));
         }
 
-        dd(Auth::user());
+        dump(Auth::user());
+        return view('home');
     }
 }
