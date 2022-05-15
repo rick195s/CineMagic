@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -19,9 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->cannot('viewAny', User::class)) {
-            return redirect(route('home'));
-        }
+        $this->authorize('viewAny', User::class);
         $users = User::paginate(15);
         return view('admin.users.index', compact('users'));
     }
@@ -85,9 +82,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_state(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        try {
+            $this->authorize('update_state', $user);
+            $user->bloqueado = !$user->bloqueado;
+            $user->save();
+
+            return back()->with('success', $user->bloqueado ? __('User Blocked') : __('User Unlocked'));
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
     /**
      * Remover um utilizador através do dashboard.
      *
@@ -101,6 +117,12 @@ class UserController extends Controller
 
         try {
             $this->authorize('delete', $user);
+
+            // soft delete cliente
+            $cliente = $user->cliente;
+            if ($cliente) {
+                $cliente->delete();
+            }
             // soft delete
             $user->delete();
             return back()->with('success', __('User Deleted'));

@@ -59,6 +59,23 @@ class UserPolicy
     }
 
     /**
+     * Só os admins é que podem desbloquear ou bloquear um user
+     * Admins não se podem bloquear ou desbloquear a eles próprios
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $userToDelete
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function update_state(User $user, User $userToDelete)
+    {
+        if ($user->id == $userToDelete->id) {
+            return $this->deny(__("A User cannot block or unlock himself"));
+        }
+
+        return $user->isAdmin();
+    }
+
+    /**
      * So admins é que podem eliminar outros utilizadores
      * Admins não se podem eliminar a eles próprios
      * Admins não podem eliminar users já eliminados
