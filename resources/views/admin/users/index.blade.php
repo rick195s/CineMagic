@@ -19,8 +19,9 @@
                         <form action="{{ route('admin.users.destroy', $user->id)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" value="Delete">
+                            <input type="submit" value="{{__('Delete User')}}">
                         </form>
+
                     </td>
                 </tr>
                 @endforeach

@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function view(User $user, User $searchedUser)
     {
-        return $searchedUser->tipo != 'C';
+        return $user->isAdmin() && $searchedUser->tipo != 'C';
     }
 
 
@@ -69,7 +69,11 @@ class UserPolicy
      */
     public function delete(User $user, User $userToDelete)
     {
-        return $user->id != $userToDelete->id && $userToDelete->deleted_at == null;
+        if ($user->id == $userToDelete->id) {
+            return $this->deny(__("A User cannot delete himself"));
+        }
+
+        return $user->isAdmin();
     }
 
     /**

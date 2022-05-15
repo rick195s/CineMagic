@@ -55,11 +55,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
-        if (Auth::user()->cannot('view', $user)) {
-            return redirect(route('home'));
-        }
+        $this->authorize('view', $user);
+        // if (Auth::user()->cannot('view', $user)) {
+        //     return redirect(route('home'));
+        // }
 
         dump($user);
         return view('home');
@@ -95,14 +96,32 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        // findOrFail já retira os users com softDeletes
+        $user = User::findOrFail($id);
 
-        // verificar se tem autorizacao 
-        if (Auth::user()->cannot('delete', $user)) {
-            return redirect(route('home'));
+        try {
+            $this->authorize('delete', $user);
+            // soft delete
+            $user->delete();
+            return back()->with('success', __('User Deleted'));
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
         }
 
-        dump(Auth::user());
-        return view('home');
+        // $request->merge([
+        //     'id' => $id,
+        //     'authUserId' => strval(Auth::user()->id)
+        // ]);
+        // $request->validate([
+        //     'id' => [
+        //         "required",
+        //         "different:authUserId",
+        //     ]
+        // ]);
+
+        // if (Auth::user()->id == $user->id) {
+        //     return back()->withErrors(['message' => 'User não se pode eliminar a ele proprio']);
+        // }
+
     }
 }

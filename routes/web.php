@@ -41,7 +41,7 @@ Route::post('/password/change', [ChangePasswordController::class, 'update'])->na
 // rotas com o prefixo admin. no seu nome
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
 
-    // // admin dashboard main page
+    // admin dashboard main page
     // Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     // rotas para gerir users no dashboard admin

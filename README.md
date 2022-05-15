@@ -260,8 +260,6 @@ Quando damos softDelete do cliente, temos de dar softDelete do user tambem
 
 Antes de inserirmos alguma coisa na DB temos de fazer as validacoes necessarias.
 
-
-
 É possivel tambem restringir valores passados no Url
 
 https://laravel.com/docs/8.x/routing#parameters-regular-expression-constraints
@@ -278,6 +276,26 @@ https://github.com/barryvdh/laravel-dompdf
 
 ## Standards:
 
+#### Erros e Validações:
+
+- Quando for para validar informação enviada no form devemos usar sempre os 
+
+- Para enviar erros para uma vista podemos usar:
+  
+  ```
+  ->with('error', '');
+  ```
+  
+  
+
+#### Forms:
+
+- sempre que usarmos forms onde o user tem de inserir dados temos de usar o old();
+
+- colocar sempre @csrf nos forms;
+
+- quando queremos usar outros metodos para além do GET e POST devemos especificar o metodo com @method('DELETE');
+
 #### Routes:
 
 - Rotas de admin têm prefixo de 'admin.' e as funcoes relacionadas com admin nos controladores têm prefixo de 'admin_';
@@ -287,6 +305,19 @@ https://github.com/barryvdh/laravel-dompdf
 #### Controllers:
 
 - Maior parte dos controllers têm de ter o middleware 'auth' no construtor;
+- Quando queremos verificar alguma policy ou gate devemos meter o $this->authorize() dentro de um try catch para depois ser possivel enviar o erro para a vista.
+  
+  ```
+   try {
+              $this->authorize('delete', $user);
+              dd(Auth::user());
+              return back();
+          } catch (\Throwable $th) {
+              return redirect(route('admin.index'))->withErrors(['message' => $th->getMessage()]);
+          }
+  ```
+  
+  
 
 ## O que já foi feito:
 
@@ -307,8 +338,6 @@ BilhetePolicy:
 UserPolicy:
 
 - view();
-
-
 
 #### Controllers:
 
