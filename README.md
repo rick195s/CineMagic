@@ -327,7 +327,8 @@ https://github.com/barryvdh/laravel-dompdf
 
 ##### Middlewares:
 
-- isAdmin();
+- IsAdmin;
+- UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
 
 ##### Policies:
 
