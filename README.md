@@ -283,7 +283,7 @@ https://github.com/barryvdh/laravel-dompdf
 - Para enviar erros para uma vista podemos usar:
   
   ```
-  ->with('error', '');
+  ->with('error', 'Mesangem');
   ```
   
   
@@ -391,9 +391,17 @@ UserPolicy:
 
 - [x] Qualquer user pode alterar a sua password;
 
-- [ ] Um administrador pode consultar filtrar, criar, alterar, bloquear/desbloquear ou remover contas de funcionarios ou administradores, excepto a ele proprio; 
+- [x] Um administrador pode bloquear/desbloquear utilizador/cliente sem ser a ele proprio;
 
-- [ ] Um administrador não pode aceder ao perfil de um cliente, apenas pode consultar, filtrar a lista de clientes, bloquear/desbloquear ou apagar (soft delete) a conta dos clientes;
+- [x] Um administrador pode eliminar utilizador/cliente sem ser a ele proprio;
+
+- [ ] Um utilizador depois de ser bloqueado não pode iniciar sessão;
+
+- [ ] Um administrador pode consultar filtrar, criar, alterar utilizadores; 
+
+- [x] Um administrador pode consultar e filtrar a lista de clientes
+
+- [x] Um administrador não pode aceder ao perfil de um cliente;
 
 #### Filmes em Exibição:
 
