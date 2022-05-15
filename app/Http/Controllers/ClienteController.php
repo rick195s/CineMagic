@@ -20,10 +20,11 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        // $this->authorize('view',  'App\Models\Cliente'); 
-        if (Auth::user()->cannot('view', 'App\Models\Cliente')) {
+        // $this->authorize('view',  Cliente::class); 
+        if (Auth::user()->cannot('view', Cliente::class)) {
             return redirect(route('home'));
         }
+        dump("dwqdwq");
         return view('home');
     }
 }
