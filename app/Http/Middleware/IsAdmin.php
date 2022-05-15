@@ -17,7 +17,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user() && $request->user()->tipo == 'A') {
+        if ($request->user() && $request->user()->isAdmin()) {
             return $next($request);
         }
         throw new AuthorizationException();
