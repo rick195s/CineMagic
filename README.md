@@ -337,6 +337,9 @@ UserPolicy:
 
 - view();
 
+#### Requests:
+- CreateUser();
+
 #### Controllers:
 
 - HomeController;
