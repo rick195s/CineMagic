@@ -337,7 +337,7 @@ UserPolicy:
 
 - view();
 
-#### Requests:
+#### Form Requests:
 - CreateUser();
 
 #### Controllers:
