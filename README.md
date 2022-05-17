@@ -322,12 +322,12 @@ https://github.com/barryvdh/laravel-dompdf
 
 - Email de recuperar senha a ser enviado
 
-##### Middlewares:
+#### Middlewares:
 
 - IsAdmin;
 - UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
 
-##### Policies:
+#### Policies:
 
 BilhetePolicy:
 
@@ -338,6 +338,7 @@ UserPolicy:
 - view();
 
 #### Form Requests:
+
 - CreateUser();
 
 #### Controllers:
@@ -350,7 +351,7 @@ UserPolicy:
 
 - ChangePasswordController (Usado para alterar a password do user);
 
-##### Relações entre modelos:
+#### Relações entre modelos:
 
 - salas 1:n sessoes:
 
