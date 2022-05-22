@@ -45,8 +45,9 @@
     "Only admins can access this page": "Apenas os administradores podem aceder a esta página",
 
     "Only the admins can update users": "Apenas os administradores podem alterar utilizadores",
-    "Edit User": "Editar Utilizador",
+    "Update User": "Atualizar Utilizador",
     "Admins cannot update clients": "Os administradores não podem alterar clientes",
+    "User updated successfully": "Utilizador atualizado com sucesso!",
 
     "Please check the form below for errors": "Por favor verifique o formulário abaixo para rever os erros",
 

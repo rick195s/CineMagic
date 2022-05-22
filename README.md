@@ -317,7 +317,7 @@ https://github.com/barryvdh/laravel-dompdf
 Se nao quisermos redirecionar para uma vista podemos so meter: 
 
 ```
-
+$this->authorize('delete', $user);
 ```
 
 
@@ -339,6 +339,18 @@ Se nao quisermos redirecionar para uma vista podemos so meter:
   ```
   
   ou seja tentamos sempre mostrar mensagens de erro consoante as verificações e no fum damos return de true.
+
+#### Form Request Validator:
+
+é possivel ir buscar um valor dinamico da rota:
+
+por exemplo esta para esta rota users/{user} podemos ir buscar o valor {user} atraves de:
+
+```
+$this->route('user')
+```
+
+
 
 ## O que já foi feito:
 
@@ -430,6 +442,8 @@ UserPolicy:
 - [x] Um administrador pode consultar e filtrar a lista de clientes
 
 - [x] Um administrador não pode aceder ao perfil de um cliente;
+
+- [ ] Edições da foto dos utilizadores quando sao criados e editados;
 
 #### Filmes em Exibição:
 

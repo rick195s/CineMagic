@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUser;
+use App\Http\Requests\UpdateUser;
 use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -107,11 +108,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUser $request, $id)
     {
         $user = User::findOrFail($id);
-
         $this->authorize('update', $user);
+
+        $validatedData = $request->validated();
+
+        $user->update($validatedData);
+
+        return back()->with('success', __('User updated successfully'));
     }
 
     /**

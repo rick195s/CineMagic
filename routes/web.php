@@ -46,7 +46,7 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
 
     // rotas para gerir users no dashboard admin
     Route::resource('users', UserController::class);
-    Route::patch('users/{user}', [UserController::class, 'update_state'])->name('users.update_state');
+    Route::patch('users/{user}/update_state', [UserController::class, 'update_state'])->name('users.update_state');
 
     // // admin dashboard manage salas
     // Route::get('/salas', [SalaController::class, 'admin_index'])->name('salas.index');
