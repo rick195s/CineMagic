@@ -30,7 +30,14 @@ class UserPolicy
      */
     public function view(User $user, User $searchedUser)
     {
-        return $user->isAdmin() && $searchedUser->tipo != 'C';
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Just admins can view employees and admins"));
+        }
+
+        if ($searchedUser->isClient()) {
+            return $this->deny(__("Admins cannot view clients profiles"));
+        }
+        return  true;
     }
 
 
