@@ -47,8 +47,8 @@ class UserController extends Controller
      */
     public function store(CreateUser $request)
     {
-        $this->authorize('create', User::class);
-
+        // o metodo authorize dentro do CreateUser já verifica se o utilizador 
+        // atual tem as permissoes necessarias 
         $validatedData = $request->validated();
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -111,8 +111,8 @@ class UserController extends Controller
     public function update(UpdateUser $request, $id)
     {
         $user = User::findOrFail($id);
-        $this->authorize('update', $user);
-
+        // o metodo authorize dentro do UpdateUser já verifica se o utilizador 
+        // atual tem as permissoes necessarias 
         $validatedData = $request->validated();
 
         $user->update($validatedData);
