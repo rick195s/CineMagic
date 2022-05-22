@@ -42,7 +42,10 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdmin();
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Just admins can create employees and admins"));
+        }
+        return true;
     }
 
     /**
@@ -68,12 +71,12 @@ class UserPolicy
      */
     public function update_state(User $user, User $userToDelete)
     {
-        if ($user->id == $userToDelete->id) {
-            return $this->deny(__("A User cannot block or unlock himself"));
-        }
-
         if (!$user->isAdmin()) {
             return $this->deny(__("Just the admins can block or unlock users"));
+        }
+
+        if ($user->id == $userToDelete->id) {
+            return $this->deny(__("A User cannot block or unlock himself"));
         }
 
         return true;
@@ -90,12 +93,12 @@ class UserPolicy
      */
     public function delete(User $user, User $userToDelete)
     {
-        if ($user->id == $userToDelete->id) {
-            return $this->deny(__("A User cannot delete himself"));
-        }
-
         if (!$user->isAdmin()) {
             return $this->deny(__("Just the admins can delete users"));
+        }
+
+        if ($user->id == $userToDelete->id) {
+            return $this->deny(__("A User cannot delete himself"));
         }
 
         return true;

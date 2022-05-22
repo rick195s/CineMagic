@@ -307,14 +307,20 @@ https://github.com/barryvdh/laravel-dompdf
 - Quando queremos verificar alguma policy ou gate devemos meter o $this->authorize() dentro de um try catch para depois ser possivel enviar o erro para a vista.
   
   ```
-   try {
+          try {
               $this->authorize('delete', $user);
-              dd(Auth::user());
-              return back();
           } catch (\Throwable $th) {
-              return redirect(route('admin.index'))->withErrors(['message' => $th->getMessage()]);
+              return back()->with('error', $th->getMessage());
           }
   ```
+
+Se nao quisermos redirecionar para uma vista podemos so meter: 
+
+```
+
+```
+
+
 
 #### Policies e Gates:
 

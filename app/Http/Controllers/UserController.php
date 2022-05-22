@@ -46,6 +46,8 @@ class UserController extends Controller
      */
     public function store(CreateUser $request)
     {
+        $this->authorize('create', User::class);
+
         $validatedData = $request->validated();
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -79,9 +81,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $this->authorize('view', $user);
-        // if (Auth::user()->cannot('view', $user)) {
-        //     return redirect(route('home'));
-        // }
 
         dump($user);
         return view('home');
@@ -146,7 +145,6 @@ class UserController extends Controller
             return back()->with('error', $th->getMessage());
         }
 
-
         // soft delete cliente
         $cliente = $user->cliente;
         if ($cliente) {
@@ -155,21 +153,5 @@ class UserController extends Controller
         // soft delete
         $user->delete();
         return back()->with('success', __('User Deleted'));
-
-        // $request->merge([
-        //     'id' => $id,
-        //     'authUserId' => strval(Auth::user()->id)
-        // ]);
-        // $request->validate([
-        //     'id' => [
-        //         "required",
-        //         "different:authUserId",
-        //     ]
-        // ]);
-
-        // if (Auth::user()->id == $user->id) {
-        //     return back()->withErrors(['message' => 'User não se pode eliminar a ele proprio']);
-        // }
-
     }
 }

@@ -29,9 +29,9 @@
     "User Unlocked": "Utilizador desbloqueado",
     "Your Account is suspended, please contact Admin.": "A sua conta está bloqueada, por favor contacte o Administrador.",
 
-
     "Create User": "Criar Utilizador",
     "User Type": "Tipo de Utilizador",
+    "Just admins can create employees and admins": "Apenas os administradores podem criar funcionários e administradores",
     "Admin": "Administrador",
     "Emplee": "Funcionário",
     "Client": "Cliente",    
