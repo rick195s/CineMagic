@@ -20,6 +20,6 @@ class IsAdmin
         if ($request->user() && $request->user()->isAdmin()) {
             return $next($request);
         }
-        throw new AuthorizationException();
+        throw new AuthorizationException(__("Only admins can access this page"));
     }
 }

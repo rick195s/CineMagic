@@ -18,7 +18,7 @@ class UserPolicy
     public function viewAny(User $user)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Just admins can view all users"));
+            return $this->deny(__("Only admins can view all users"));
         }
         return true;
     }
@@ -34,7 +34,7 @@ class UserPolicy
     public function view(User $user, User $searchedUser)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Just admins can view employees and admins"));
+            return $this->deny(__("Only admins can view employees and admins"));
         }
 
         if ($searchedUser->isClient()) {
@@ -53,7 +53,7 @@ class UserPolicy
     public function create(User $user)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Just admins can create employees and admins"));
+            return $this->deny(__("Only admins can create employees and admins"));
         }
         return true;
     }
@@ -82,7 +82,7 @@ class UserPolicy
     public function update_state(User $user, User $userToDelete)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Just the admins can block or unlock users"));
+            return $this->deny(__("Only the admins can block or unlock users"));
         }
 
         if ($user->id == $userToDelete->id) {
@@ -104,7 +104,7 @@ class UserPolicy
     public function delete(User $user, User $userToDelete)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Just the admins can delete users"));
+            return $this->deny(__("Only the admins can delete users"));
         }
 
         if ($user->id == $userToDelete->id) {
