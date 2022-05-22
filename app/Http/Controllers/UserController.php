@@ -6,6 +6,7 @@ use App\Http\Requests\CreateUser;
 use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -47,14 +48,24 @@ class UserController extends Controller
     {
         $validatedData = $request->validated();
         $validatedData['password'] = Hash::make($validatedData['password']);
-        $user = User::create($validatedData);
 
-        if ($validatedData['tipo'] == "C") {
-            $validatedData['id'] = $user->id;
-            Cliente::create($validatedData);
+        try {
+            DB::beginTransaction();
+            $user = User::create($validatedData);
+
+            if ($validatedData['tipo'] == "C") {
+                $validatedData['id'] = $user->id;
+                Cliente::create($validatedData);
+            }
+
+            DB::commit();
+
+            return back()->with('success', __('User created successfully'));
+        } catch (\PDOException $e) {
+            DB::rollBack();
+
+            return back()->with('error', __('Error creating user'));
         }
-
-        return redirect()->route('admin.users.index')->with('success', __('User created successfully'));
     }
 
     /**
@@ -109,13 +120,14 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         try {
             $this->authorize('update_state', $user);
-            $user->bloqueado = !$user->bloqueado;
-            $user->save();
-
-            return back()->with('success', $user->bloqueado ? __('User Blocked') : __('User Unlocked'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
+
+        $user->bloqueado = !$user->bloqueado;
+        $user->save();
+
+        return back()->with('success', $user->bloqueado ? __('User Blocked') : __('User Unlocked'));
     }
     /**
      * Remover um utilizador através do dashboard.
@@ -130,18 +142,19 @@ class UserController extends Controller
 
         try {
             $this->authorize('delete', $user);
-
-            // soft delete cliente
-            $cliente = $user->cliente;
-            if ($cliente) {
-                $cliente->delete();
-            }
-            // soft delete
-            $user->delete();
-            return back()->with('success', __('User Deleted'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
+
+
+        // soft delete cliente
+        $cliente = $user->cliente;
+        if ($cliente) {
+            $cliente->delete();
+        }
+        // soft delete
+        $user->delete();
+        return back()->with('success', __('User Deleted'));
 
         // $request->merge([
         //     'id' => $id,

@@ -33,6 +33,7 @@
     "Emplee": "Funcionário",
     "Client": "Cliente",    
     "User created successfully":"Utilizador criado com sucesso!",
+    "Error creating user":"Erro ao criar utilizador!",
 
     "Please check the form below for errors": "Por favor verifique o formulário abaixo para rever os erros",
 

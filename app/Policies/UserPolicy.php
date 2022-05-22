@@ -72,7 +72,11 @@ class UserPolicy
             return $this->deny(__("A User cannot block or unlock himself"));
         }
 
-        return $user->isAdmin();
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Just the admins can block or unlock users"));
+        }
+
+        return true;
     }
 
     /**
