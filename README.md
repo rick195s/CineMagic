@@ -296,7 +296,7 @@ https://github.com/barryvdh/laravel-dompdf
 
 #### Routes:
 
-- Rotas de admin têm prefixo de 'admin.' e as funcoes relacionadas com admin nos controladores têm prefixo de 'admin_';
+- Rotas de admin têm prefixo de 'admin.';
 
 - Rotas de admin têm de estar dentro de middleware 'isAdmin'
 
