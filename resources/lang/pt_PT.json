@@ -43,6 +43,11 @@
     "Admins cannot view clients profiles": "Os administradores não podem ver perfis de clientes",
 
     "Only admins can access this page": "Apenas os administradores podem aceder a esta página",
+
+    "Only the admins can update users": "Apenas os administradores podem alterar utilizadores",
+    "Edit User": "Editar Utilizador",
+    "Admins cannot update clients": "Os administradores não podem alterar clientes",
+
     "Please check the form below for errors": "Por favor verifique o formulário abaixo para rever os erros",
 
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.":"Esqueceu-se da sua senha de inicio de sessão? Sem problemas. Apenas necessita de introduzir o seu endereço de e-mail para que possamos lhe enviar um link de redefinição de senha.",

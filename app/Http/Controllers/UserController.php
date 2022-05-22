@@ -94,6 +94,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -105,6 +109,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
+        $this->authorize('update', $user);
     }
 
     /**

@@ -10,6 +10,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
+                    <th>Tipo</th>
                     <th>Estado</th>
                     <th>Editar</th>
                 </tr>
@@ -18,6 +19,7 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->tipo  }}</td>
                     <td>
                         <form action="{{ route('admin.users.update_state', $user->id)}}" method="post">
                             @csrf

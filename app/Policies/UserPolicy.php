@@ -62,12 +62,18 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\User  $userToUpdate
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, User $userToUpdate)
     {
-        //
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Only the admins can update users"));
+        }
+        if ($userToUpdate->isClient()) {
+            return $this->deny(__("Admins cannot update clients"));
+        }
+
         return true;
     }
 
