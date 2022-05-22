@@ -17,15 +17,18 @@
     "Password changed successfully!": "Password alterada com sucesso!",
 
     "A User cannot delete himself": "Um utilizador não se pode eliminar a si próprio",
+    "Just the admins can delete users":"Apenas os administradores podem eliminar utilizadores",
     "User Deleted": "Utilizador eliminado",
     "Delete User": "Apagar Utilizador",
 
     "A User cannot block or unlock himself": "Um utilizador não se pode bloquear ou desbloquear a si próprio",
+    "Just the admins can block or unlock users":"Apenas os administradores podem bloquear ou desbloquear utilizadores",
     "Unlock": "Desbloquear",
     "Block": "Bloquear",
     "User Blocked": "Utilizador bloqueado",
     "User Unlocked": "Utilizador desbloqueado",
     "Your Account is suspended, please contact Admin.": "A sua conta está bloqueada, por favor contacte o Administrador.",
+
 
     "Create User": "Criar Utilizador",
     "User Type": "Tipo de Utilizador",

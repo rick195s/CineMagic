@@ -316,6 +316,24 @@ https://github.com/barryvdh/laravel-dompdf
           }
   ```
 
+#### Policies e Gates:
+
+- Sempre que validamos alguma coisa numa policy ou Gate devemos fazer desta forma:
+  
+  ```
+          if ($user->id == $userToDelete->id) {
+              return $this->deny(__("A User cannot block or unlock himself"));
+          }
+  
+          if (!$user->isAdmin()) {
+              return $this->deny(__("Just the admins can block or unlock users"));
+          }
+  
+          return true;
+  ```
+  
+  ou seja tentamos sempre mostrar mensagens de erro consoante as verificações e no fum damos return de true.
+
 ## O que já foi feito:
 
 - Laravel UI instalada.

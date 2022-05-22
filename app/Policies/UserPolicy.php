@@ -94,7 +94,11 @@ class UserPolicy
             return $this->deny(__("A User cannot delete himself"));
         }
 
-        return $user->isAdmin();
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Just the admins can delete users"));
+        }
+
+        return true;
     }
 
     /**
