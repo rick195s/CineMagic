@@ -39,6 +39,7 @@
     "Error creating user":"Erro ao criar utilizador!",
 
     "Just admins can view employees and admins": "Apenas os administradores podem ver funcionários e administradores",
+    "Just admins can view all users": "Apenas os administradores podem ver todos os utilizadores",
     "Admins cannot view clients profiles": "Os administradores não podem ver perfis de clientes",
 
     "Please check the form below for errors": "Por favor verifique o formulário abaixo para rever os erros",

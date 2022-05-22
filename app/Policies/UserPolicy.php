@@ -17,7 +17,10 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Just admins can view all users"));
+        }
+        return true;
     }
 
     /**
