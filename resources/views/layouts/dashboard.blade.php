@@ -36,9 +36,15 @@
                         {{__('Pages')}}
                     </li>
 
+                    <li class="sidebar-item {{Route::currentRouteName() == 'admin.index'? 'active': ''}}">
+                        <a class="sidebar-link" href="{{route('admin.index')}}">
+                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">{{__('Dashboard')}}</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.users')? 'active': ''}}">
-                        <a class="sidebar-link" href="index.html">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">{{__('Users')}}</span>
+                        <a class="sidebar-link" href="{{route('admin.users.index')}}">
+                            <i class="align-middle me-2" data-feather="users"></i> <span class="align-middle">{{__('Users')}}</span>
                         </a>
                     </li>
 
@@ -78,8 +84,8 @@
                             </a>
 
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                <img src="{{$user->foto_url ? asset('storage/fotos/' .
-$user->foto_url) : asset('img/default_img.png') }}" class="avatar img-fluid rounded me-1" alt="Fotografia" />
+                                <img src="{{ Auth::user()->foto_url ? asset('storage/fotos/' .
+                                    Auth::user()->foto_url) : asset('img/default_img.png') }}" class="avatar img-fluid rounded me-1" alt="Fotografia" />
 
                                 <span class="text-dark">
                                     {{ explode(' ', Auth::user()->name)[0] }}
