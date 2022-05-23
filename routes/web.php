@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,7 @@ Route::post('/password/change', [ChangePasswordController::class, 'update'])->na
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
 
     // admin dashboard main page
-    // Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     // rotas para gerir users no dashboard admin
     Route::resource('users', UserController::class);
