@@ -67,8 +67,9 @@ class UserPolicy
      */
     public function update(User $user, User $userToUpdate)
     {
+
         if (!$user->isAdmin()) {
-            return $this->deny(__("Only the admins can update users"));
+            return $this->deny(__("Only the fadmins can update users"));
         }
         if ($userToUpdate->isClient()) {
             return $this->deny(__("Admins cannot update clients"));
@@ -82,16 +83,16 @@ class UserPolicy
      * Admins não se podem bloquear ou desbloquear a eles próprios
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $userToDelete
+     * @param  \App\Models\User  $userModified
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update_state(User $user, User $userToDelete)
+    public function update_state(User $user, User $userModified)
     {
         if (!$user->isAdmin()) {
             return $this->deny(__("Only the admins can block or unlock users"));
         }
 
-        if ($user->id == $userToDelete->id) {
+        if ($user->id == $userModified->id) {
             return $this->deny(__("A User cannot block or unlock himself"));
         }
 
@@ -104,16 +105,17 @@ class UserPolicy
      * Admins não podem eliminar users já eliminados
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $userToDelete
+     * @param  \App\Models\User  $userModified
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $userToDelete)
+    public function delete(User $user, User $userModified)
     {
+
         if (!$user->isAdmin()) {
             return $this->deny(__("Only the admins can delete users"));
         }
 
-        if ($user->id == $userToDelete->id) {
+        if ($user->id == $userModified->id) {
             return $this->deny(__("A User cannot delete himself"));
         }
 

@@ -21,19 +21,23 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->tipo  }}</td>
                     <td>
+                        @can('update_state', $user)
                         <form action="{{ route('admin.users.update_state', $user->id)}}" method="post">
                             @csrf
                             @method('PATCH')
                             <input type="hidden" name="state" value="{{ !$user->estado }}">
                             <input type="submit" value="{{ $user->bloqueado ? __('Unlock') : __('Block') }}">
                         </form>
+                        @endcan
                     </td>
                     <td>
+                        @can('delete', $user)
                         <form action="{{ route('admin.users.destroy', $user->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <input type="submit" value="{{__('Delete User')}}">
                         </form>
+                        @endcan
 
                     </td>
                 </tr>

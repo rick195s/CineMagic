@@ -15,6 +15,7 @@ class UserController extends Controller
     public function  __construct()
     {
         $this->middleware('auth');
+        // $this->authorizeResource(User::class);
     }
     /**
      * Display a listing of the resource.
@@ -80,9 +81,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-
         $this->authorize('view', $user);
-
         dump($user);
         return view('home');
     }
@@ -130,11 +129,7 @@ class UserController extends Controller
     public function update_state(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        try {
-            $this->authorize('update_state', $user);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th->getMessage());
-        }
+        $this->authorize('update_state', $user);
 
         $user->bloqueado = !$user->bloqueado;
         $user->save();
@@ -151,12 +146,7 @@ class UserController extends Controller
     {
         // findOrFail já retira os users com softDeletes
         $user = User::findOrFail($id);
-
-        try {
-            $this->authorize('delete', $user);
-        } catch (\Throwable $th) {
-            return back()->with('error', $th->getMessage());
-        }
+        $this->authorize('delete', $user);
 
         // soft delete cliente
         $cliente = $user->cliente;

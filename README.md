@@ -304,23 +304,17 @@ https://github.com/barryvdh/laravel-dompdf
 
 - Maior parte dos controllers têm de ter o middleware 'auth' no construtor;
 
-- Quando queremos verificar alguma policy ou gate devemos meter o $this->authorize() dentro de um try catch para depois ser possivel enviar o erro para a vista.
-  
-  ```
-          try {
-              $this->authorize('delete', $user);
-          } catch (\Throwable $th) {
-              return back()->with('error', $th->getMessage());
-          }
-  ```
-
-Se nao quisermos redirecionar para uma vista podemos so meter: 
+- Quando queremos verificar alguma policy ou gate devemos meter isto antes de fazer qualquer operacao num controller: 
 
 ```
 $this->authorize('delete', $user);
 ```
 
+ou podemos meter na route um middleware can
 
+#### Views:
+
+    dentro das views devemos usar sempre @can e @cannot para so mostrar coisas que os utilizadores podem fazer.
 
 #### Policies e Gates:
 
@@ -349,8 +343,6 @@ por exemplo esta para esta rota users/{user} podemos ir buscar o valor {user} at
 ```
 $this->route('user')
 ```
-
-
 
 ## O que já foi feito:
 
