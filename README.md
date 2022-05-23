@@ -1,3 +1,7 @@
+# AdminKit
+
+https://github.com/adminkit/adminkit
+
 # TIPS
 
 Foi usado scaffold bootstrap. Basicamente foram implementadas coisas automaticamente que correspondem ao auth de users e páginas base:
