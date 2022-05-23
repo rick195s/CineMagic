@@ -515,4 +515,4 @@ UserPolicy:
 
 - [ ] Para cada filme deve ser possivel fazer upload do cartaz:
 
-- [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
+- [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado
