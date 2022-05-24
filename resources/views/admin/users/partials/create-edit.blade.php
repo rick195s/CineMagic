@@ -5,7 +5,7 @@
         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name', $user->name)}}" required autocomplete="name" autofocus>
 
         @error('name')
-        <span class="invalid-feedback" role="alert">
+        <span class="small text-danger" role="alert">
             <strong>{{ $message }}</strong>
         </span>
         @enderror
@@ -19,7 +19,7 @@
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email', $user->email)}}" required autocomplete="email">
 
         @error('email')
-        <span class="invalid-feedback" role="alert">
+        <span class="small text-danger" role="alert">
             <strong>{{ $message }}</strong>
         </span>
         @enderror
@@ -29,7 +29,7 @@
 
 
 <div class="row mb-3">
-    <label for="tipo" class="col-md-4 col-form-label text-md-end">{{ __('User Type') }}</label>
+    <label for="tipo" class="col-md-4 @error('tipo') is-invalid @enderror col-form-label text-md-end">{{ __('User Type') }}</label>
     <div class="col-md-6">
         <input type="radio" id="A" name="tipo" value="A" {{ old('tipo', $user->tipo) == 'A' ? 'checked' : ''}}>
         <label for="A">{{__("Admin")}}</label>
@@ -40,12 +40,17 @@
         <input type="radio" id="C" name="tipo" value="C" {{ old('tipo', $user->tipo) == 'C' ? 'checked' : ''}}>
         <label for="C">{{__("Client")}}</label>
 
-        @error('tipo')
-        <span class="invalid-feedback" role="alert">
+
+    </div>
+    @error('tipo')
+    <div class="col-md-6 d-flex justify-content-end">
+        <span class="small text-danger" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-        @enderror
+
     </div>
+    @enderror
+
 </div>
 
 
@@ -56,7 +61,7 @@
         <input id="foto_url" type="file" class="form-control @error('foto_url') is-invalid @enderror" name="foto_url">
 
         @error('foto_url')
-        <span class="invalid-feedback" role="alert">
+        <span class="small text-danger" role="alert">
             <strong>{{ $message }}</strong>
         </span>
         @enderror
