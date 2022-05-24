@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUser extends FormRequest
+class CreateUserPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

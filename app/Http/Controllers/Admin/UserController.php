@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUser;
-use App\Http\Requests\UpdateUser;
+use App\Http\Requests\CreateUserPost;
+use App\Http\Requests\UpdateUserPost;
 use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,10 +47,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUser $request)
+    public function store(CreateUserPost $request)
     {
-        // o metodo authorize dentro do CreateUser já verifica se o utilizador 
-        // atual tem as permissoes necessarias 
+        // o metodo authorize dentro do CreateUser já verifica se o utilizador
+        // atual tem as permissoes necessarias
         $validatedData = $request->validated();
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -108,11 +108,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUser $request, $id)
+    public function update(UpdateUserPost $request, $id)
     {
         $user = User::findOrFail($id);
-        // o metodo authorize dentro do UpdateUser já verifica se o utilizador 
-        // atual tem as permissoes necessarias 
+        // o metodo authorize dentro do UpdateUser já verifica se o utilizador
+        // atual tem as permissoes necessarias
         $validatedData = $request->validated();
 
         $user->update($validatedData);
