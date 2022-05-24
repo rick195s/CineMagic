@@ -30,7 +30,8 @@ class CreateUserPost extends FormRequest
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'tipo' => ['required', Rule::in(['A', 'F', 'C'])],
             'bloqueado' => ['boolean'],
-            'foto_url' => ['file'],
+            'foto_url' => ['nullable', 'image', 'max:8192'],
+
         ];
     }
 }

@@ -433,13 +433,13 @@ UserPolicy:
 
 - [x] Um administrador pode criar utilizadores e clientes;
 
-- [ ] Um administrador pode consultar filtrar, alterar utilizadores; 
+- [x] Um administrador pode consultar filtrar, alterar utilizadores; 
 
 - [x] Um administrador pode consultar e filtrar a lista de clientes
 
 - [x] Um administrador não pode aceder ao perfil de um cliente;
 
-- [ ] Edições da foto dos utilizadores quando sao criados e editados;
+- [x] Edições da foto dos utilizadores quando sao criados e editados;
 
 #### Filmes em Exibição:
 

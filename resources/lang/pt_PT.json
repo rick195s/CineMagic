@@ -40,6 +40,9 @@
     "Client": "Cliente",    
     "User created successfully":"Utilizador criado com sucesso!",
     "Error creating user":"Erro ao criar utilizador!",
+    "User Photo": "Foto do Utilizador",
+    "Upload Photo": "Carregar Foto",
+
 
     "Only admins can view employees and admins": "Apenas os administradores podem ver funcionários e administradores",
     "Only admins can view all users": "Apenas os administradores podem ver todos os utilizadores",

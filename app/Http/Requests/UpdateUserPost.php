@@ -36,7 +36,8 @@ class UpdateUserPost extends FormRequest
             'email' => ['string', 'email', 'max:255', Rule::unique('users')->ignore($this->user->id),],
             'tipo' => [Rule::in(['A', 'F'])],
             'bloqueado' => ['boolean'],
-            'foto_url' => ['file'],
+            'foto_url' => ['nullable', 'image', 'max:8192'],
+
         ];
     }
 }

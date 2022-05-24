@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -38,7 +39,8 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('create', User::class);
-        return view('admin.users.create');
+        $user = new User;
+        return view('admin.users.create', compact('user'));
     }
 
     /**
@@ -54,9 +56,17 @@ class UserController extends Controller
         $validatedData = $request->validated();
         $validatedData['password'] = Hash::make($validatedData['password']);
 
+
         try {
             DB::beginTransaction();
+
+            if ($request->hasFile('foto_url')) {
+                $path = $request->foto->store('public/fotos');
+                $validatedData['foto_url'] = basename($path);
+            }
+
             $user = User::create($validatedData);
+
 
             if ($validatedData['tipo'] == "C") {
                 $validatedData['id'] = $user->id;
@@ -114,6 +124,12 @@ class UserController extends Controller
         // o metodo authorize dentro do UpdateUser já verifica se o utilizador
         // atual tem as permissoes necessarias
         $validatedData = $request->validated();
+
+        if ($request->hasFile('foto_url')) {
+            Storage::delete('public/fotos/' . $user->foto_url);
+            $path = $request->foto_url->store('public/fotos');
+            $validatedData['foto_url'] = basename($path);
+        }
 
         $user->update($validatedData);
 

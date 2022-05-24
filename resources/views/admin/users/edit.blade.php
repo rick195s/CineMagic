@@ -10,24 +10,34 @@
                 <div class="card-header">{{ __('Update User') }}</div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.users.update', $user->id) }}" method="post">
+                    <form action="{{ route('admin.users.update', $user->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         @include('admin.users.partials.create-edit')
 
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-end">{{ __('User Photo') }}</label>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update User') }}
-                                </button>
+                            <div class="col-md-6 ">
+                                <img src="{{$user->foto_url ? asset('storage/fotos/' .
+$user->foto_url) : asset('img/default_img.png') }}" alt="Foto do utilizador" class="w-25 img-fluid rounded">
                             </div>
+
                         </div>
-                    </form>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Update User') }}
+                        </button>
+                    </div>
+                </div>
+
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
 </div>
