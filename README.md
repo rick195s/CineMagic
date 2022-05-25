@@ -441,6 +441,8 @@ UserPolicy:
 
 - [x] Edições da foto dos utilizadores quando sao criados e editados;
 
+- [x] Um administrador só pode mudar o tipo de um user para admin ou funcionario (extra)
+
 #### Filmes em Exibição:
 
 - [ ] Qualquer utilizador pode ver quais os filmes em exibição, e as sessos dos mesmos;
