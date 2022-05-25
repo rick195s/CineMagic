@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sala;
 use Illuminate\Http\Request;
 
 class SalaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class SalaController extends Controller
      */
     public function index()
     {
-        return view('admin.salas.index');
+        $salas = Sala::paginate(15);
+        return view('admin.salas.index', compact('salas'));
     }
 
     /**

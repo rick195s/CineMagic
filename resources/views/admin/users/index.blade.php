@@ -11,7 +11,7 @@
             <h1 class="h3 mb-3"><strong>{{__('Users')}}</strong></h1>
         </div>
 
-        <div class="col-6  d-flex justify-content-end align-items-center ">
+        <div class="col-6  d-flex justify-content-end align-items-start">
             <a href="{{ route('admin.users.create')}}" class="btn btn-success"><i class="align-middle" data-feather="user-plus"> </i> {{__('Add User')}}</a>
         </div>
     </div>

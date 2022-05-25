@@ -10,7 +10,7 @@ class Sala extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $timestamps = false;
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
