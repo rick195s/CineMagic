@@ -49,8 +49,8 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::resource('users', UserController::class);
     Route::patch('users/{user}/update_state', [UserController::class, 'update_state'])->name('users.update_state');
 
-    // // admin dashboard manage salas
-    // Route::get('/salas', [SalaController::class, 'admin_index'])->name('salas.index');
+    // admin dashboard manage salas
+    Route::resource('salas', SalaController::class);
 
     // // admin dashboard manage filmes
     // Route::get('/filmes', [FilmeController::class, 'admin_index'])->name('filmes.index');
