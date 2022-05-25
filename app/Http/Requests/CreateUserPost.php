@@ -28,7 +28,7 @@ class CreateUserPost extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'tipo' => ['required', Rule::in(['A', 'F', 'C'])],
+            'tipo' => ['required', Rule::in(['A', 'F'])],
             'bloqueado' => ['boolean'],
             'foto_url' => ['nullable', 'image', 'max:8192'],
 

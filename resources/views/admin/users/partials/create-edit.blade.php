@@ -37,10 +37,6 @@
         <input type="radio" id="F" name="tipo" value="F" {{ old('tipo', $user->tipo) == 'F' ? 'checked' : ''}}>
         <label for="F">{{__("Emplee")}}</label>
 
-        <input type="radio" id="C" name="tipo" value="C" {{ old('tipo', $user->tipo) == 'C' ? 'checked' : ''}}>
-        <label for="C">{{__("Client")}}</label>
-
-
     </div>
     @error('tipo')
     <div class="col-md-6 d-flex justify-content-end">
