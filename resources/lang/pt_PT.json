@@ -66,7 +66,8 @@
     "Only admins can create movie theaters": "Apenas os administradores podem criar salas de cinema",
     "Only admins can update movie theaters": "Apenas os administradores podem alterar salas de cinema",
     "Only admins can delete movie theaters": "Apenas os administradores podem eliminar salas de cinema",
-    
+    "Only admins and employees can view movie theaters": "Apenas os administradores e funcionários podem ver salas de cinema",
+
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.":"Esqueceu-se da sua senha de inicio de sessão? Sem problemas. Apenas necessita de introduzir o seu endereço de e-mail para que possamos lhe enviar um link de redefinição de senha.",
     "Already registered?": "Já possui uma conta?",
     "Register": "Registar",

@@ -18,7 +18,10 @@ class SalaPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        if (!$user->isAdmin() && !$user->isFuncionario()) {
+            return $this->deny(__("Only admins and employees can view movie theaters"));
+        }
+        return true;
     }
 
     /**
