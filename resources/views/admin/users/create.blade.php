@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('title', __('Create User'))
 
 @section('content')
 

@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 
+@section('title', __('Users'))
 @section('content')
 
 <div class="container-fluid p-0">
