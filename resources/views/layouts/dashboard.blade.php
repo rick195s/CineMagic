@@ -49,7 +49,7 @@
                     </li>
 
                     <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.salas')? 'active': ''}}">
-                        <a class="sidebar-link" href="{{route('admin.users.index')}}">
+                        <a class="sidebar-link" href="{{route('admin.salas.index')}}">
                             <i class="align-middle me-2" data-feather="tv"></i> <span class="align-middle">{{__('Movie Theaters')}}</span>
                         </a>
                     </li>
