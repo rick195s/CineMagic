@@ -68,6 +68,7 @@
     "Only admins can delete movie theaters": "Apenas os administradores podem eliminar salas de cinema",
     "Only admins and employees can view movie theaters": "Apenas os administradores e funcionários podem ver salas de cinema",
 
+    "Movies": "Filmes",
     "Only admins can view all movies": "Apenas os administradores podem ver todos os filmes",
     "Only admins can create movies": "Apenas os administradores podem criar filmes",
     "Only admins can update movies": "Apenas os administradores podem alterar filmes",

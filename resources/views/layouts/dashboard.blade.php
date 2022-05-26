@@ -38,32 +38,32 @@
 
                     <li class="sidebar-item {{Route::currentRouteName() == 'admin.index'? 'active': ''}}">
                         <a class="sidebar-link" href="{{route('admin.index')}}">
-                            <i class="align-middle" data-feather="sliders"></i> <span
-                                class="align-middle">{{__('Dashboard')}}</span>
+                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">{{__('Dashboard')}}</span>
                         </a>
                     </li>
 
-                    <li
-                        class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.users')? 'active': ''}}">
+                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.users')? 'active': ''}}">
                         <a class="sidebar-link" href="{{route('admin.users.index')}}">
-                            <i class="align-middle me-2" data-feather="users"></i> <span
-                                class="align-middle">{{__('Users')}}</span>
+                            <i class="align-middle me-2" data-feather="users"></i> <span class="align-middle">{{__('Users')}}</span>
                         </a>
                     </li>
 
-                    <li
-                        class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.salas')? 'active': ''}}">
+                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.salas')? 'active': ''}}">
                         <a class="sidebar-link" href="{{route('admin.salas.index')}}">
                             <i class="align-middle me-2" data-feather="tv"></i> <span class="align-middle">{{__('Movie
                                 Theaters')}}</span>
                         </a>
                     </li>
 
-                    <li
-                        class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.sessoes')? 'active': ''}}">
+                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.filmes')? 'active': ''}}">
+                        <a class="sidebar-link" href="{{route('admin.filmes.index')}}">
+                            <i class="align-middle me-2" data-feather="film"></i> <span class="align-middle">{{__('Movies')}}</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.sessoes')? 'active': ''}}">
                         <a class="sidebar-link" href="{{route('admin.sessoes.index')}}">
-                            <i class="align-middle me-2" data-feather="tv"></i> <span
-                                class="align-middle">{{__('Sessions')}}</span>
+                            <i class="align-middle me-2" data-feather="tv"></i> <span class="align-middle">{{__('Sessions')}}</span>
                         </a>
                     </li>
                 </ul>
@@ -96,31 +96,24 @@
                         @else
 
                         <li class="nav-item dropdown">
-                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
-                                data-bs-toggle="dropdown">
+                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                                 <i class="align-middle" data-feather="settings"></i>
                             </a>
 
-                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
-                                data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                                 <img src="{{ Auth::user()->foto_url ? asset('storage/fotos/' .
-                                    Auth::user()->foto_url) : asset('img/default_img.png') }}"
-                                    class="avatar img-fluid rounded me-1" alt="Fotografia" />
+                                    Auth::user()->foto_url) : asset('img/default_img.png') }}" class="avatar img-fluid rounded me-1" alt="Fotografia" />
 
                                 <span class="text-dark">
                                     {{ explode(' ', Auth::user()->name)[0] }}
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
-                                        data-feather="user"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="align-middle me-1"
-                                        data-feather="pie-chart"></i> Analytics</a>
+                                <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
-                                        data-feather="settings"></i> Settings & Privacy</a>
-                                <a class="dropdown-item" href="#"><i class="align-middle me-1"
-                                        data-feather="help-circle"></i> Help Center</a>
+                                <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+                                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"> {{ __('Logout')
