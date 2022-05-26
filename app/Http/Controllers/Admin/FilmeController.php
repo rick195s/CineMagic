@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 
 class FilmeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->authorizeResource(Filme::class, 'filme');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,6 @@ class FilmeController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Filme::class);
         $filmes = Filme::paginate(15);
         return view('admin.filmes.index', compact('filmes'));
     }
