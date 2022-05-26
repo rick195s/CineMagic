@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class SalaController extends Controller
 {
 
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -96,6 +97,12 @@ class SalaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // findOrFail já retira os users com softDeletes
+        $sala = Sala::findOrFail($id);
+        $this->authorize('delete', $sala);
+
+        // soft delete
+        $sala->delete();
+        return back()->with('success', __('Movie Theater Deleted'));
     }
 }
