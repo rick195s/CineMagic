@@ -77,7 +77,7 @@ class SalaPolicy
         if (!$user->isAdmin()) {
             return $this->deny(__("Only admins can delete movie theaters"));
         }
-        return $user->isAdmin();
+        return true;
     }
 
     /**
