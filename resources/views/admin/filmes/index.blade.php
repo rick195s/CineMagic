@@ -22,7 +22,7 @@
         <div class="col-6 col-sm-4">
             <div class="card">
                 <img class="card-img-top" src="{{asset('storage/cartazes/'.$filme->cartaz_url)}}" alt="{{$filme->titulo}}">
-                <div class="card-body d-flex">
+                <div class="card-body d-flex align-items-start">
                     <div class="me-auto">
                         <h2 class="mb-0">{{ $filme->titulo }}</h2>
                     </div>
