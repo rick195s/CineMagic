@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SalaController;
+use App\Http\Controllers\Admin\SessaoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
@@ -57,6 +58,6 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     // // admin dashboard manage filmes
     Route::resource('filmes', FilmeController::class);
 
-    // // admin dashboard manage sessoes
-    // Route::get('/sessoes', [SessaoController::class, 'admin_index'])->name('sessoes.index');
+    // admin dashboard manage sessoes
+    Route::resource('sessoes', SessaoController::class);
 });
