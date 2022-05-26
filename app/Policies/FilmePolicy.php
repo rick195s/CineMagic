@@ -19,7 +19,7 @@ class FilmePolicy
     public function viewAny(User $user)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Only admins can view all users"));
+            return $this->deny(__("Only admins can view all movies"));
         }
         return true;
     }
@@ -45,7 +45,7 @@ class FilmePolicy
     public function create(User $user)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Only admins can create movie theaters"));
+            return $this->deny(__("Only admins can create movies"));
         }
         return true;
     }
@@ -61,7 +61,7 @@ class FilmePolicy
     {
         //
         if (!$user->isAdmin()) {
-            return $this->deny(__("Only admins can update movie theaters"));
+            return $this->deny(__("Only admins can update movies"));
         }
         return true;
     }
@@ -76,7 +76,7 @@ class FilmePolicy
     public function delete(User $user, Filme $filme)
     {
         if (!$user->isAdmin()) {
-            return $this->deny(__("Only admins can delete movie theaters"));
+            return $this->deny(__("Only admins can delete movies"));
         }
         return $user->isAdmin();
     }
