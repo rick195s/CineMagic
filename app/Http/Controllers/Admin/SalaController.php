@@ -12,7 +12,7 @@ class SalaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->authorizeResource(Sala::class, 'sala');
+        // $this->authorizeResource(Sala::class, 'sala');
     }
 
     /**
@@ -22,6 +22,7 @@ class SalaController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Sala::class);
         $salas = Sala::paginate(15);
         return view('admin.salas.index', compact('salas'));
     }
@@ -33,7 +34,8 @@ class SalaController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Sala::class);
+        return view('admin.salas.create');
     }
 
     /**
@@ -44,7 +46,13 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', Sala::class);
+        $validatedData = $request->validate([
+            'nome' => 'required|max:255',
+        ]);
+
+        Sala::create($validatedData);
+        return redirect()->route('admin.salas.index')->with('success', __('Movie Theater created successfully'));
     }
 
     /**
@@ -66,7 +74,6 @@ class SalaController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**

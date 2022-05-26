@@ -61,6 +61,7 @@
 
     "Movie Theaters": "Salas de Cinema",
     "Add Movie Theater": "Adicionar Sala de Cinema",
+    "Movie Theater created successfully": "Sala de Cinema criada com sucesso!",
     "Only admins can create movie theaters": "Apenas os administradores podem criar salas de cinema",
     "Only admins can update movie theaters": "Apenas os administradores podem alterar salas de cinema",
     "Only admins can delete movie theaters": "Apenas os administradores podem eliminar salas de cinema",
