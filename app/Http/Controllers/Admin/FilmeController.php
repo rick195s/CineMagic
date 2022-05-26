@@ -11,7 +11,7 @@ class FilmeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->authorizeResource(Filme::class, 'filme');
+        //$this->authorizeResource(Filme::class, 'filme');
     }
 
     /**
@@ -21,6 +21,7 @@ class FilmeController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Filme::class);
         $filmes = Filme::paginate(15);
         return view('admin.filmes.index', compact('filmes'));
     }

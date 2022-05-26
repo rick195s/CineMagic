@@ -13,7 +13,7 @@ class SalaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->authorizeResource(Sala::class, 'salas');
+        //$this->authorizeResource(Sala::class, 'salas');
     }
 
     /**
@@ -23,6 +23,7 @@ class SalaController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Sala::class);
         $salas = Sala::paginate(15);
         return view('admin.salas.index', compact('salas'));
     }
