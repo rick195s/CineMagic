@@ -19,27 +19,32 @@
     <div class="row">
         @foreach ($filmes as $filme)
 
-        <div class="col-6 col-sm-4">
+        <div class="col-6 col-sm-3">
             <div class="card">
                 <img class="card-img-top" src="{{asset('storage/cartazes/'.$filme->cartaz_url)}}" alt="{{$filme->titulo}}">
                 <div class="card-body d-flex align-items-start">
-                    <div class="me-auto">
-                        <h2 class="mb-0">{{ $filme->titulo }}</h2>
+                    <div class="row ">
+                        <div class="col-12 ">
+                            <h2 class="mb-0">{{ $filme->titulo }}</h2>
+                        </div>
+
+                        <div class="col-12 mt-3 d-flex justify-content-end">
+
+                            @can('update', $filme)
+                            <a href="{{route('admin.filmes.edit', $filme->id)}}" class="btn btn-primary me-1">{{__('Edit')}}</a>
+                            @endcan
+
+                            @can('delete', $filme)
+                            <button form="delete_filme_{{$filme->id}}" class="btn btn-danger"><i data-feather="trash-2"></i> </button>
+
+                            <form id="delete_filme_{{$filme->id}}" action="{{ route('admin.filmes.destroy', $filme->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+
+                            </form>
+                            @endcan
+                        </div>
                     </div>
-
-                    @can('update', $filme)
-                    <a href="{{route('admin.filmes.edit', $filme->id)}}" class="btn btn-primary me-1">{{__('Edit')}}</a>
-                    @endcan
-
-                    @can('delete', $filme)
-                    <button form="delete_filme_{{$filme->id}}" class="btn btn-danger"><i data-feather="trash-2"></i> </button>
-
-                    <form id="delete_filme_{{$filme->id}}" action="{{ route('admin.filmes.destroy', $filme->id)}}" method="post">
-                        @csrf
-                        @method('DELETE')
-
-                    </form>
-                    @endcan
                 </div>
             </div>
         </div>
