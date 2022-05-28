@@ -63,7 +63,7 @@
 
                     <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.sessoes')? 'active': ''}}">
                         <a class="sidebar-link" href="{{route('admin.sessoes.index')}}">
-                            <i class="align-middle me-2" data-feather="tv"></i> <span class="align-middle">{{__('Sessions')}}</span>
+                            <i class="align-middle me-2" data-feather="video"></i> <span class="align-middle">{{__('Sessions')}}</span>
                         </a>
                     </li>
                 </ul>
