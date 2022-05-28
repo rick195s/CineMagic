@@ -26,7 +26,11 @@
                     <h2 class="mb-0">{{ $filme->titulo }}</h2>
 
                 </div>
-                <div class="card-footer d-flex justify-content-end">
+
+                <div class="card-footer d-flex text-muted">
+                    <span class="me-auto d-flex align-self-center">
+                        {{$filme->ano}} - {{$filme->genero->nome}}
+                    </span>
                     @can('update', $filme)
                     <a href="{{route('admin.filmes.edit', $filme->id)}}" class="btn btn-primary me-1">{{__('Edit')}}</a>
                     @endcan
