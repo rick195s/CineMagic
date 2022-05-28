@@ -32,11 +32,11 @@
                         {{$filme->ano}} - {{$filme->genero->nome}}
                     </span>
                     @can('update', $filme)
-                    <a href="{{route('admin.filmes.edit', $filme->id)}}" class="btn btn-primary me-1">{{__('Edit')}}</a>
+                    <a href="{{route('admin.filmes.edit', $filme->id)}}" class="btn align-self-end btn-primary me-1">{{__('Edit')}}</a>
                     @endcan
 
                     @can('delete', $filme)
-                    <button form="delete_filme_{{$filme->id}}" class="btn btn-danger"><i data-feather="trash-2"></i> </button>
+                    <button form="delete_filme_{{$filme->id}}" class="btn align-self-end btn-danger"><i data-feather="trash-2"></i> </button>
 
                     <form id="delete_filme_{{$filme->id}}" action="{{ route('admin.filmes.destroy', $filme->id)}}" method="post">
                         @csrf
