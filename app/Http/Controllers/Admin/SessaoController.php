@@ -21,7 +21,7 @@ class SessaoController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Sessao::class);
+        $this->authorize('viewAny', Sessao::class);
         $sessoes = Sessao::paginate(15);
         return view('admin.sessoes.index', compact('sessoes'));
     }

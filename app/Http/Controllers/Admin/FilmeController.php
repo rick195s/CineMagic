@@ -21,7 +21,7 @@ class FilmeController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Filme::class);
+        $this->authorize('viewAny', Filme::class);
         $filmes = Filme::paginate(15);
         return view('admin.filmes.index', compact('filmes'));
     }

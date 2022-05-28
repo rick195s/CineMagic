@@ -23,7 +23,7 @@ class SalaController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Sala::class);
+        $this->authorize('viewAny', Sala::class);
         $salas = Sala::paginate(15);
         return view('admin.salas.index', compact('salas'));
     }
