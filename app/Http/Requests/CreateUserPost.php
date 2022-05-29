@@ -29,9 +29,18 @@ class CreateUserPost extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'tipo' => ['required', Rule::in(['A', 'F'])],
-            'bloqueado' => ['boolean'],
             'foto_url' => ['nullable', 'image', 'max:8192'],
+        ];
+    }
 
+    public function attributes()
+    {
+        return [
+            'name' => __('Name'),
+            'email' => __('Email'),
+            'password' => __('Password'),
+            'tipo' => __('Type'),
+            'foto_url' => __('User Photo'),
         ];
     }
 }

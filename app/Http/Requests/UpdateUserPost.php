@@ -35,9 +35,18 @@ class UpdateUserPost extends FormRequest
             // ignore serve para nao verificarmos se o email inserido é igual ao email do utilizador que estamos a editar
             'email' => ['string', 'email', 'max:255', Rule::unique('users')->ignore($this->user->id),],
             'tipo' => [Rule::in(['A', 'F'])],
-            'bloqueado' => ['boolean'],
             'foto_url' => ['nullable', 'image', 'max:8192'],
 
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => __('Name'),
+            'email' => __('Email'),
+            'tipo' => __('Type'),
+            'foto_url' => __('User Photo'),
         ];
     }
 }
