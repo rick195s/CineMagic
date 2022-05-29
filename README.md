@@ -348,38 +348,28 @@ por exemplo esta para esta rota users/{user} podemos ir buscar o valor {user} at
 $this->route('user')
 ```
 
-## O que já foi feito:
+## Coisas Importantes (Extras, etc):
 
 - Laravel UI instalada.
 
 - Email de recuperar senha a ser enviado
+
+#### Salas:
+
+- Só se pode editar salas se as salas não tiverem nenhuma sessão futura;
+
+- Ao criar uma sala podemos especificar o numero de lugares que a sala vai ter;
+
+- Ao editar uma sala, se aumentarmos o numero de lugares são criados mais lugares. Se diminuirmos o numero de lugares, fazemos soft delete dos lugares a mais, começando a eliminar do fim.
+
+- Cada fila de lugares é composta por 15 lugares no máximo.
 
 #### Middlewares:
 
 - IsAdmin;
 - UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
 
-#### Policies:
-
-BilhetePolicy:
-
-- view(); 
-
-UserPolicy:
-
-- view();
-
-#### Form Requests:
-
-- CreateUser();
-
 #### Controllers:
-
-- HomeController;
-
-- UserController (Resource, Usado no dashboard para editar funcionarios e admins);
-
-- ClienteController(Usado para funções que o cliente pode fazer);
 
 - ChangePasswordController (Usado para alterar a password do user);
 
@@ -404,10 +394,6 @@ UserPolicy:
 - clientes 1:1 users;
 
 - recibos 1:n bilhetes;
-
-#### Models:
-
-- Cliente (fillable, hidden)
 
 ## O que temos de fazer:
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateSalaPost;
 use App\Models\Sala;
 use Illuminate\Http\Request;
 
@@ -45,14 +46,28 @@ class SalaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSalaPost $request)
     {
         $this->authorize('create', Sala::class);
-        $validatedData = $request->validate([
-            'nome' => 'required|max:255',
-        ]);
+        $validatedData = $request->validated();
 
-        Sala::create($validatedData);
+        $sala = Sala::create($validatedData);
+
+        // ceil arredonda o valor sempre para cima (ex: 0.1 = 1, 0.5 = 1)
+        // dividimos por 15, porque definimos que cada fila tem 15 lugares
+        $num_lugares = $validatedData["num_lugares"];
+        $num_filas = ceil($num_lugares / 15);
+        $alphabet = range('A', 'Z');
+
+        for ($i = 0; $i < $num_filas; $i++) {
+            for ($j = 1; $j <= 15 && $j <= $num_lugares; $j++) {
+                $sala->lugares()->create([
+                    'fila' => $alphabet[$i],
+                    'posicao' => $j,
+                ]);
+            }
+            $num_lugares -= 15;
+        }
         return redirect()->route('admin.salas.index')->with('success', __('Movie Theater created successfully'));
     }
 
