@@ -31,10 +31,10 @@ class UpdateUserPost extends FormRequest
     {
 
         return [
-            'name' => ['string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             // ignore serve para nao verificarmos se o email inserido é igual ao email do utilizador que estamos a editar
-            'email' => ['string', 'email', 'max:255', Rule::unique('users')->ignore($this->user->id),],
-            'tipo' => [Rule::in(['A', 'F'])],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user->id),],
+            'tipo' => ['required', Rule::in(['A', 'F'])],
             'foto_url' => ['nullable', 'image', 'max:8192'],
 
         ];
