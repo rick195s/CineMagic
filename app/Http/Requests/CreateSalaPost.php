@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Sala;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateSalaPost extends FormRequest
 {
@@ -23,10 +25,12 @@ class CreateSalaPost extends FormRequest
      */
     public function rules()
     {
+        $sala = Sala::find($this->route('sala'));
+
         return [
-            'nome' => 'required|max:125|unique:salas',
+            'nome' => ['required', 'max:125', Rule::unique("salas")->ignore($sala->id ?? null)],
             'num_lugares' => 'required|numeric|min:1|max:500',
-            // 'num_lugares_por_fila'
+            'num_filas' => 'required|numeric|min:1',
         ];
     }
 
@@ -35,6 +39,7 @@ class CreateSalaPost extends FormRequest
         return [
             'nome' => __('Name'),
             'num_lugares' => __('Number of Seats'),
+            'num_filas' => __('Number of Rows'),
         ];
     }
 }

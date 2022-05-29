@@ -41,4 +41,59 @@ class Sala extends Model
     {
         return $this->hasMany(Lugar::class);
     }
+
+    // saber quantas filas existem numa sala
+    public function number_of_rows()
+    {
+        $num_filas = 0;
+        $lugares = $this->lugares;
+        $alphabet = range('A', 'Z');
+
+        for ($i = 0; $i < count($alphabet); $i++) {
+            foreach ($lugares as $lugar) {
+                if ($lugar->fila == $alphabet[$i]) {
+                    $num_filas++;
+                    break;
+                }
+            }
+        }
+        return $num_filas;
+    }
+
+    // criar lugares numa sala
+    public function create_seats(Sala $sala, $num_lugares, $num_filas)
+    {
+        $num_lugares_por_fila = ceil($num_lugares / $num_filas);
+
+        $alphabet = range('A', 'Z');
+
+        for ($i = 0; $i < $num_filas; $i++) {
+            for ($j = 1; $j <= $num_lugares_por_fila && $j <= $num_lugares; $j++) {
+                $sala->lugares()->create([
+                    'fila' => $alphabet[$i],
+                    'posicao' => $j,
+                ]);
+            }
+            $num_lugares -= $num_lugares_por_fila;
+        };
+    }
+
+    // remover lugares numa sala
+    public function remove_num_seats($num)
+    {
+        $lugares = $this->lugares;
+        $count = $lugares->count();
+        for ($i = 0; $i < $num; $i++) {
+            $lugares[$count - 1]->delete();
+            $count--;
+        }
+    }
+
+    // remover lugares permanentemente
+    public function permanent_remove_seats()
+    {
+        foreach ($this->lugares as $lugar) {
+            $lugar->forceDelete();
+        }
+    }
 }

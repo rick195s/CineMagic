@@ -62,6 +62,11 @@ class SalaPolicy
         if (!$user->isAdmin()) {
             return $this->deny(__("Only admins can update movie theaters"));
         }
+
+        if ($sala->sessoes && $sala->sessoes->count() > 0) {
+            return $this->deny(__("Only movie theaters without future sessions can be updated"));
+        }
+
         return true;
     }
 

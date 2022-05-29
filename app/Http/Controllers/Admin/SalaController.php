@@ -37,7 +37,8 @@ class SalaController extends Controller
     public function create()
     {
         $this->authorize('create', Sala::class);
-        return view('admin.salas.create');
+        $sala = new Sala;
+        return view('admin.salas.create', compact('sala'));
     }
 
     /**
@@ -56,18 +57,9 @@ class SalaController extends Controller
         // ceil arredonda o valor sempre para cima (ex: 0.1 = 1, 0.5 = 1)
         // dividimos por 15, porque definimos que cada fila tem 15 lugares
         $num_lugares = $validatedData["num_lugares"];
-        $num_filas = ceil($num_lugares / 15);
-        $alphabet = range('A', 'Z');
+        $num_filas = $validatedData["num_filas"];
+        $sala->create_seats($sala, $num_lugares, $num_filas);
 
-        for ($i = 0; $i < $num_filas; $i++) {
-            for ($j = 1; $j <= 15 && $j <= $num_lugares; $j++) {
-                $sala->lugares()->create([
-                    'fila' => $alphabet[$i],
-                    'posicao' => $j,
-                ]);
-            }
-            $num_lugares -= 15;
-        }
         return redirect()->route('admin.salas.index')->with('success', __('Movie Theater created successfully'));
     }
 
@@ -90,6 +82,9 @@ class SalaController extends Controller
      */
     public function edit($id)
     {
+        $sala = Sala::findOrFail($id);
+        $this->authorize('update', $sala);
+        return view('admin.salas.edit', compact('sala'));
     }
 
     /**
@@ -99,9 +94,31 @@ class SalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateSalaPost $request, $id)
     {
-        //
+        $sala = Sala::findOrFail($id);
+        $this->authorize('update', $sala);
+
+        $validatedData = $request->validated();
+
+        $num_lugares = $validatedData["num_lugares"];
+        $lugares = $sala->lugares()->orderBy('fila', 'asc')->orderBy('posicao', 'asc')->get();
+        $old_num_lugares = $lugares->count();
+
+        // se a sala ficar com menos lugares vamos fazer soft delete aos lugares
+        // até termos o número de lugares desejado
+        if ($num_lugares < $old_num_lugares) {
+            $sala->remove_num_seats($old_num_lugares - $num_lugares);
+        } else if ($num_lugares > $old_num_lugares) {
+            // se a sala ficar com mais lugares apagamos os lugares existentes e criamos novos
+            // podemos apagar permanentemente os lugares anteriores porque só é possivel editar a sala se não
+            // houver sessoes futuras na mesma
+            // $sala->permanent_remove_seats();
+            // $sala->create_seats($sala, $num_lugares, $validatedData["num_filas"]);
+        }
+
+        $sala->update($validatedData);
+        return redirect()->route('admin.salas.index')->with('success', __('Movie Theater updated successfully'));
     }
 
     /**

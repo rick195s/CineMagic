@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', __('Add Movie Theater'))
+@section('title', __('Update Movie Theater'))
 @section('content')
 
 
@@ -7,17 +7,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Add Movie Theater') }}</div>
+                <div class="card-header">{{ __('Update Movie Theater') }}</div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.salas.store') }}" method="post">
+                    <form action="{{ route('admin.salas.update', $sala->id) }}" method="post">
                         @csrf
-
+                        @method('PUT')
                         @include('admin.salas.partials.create-edit')
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Add Movie Theater') }}
+                                    {{ __('Update Movie Theater') }}
                                 </button>
                             </div>
                         </div>
