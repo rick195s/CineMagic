@@ -14,11 +14,8 @@ class UpdateUserPost extends FormRequest
      * @return bool
      */
 
-    protected $user = null;
-
     public function authorize()
     {
-        $this->user = User::findOrFail($this->route('user'));
         return $this->user()->can('update', $this->user);
     }
 
@@ -29,11 +26,11 @@ class UpdateUserPost extends FormRequest
      */
     public function rules()
     {
-
+        $user = User::findOrFail($this->route('user'));
         return [
             'name' => ['required', 'string', 'max:255'],
             // ignore serve para nao verificarmos se o email inserido é igual ao email do utilizador que estamos a editar
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user->id),],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id),],
             'tipo' => ['required', Rule::in(['A', 'F'])],
             'foto_url' => ['nullable', 'image', 'max:8192'],
 
