@@ -23,10 +23,12 @@
             <div class="card">
                 <img class="card-img-top" src="{{asset('img/movie_theater.jpg')}}" alt="{{$sala->nome}}">
                 <div class="card-body d-flex align-items-start">
-                    <div class="me-auto">
-                        <h2 class="mb-0">{{ $sala->nome }}</h2>
-                    </div>
-
+                    <h2 class="mb-0">{{ $sala->nome }}</h2>
+                </div>
+                <div class="card-footer d-flex text-muted">
+                    <span class="me-auto d-flex align-self-center">
+                        {{$sala->lugares->count()}} {{__('seats')}}
+                    </span>
                     @can('update', $sala)
                     <a href="{{route('admin.salas.edit', $sala->id)}}" class="btn btn-primary me-1">{{__('Edit')}}</a>
                     @endcan
