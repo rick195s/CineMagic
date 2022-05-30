@@ -47,6 +47,8 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
 
     // admin dashboard main page
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
+
 
     // rotas para gerir users no dashboard admin
     Route::resource('users', UserController::class);

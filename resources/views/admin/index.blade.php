@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('title', __('Dashboard'))
 @section('content')
 <div class="container-fluid p-0">
 
@@ -111,6 +112,53 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-12  d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100">
+                <div class="card-header">
+
+                    <h5 class="card-title mb-0">{{__('Settings')}}</h5>
+                </div>
+                <div class="card-body px-4">
+                    <form action="{{ route('admin.settings.update') }}" method="post">
+                        @csrf
+                        <div class="row mb-3">
+                            <label for="preco_bilhete_sem_iva" class="col-md-2 col-form-label">{{ __('Ticket Price without IVA') }}</label>
+
+                            <div class="col-md-2">
+                                <input id="preco_bilhete_sem_iva" type="number" value="{{old('preco_bilhete_sem_iva', $config->preco_bilhete_sem_iva)}}" class="form-control @error('preco_bilhete_sem_iva') is-invalid @enderror" name="preco_bilhete_sem_iva" required>
+
+                                @error('preco_bilhete_sem_iva')
+                                <span class="small text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <label for="percentagem_iva" class="col-md-2 col-form-label">{{ __('IVA Percentage') }} (%)</label>
+
+                            <div class="col-md-2">
+                                <input id="percentagem_iva" type="number" value="{{old('percentagem_iva', $config->percentagem_iva)}}" class="form-control @error('percentagem_iva') is-invalid @enderror" name="percentagem_iva" required>
+
+
+                                @error('percentagem_iva')
+                                <span class="small text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 my-3 my-md-0">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Update Settings') }}
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
             <div class="card flex-fill w-100">

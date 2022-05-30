@@ -12,6 +12,7 @@
     "Confirm Password": "Confirmar senha",
     "Whoops! Something went wrong.": "Foram encontrados os seguintes erros:",
 
+
     "Change Password": "Alterar a Password",
     "Current Password": "Password atual",
     "New Password": "Nova Password",
@@ -90,6 +91,12 @@
     "Starting Hour": "Hora de Início",
     "Date": "Data",
     "Screen Room": "Sala",
+
+    "Dashboard": "Painel de Controlo",
+    "Settings": "Configurações",
+    "Ticket Price without IVA": "Preço do bilhete sem IVA",
+    "IVA Percentage": "Percentagem do IVA",
+    "Update Settings": "Atualizar Configurações",
 
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Esqueceu-se da sua senha de inicio de sessão? Sem problemas. Apenas necessita de introduzir o seu endereço de e-mail para que possamos lhe enviar um link de redefinição de senha.",
     "Already registered?": "Já possui uma conta?",

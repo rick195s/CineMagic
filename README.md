@@ -505,14 +505,16 @@ $this->route('user')
 
 - [ ] Os administradores podem gerir filmes, sessoes e outros valores que estao no enunciado.
 
-- [ ] Os administradores podem gerir salas e lugares de salas;
+- [x] Os administradores podem gerir salas e lugares de salas;
 
-- [ ] O admin pode criar, alterar ou apagar (soft delete) as salas.
+- [x] O admin pode criar, alterar ou apagar (soft delete) as salas.
 
-- [ ] Para cada sala tem de ser possivel definir os lugares que a sala tem.
+- [x] Para cada sala tem de ser possivel definir os lugares que a sala tem.
 
 - [ ] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
 
 - [ ] Para cada filme deve ser possivel fazer upload do cartaz:
 
-- [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado
+- [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
+
+- [x] Os admin podem alterar as configurações do preco de bilhete e iva no dashboard;
