@@ -66,10 +66,10 @@ class SalaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Sala $sala
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Sala $sala)
     {
         //
     }
@@ -77,12 +77,11 @@ class SalaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Sala $sala
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Sala $sala)
     {
-        $sala = Sala::findOrFail($id);
         $this->authorize('update', $sala);
         return view('admin.salas.edit', compact('sala'));
     }
@@ -91,12 +90,11 @@ class SalaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Sala $sala
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateSalaPost $request, $id)
+    public function update(CreateSalaPost $request, Sala $sala)
     {
-        $sala = Sala::findOrFail($id);
         $this->authorize('update', $sala);
 
         $validatedData = $request->validated();
@@ -126,13 +124,11 @@ class SalaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Sala $sala
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Sala $sala)
     {
-        // findOrFail já retira os users com softDeletes
-        $sala = Sala::findOrFail($id);
         $this->authorize('delete', $sala);
 
         // soft delete
