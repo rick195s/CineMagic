@@ -30,7 +30,7 @@ class CreateSalaPost extends FormRequest
         return [
             'nome' => ['required', 'max:125', Rule::unique("salas")->ignore($sala->id ?? null)],
             'num_lugares' => 'required|numeric|min:1|max:500',
-            'num_filas' => 'required|numeric|min:1',
+            'num_filas' => 'required|numeric|min:1|lte:num_lugares',
         ];
     }
 

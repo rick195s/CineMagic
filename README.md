@@ -356,8 +356,6 @@ $this->route('user')
 
 #### Salas:
 
-- Só se pode editar salas se as salas não tiverem nenhuma sessão futura em que alguem ja tenha comprado bilhete;
-
 - Podemos permitir que uma sala seja alterada mesmo tendo sessoes anteriores se quando alterarmos uma sala criarmos uma copia dessa sala.
 
 - Ao criar uma sala podemos especificar o numero de lugares que a sala vai ter;
@@ -365,8 +363,12 @@ $this->route('user')
 - Ao editar uma sala, se aumentarmos o numero de lugares são criados mais lugares. Se diminuirmos o numero de lugares, fazemos soft delete dos lugares a mais, começando a eliminar do fim.
 
 - Cada fila de lugares é composta por 15 lugares no máximo.
-  
-  
+
+- Só salas sem sessoes futuras é que podem ser eliminadas.
+
+- Só salas sem sessoes é que podem ser editadas.
+
+- Número de filas de uma sala não pode ser maior que o número de lugares;
 
 #### Middlewares:
 
