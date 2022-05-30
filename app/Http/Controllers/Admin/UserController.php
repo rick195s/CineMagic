@@ -17,7 +17,7 @@ class UserController extends Controller
     public function  __construct()
     {
         $this->middleware('auth');
-        // $this->authorizeResource(User::class);
+        $this->authorizeResource(User::class);
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +26,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', User::class);
         $users = User::paginate(15);
         return view('admin.users.index', compact('users'));
     }
@@ -38,7 +37,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', User::class);
         $user = new User;
         return view('admin.users.create', compact('user'));
     }
@@ -104,8 +102,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $this->authorize('update', $user);
-
         return view('admin.users.edit', compact('user'));
     }
 
@@ -142,7 +138,6 @@ class UserController extends Controller
      */
     public function update_state(Request $request, User $user)
     {
-        $this->authorize('update_state', $user);
 
         $user->bloqueado = !$user->bloqueado;
         $user->save();
@@ -157,7 +152,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('delete', $user);
 
         // soft delete cliente
         $cliente = $user->cliente;

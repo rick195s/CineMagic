@@ -11,7 +11,7 @@ class FilmeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->authorizeResource(Filme::class, 'filme');
+        $this->authorizeResource(Filme::class, 'filme');
     }
 
     /**
@@ -21,7 +21,6 @@ class FilmeController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Filme::class);
         $filmes = Filme::paginate(15);
         return view('admin.filmes.index', compact('filmes'));
     }
@@ -89,6 +88,7 @@ class FilmeController extends Controller
      */
     public function destroy(Filme $filme)
     {
-        //
+        $filme->delete();
+        return redirect()->route('admin.filmes.index')->with('success', __('Movie deleted successfully'));
     }
 }

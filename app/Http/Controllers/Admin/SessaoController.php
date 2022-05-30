@@ -11,7 +11,7 @@ class SessaoController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->authorizeResource(Sessao::class, 'sessao');
+        $this->authorizeResource(Sessao::class, 'sessao');
     }
 
     /**
@@ -21,7 +21,6 @@ class SessaoController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Sessao::class);
         $sessoes = Sessao::paginate(15);
         return view('admin.sessoes.index', compact('sessoes'));
     }

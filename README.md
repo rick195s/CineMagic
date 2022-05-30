@@ -370,6 +370,10 @@ $this->route('user')
 
 - Número de filas de uma sala não pode ser maior que o número de lugares;
 
+#### Filmes:
+
+- Só se podem apagar filmes sem sessoes associadas;
+
 #### Middlewares:
 
 - IsAdmin;

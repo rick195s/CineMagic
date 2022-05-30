@@ -77,11 +77,13 @@
     "Number of Rows": "Número de filas",
 
     "Add Movie": "Adicionar Filme",
+    "Movie deleted successfully": "Filme eliminado com sucesso!",
     "Movies": "Filmes",
     "Only admins can view all movies": "Apenas os administradores podem ver todos os filmes",
     "Only admins can create movies": "Apenas os administradores podem criar filmes",
     "Only admins can update movies": "Apenas os administradores podem alterar filmes",
     "Only admins can delete movies": "Apenas os administradores podem eliminar filmes",
+    "Only movies without sessions can be deleted": "Apenas filmes sem sessões podem ser eliminados",
 
     "Sessions": "Sessões",
     "Title": "Título",

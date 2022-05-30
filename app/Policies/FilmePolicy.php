@@ -78,7 +78,12 @@ class FilmePolicy
         if (!$user->isAdmin()) {
             return $this->deny(__("Only admins can delete movies"));
         }
-        return $user->isAdmin();
+
+        if ($filme->sessoes) {
+            return $this->deny(__("Only movies without sessions can be deleted"));
+        }
+
+        return true;
     }
 
     /**
