@@ -2,6 +2,10 @@
 
 https://github.com/adminkit/adminkit
 
+# MoviePoint:
+
+https://www.templateshub.net/template/Moviepoint-Online-Movie-Template
+
 # TIPS
 
 Foi usado scaffold bootstrap. Basicamente foram implementadas coisas automaticamente que correspondem ao auth de users e páginas base:
