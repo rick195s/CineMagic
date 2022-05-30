@@ -14,7 +14,7 @@ class SalaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        //$this->authorizeResource(Sala::class, 'salas');
+        $this->authorizeResource(Sala::class, 'sala');
     }
 
     /**
@@ -24,7 +24,6 @@ class SalaController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Sala::class);
         $salas = Sala::paginate(15);
         return view('admin.salas.index', compact('salas'));
     }
@@ -36,7 +35,6 @@ class SalaController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Sala::class);
         $sala = new Sala;
         return view('admin.salas.create', compact('sala'));
     }
@@ -49,7 +47,6 @@ class SalaController extends Controller
      */
     public function store(CreateSalaPost $request)
     {
-        $this->authorize('create', Sala::class);
         $validatedData = $request->validated();
 
         $sala = Sala::create($validatedData);
@@ -58,7 +55,7 @@ class SalaController extends Controller
         // dividimos por 15, porque definimos que cada fila tem 15 lugares
         $num_lugares = $validatedData["num_lugares"];
         $num_filas = $validatedData["num_filas"];
-        $sala->create_seats($sala, $num_lugares, $num_filas);
+        $sala->create_seats($num_lugares, $num_filas);
 
         return redirect()->route('admin.salas.index')->with('success', __('Movie Theater created successfully'));
     }
@@ -82,7 +79,6 @@ class SalaController extends Controller
      */
     public function edit(Sala $sala)
     {
-        $this->authorize('update', $sala);
         return view('admin.salas.edit', compact('sala'));
     }
 
@@ -95,8 +91,6 @@ class SalaController extends Controller
      */
     public function update(CreateSalaPost $request, Sala $sala)
     {
-        $this->authorize('update', $sala);
-
         $validatedData = $request->validated();
 
         $num_lugares = $validatedData["num_lugares"];
@@ -129,8 +123,6 @@ class SalaController extends Controller
      */
     public function destroy(Sala $sala)
     {
-        $this->authorize('delete', $sala);
-
         // soft delete
         $sala->delete();
         return back()->with('success', __('Movie Theater Deleted'));

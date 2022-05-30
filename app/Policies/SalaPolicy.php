@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Sala;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SalaPolicy
@@ -87,7 +86,6 @@ class SalaPolicy
         if ($sala->sessoes && $sala->sessoes_futuras->count() > 0) {
             return $this->deny(__("Only movie theaters without future sessions can be deleted"));
         }
-
 
         return true;
     }
