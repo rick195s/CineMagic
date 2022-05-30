@@ -503,7 +503,9 @@ $this->route('user')
 
 #### Administracao do negocio:
 
-- [ ] Os administradores podem gerir salas, lugares, salas, filmes, sessoes e outros valores que estao no enunciado.
+- [ ] Os administradores podem gerir filmes, sessoes e outros valores que estao no enunciado.
+
+- [ ] Os administradores podem gerir salas e lugares de salas;
 
 - [ ] O admin pode criar, alterar ou apagar (soft delete) as salas.
 
