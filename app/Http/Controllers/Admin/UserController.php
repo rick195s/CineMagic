@@ -86,12 +86,11 @@ class UserController extends Controller
     /**
      * Mostrar as informações do user no dashboard.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
         $this->authorize('view', $user);
         dump($user);
         return view('home');
@@ -100,12 +99,11 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
         $this->authorize('update', $user);
 
         return view('admin.users.edit', compact('user'));
@@ -115,12 +113,11 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserPost $request, $id)
+    public function update(UpdateUserPost $request, User $user)
     {
-        $user = User::findOrFail($id);
         // o metodo authorize dentro do UpdateUser já verifica se o utilizador
         // atual tem as permissoes necessarias
         $validatedData = $request->validated();
@@ -140,12 +137,11 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update_state(Request $request, $id)
+    public function update_state(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
         $this->authorize('update_state', $user);
 
         $user->bloqueado = !$user->bloqueado;
@@ -156,13 +152,11 @@ class UserController extends Controller
     /**
      * Remover um utilizador através do dashboard.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        // findOrFail já retira os users com softDeletes
-        $user = User::findOrFail($id);
         $this->authorize('delete', $user);
 
         // soft delete cliente
