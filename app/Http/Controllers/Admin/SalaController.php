@@ -97,18 +97,18 @@ class SalaController extends Controller
         $lugares = $sala->lugares()->orderBy('fila', 'asc')->orderBy('posicao', 'asc')->get();
         $old_num_lugares = $lugares->count();
 
-        // se a sala ficar com menos lugares vamos fazer soft delete aos lugares 
+        // se a sala ficar com menos lugares vamos fazer soft delete aos lugares
         // a contar do fim até termos o número de lugares desejado
         // if ($num_lugares < $old_num_lugares ) {
         //     $sala->remove_num_seats($old_num_lugares - $num_lugares);
         // }
 
-        if ($num_lugares !=  $old_num_lugares || $sala->number_of_rows() != $validatedData["num_filas"]) {
+        if ($num_lugares !=  $old_num_lugares || $sala->num_filas() != $validatedData["num_filas"]) {
             // se a sala ficar com mais lugares apagamos os lugares existentes e criamos novos
             // podemos apagar permanentemente os lugares anteriores porque só é possivel editar a sala se não
             // houver sessoes futuras na mesma
-            $sala->permanent_remove_seats();
-            $sala->create_seats($num_lugares, $validatedData["num_filas"]);
+            $sala->remover_permanentemente_lugares();
+            $sala->criar_lugares($num_lugares, $validatedData["num_filas"]);
         }
 
         $sala->update($validatedData);

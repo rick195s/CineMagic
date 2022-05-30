@@ -54,7 +54,7 @@ class Sala extends Model
     }
 
     // saber quantas filas existem numa sala
-    public function number_of_rows()
+    public function num_filas()
     {
         $filas = [];
         foreach ($this->lugares as $lugar) {
@@ -66,7 +66,7 @@ class Sala extends Model
     }
 
     // criar lugares numa sala
-    public function create_seats($num_lugares, $num_filas)
+    public function criar_lugares($num_lugares, $num_filas)
     {
         $num_lugares_por_fila = ceil($num_lugares / $num_filas);
 
@@ -84,7 +84,7 @@ class Sala extends Model
     }
 
     // remover lugares numa sala
-    public function remove_num_seats($num)
+    public function remover_num_lugares($num)
     {
         $lugares = $this->lugares;
         $count = $lugares->count();
@@ -95,7 +95,7 @@ class Sala extends Model
     }
 
     // remover lugares permanentemente
-    public function permanent_remove_seats()
+    public function remover_permanentemente_lugares()
     {
         foreach ($this->lugares as $lugar) {
             $lugar->forceDelete();
