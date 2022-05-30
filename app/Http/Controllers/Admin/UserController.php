@@ -138,7 +138,7 @@ class UserController extends Controller
      */
     public function update_state(Request $request, User $user)
     {
-
+        $this->authorize('update_state', $user);
         $user->bloqueado = !$user->bloqueado;
         $user->save();
 
