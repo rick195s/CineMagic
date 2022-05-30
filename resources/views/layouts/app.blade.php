@@ -84,7 +84,8 @@
                         @else
 
                         <a id="dropdownUser" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="mdo" class="rounded img-fluid" width="40" height="40">
+                            <img src="{{ Auth::user()->foto_url ? asset('storage/fotos/' .
+                                    Auth::user()->foto_url) : asset('img/default_img.png') }}" alt="mdo" class="rounded img-fluid" width="40" height="40">
                             <p class="d-none d-sm-inline-block"> {{ explode(' ', Auth::user()->name)[0] }}</p>
 
                         </a>
