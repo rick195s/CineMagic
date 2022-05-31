@@ -73,11 +73,11 @@
 
                     <!-- content tabs nav -->
                     <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
-                        @for ($i = 0; $i < $generos->count(); $i++)
-                            <li class="nav-item ">
-                                <a class="nav-link  @if ($i == 0) active @endif" data-toggle="tab" href="#tab-{{$i}}" role="tab" aria-controls="tab-{{$i}}" aria-selected="@if($i == 0) true @else false @endif ">{{$generos[$i]->nome}}</a>
-                            </li>
-                            @endfor
+                        @foreach ($filmes_por_genero as $genero_nome => $filmes )
+                        <li class="nav-item ">
+                            <a class="nav-link  @if ($loop->first) active @endif" data-toggle="tab" href="#tab-{{$genero_nome}}" role="tab" aria-controls="tab-{{$genero_nome}}" aria-selected="@if($loop->first) true @else false @endif ">{{$genero_nome}}</a>
+                        </li>
+                        @endforeach
                     </ul>
                     <!-- end content tabs nav -->
 
@@ -90,11 +90,11 @@
 
                         <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
                             <ul class="nav nav-tabs" role="tablist">
-                                @for ($i = 0; $i < $generos->count(); $i++)
-                                    <li class="nav-item">
-                                        <a class="nav-link @if ($i == 0) active @endif" data-toggle="tab" href="#tab-{{$i}}" role="tab" aria-controls="#tab-{{$i}}" aria-selected="@if($i == 0) true @else false @endif ">{{$generos[$i]->nome}}</a>
-                                    </li>
-                                    @endfor
+                                @foreach ($filmes_por_genero as $genero_nome => $filmes )
+                                <li class="nav-item">
+                                    <a class="nav-link @if ($loop->first) active @endif" data-toggle="tab" href="#tab-{{$genero_nome}}" role="tab" aria-controls="#tab-{{$genero_nome}}" aria-selected="@if($loop->first) true @else false @endif ">{{$genero_nome}}</a>
+                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -107,55 +107,54 @@
     <div class="container">
         <!-- content tabs -->
         <div class="tab-content" id="myTabContent">
-            @for ($i = 0; $i < $generos->count(); $i++)
-                <div class="tab-pane fade show @if($i==0) active @endif" id="tab-{{$i}}" role="tabpanel" aria-labelledby="tab-{{$i}}">
-                    <div class="row">
-                        <!-- card -->
-                        @foreach ($generos[$i]->filmes->take(5) as $filme)
-                        <div class="col-6 col-sm-12 col-lg-6">
-                            <div class="card border-0 rounded bg-transparent card--list">
-                                <div class="row">
-                                    <div class="col-12 col-sm-4">
-                                        <div class="card__cover">
-                                            <img src="{{asset('storage/cartazes/'.$filme->cartaz_url)}}" alt="">
-                                            <a href="{{$filme->trailer_url}}" target="_blank" class="card__play">
-                                                <i class="icon ion-ios-play"></i>
-                                            </a>
-                                        </div>
+            @foreach ($filmes_por_genero as $genero_nome => $filmes ) <div class="tab-pane fade show @if($loop->first) active @endif" id="tab-{{$genero_nome}}" role="tabpanel" aria-labelledby="tab-{{$genero_nome}}">
+                <div class="row">
+                    <!-- card -->
+                    @foreach ($filmes as $filme)
+                    <div class="col-6 col-sm-12 col-lg-6">
+                        <div class="card border-0 rounded bg-transparent card--list">
+                            <div class="row">
+                                <div class="col-12 col-sm-4">
+                                    <div class="card__cover">
+                                        <img src="{{asset('storage/cartazes/'.$filme->cartaz_url)}}" alt="">
+                                        <a href="{{$filme->trailer_url}}" target="_blank" class="card__play">
+                                            <i class="icon ion-ios-play"></i>
+                                        </a>
                                     </div>
+                                </div>
 
-                                    <div class="col-12 col-sm-8">
-                                        <div class="card__content">
-                                            <h3 class="card__title"><a href="#">{{ $filme->titulo }}</a></h3>
-                                            <span class="card__category">
-                                                <a href="#">{{ $filme->genero->nome }}</a>
+                                <div class="col-12 col-sm-8">
+                                    <div class="card__content">
+                                        <h3 class="card__title"><a href="#">{{ $filme->titulo }}</a></h3>
+                                        <span class="card__category">
+                                            <a href="#">{{ $genero_nome }}</a>
 
-                                            </span>
+                                        </span>
 
-                                            <div class="card__wrap">
-                                                <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+                                        <div class="card__wrap">
+                                            <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
 
-                                                <ul class="card__list">
-                                                    <li>HD</li>
-                                                    <li>{{ $filme->ano }}</li>
-                                                </ul>
-                                            </div>
+                                            <ul class="card__list">
+                                                <li>HD</li>
+                                                <li>{{ $filme->ano }}</li>
+                                            </ul>
+                                        </div>
 
-                                            <div class="card__description">
-                                                <p>{{$filme->sumario}}</p>
-                                            </div>
+                                        <div class="card__description">
+                                            <p>{{$filme->sumario}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-                        <!-- end card -->
-
-
                     </div>
+                    @endforeach
+                    <!-- end card -->
+
+
                 </div>
-                @endfor
+            </div>
+            @endforeach
         </div>
         <!-- end content tabs -->
     </div>

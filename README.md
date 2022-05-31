@@ -324,6 +324,12 @@ ou podemos meter na route um middleware can
 
     dentro das views devemos usar sempre @can e @cannot para so mostrar coisas que os utilizadores podem fazer.
 
+##### Loops:
+
+Dentro de loops foreach nas views conseguimos saber se estamos no primeiro loop ou ultimo atraves de $loop->first, ou last; 
+
+
+
 #### Policies e Gates:
 
 - Sempre que validamos alguma coisa numa policy ou Gate devemos fazer desta forma:
