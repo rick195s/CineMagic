@@ -2,9 +2,9 @@
 
 https://github.com/adminkit/adminkit
 
-# MoviePoint:
+# FlixGo:
 
-https://www.templateshub.net/template/Moviepoint-Online-Movie-Template
+https://www.templateshub.net/template/FlixGo-Online-Movies-Template
 
 # TIPS
 
