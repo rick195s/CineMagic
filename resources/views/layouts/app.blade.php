@@ -40,8 +40,8 @@
                 <div class="header__content">
 
                     <!-- header logo -->
-                    <a href="{{route('home')}}" class="header__logo">
-                        <img src="{{asset('img/logo.svg')}}" alt="">
+                    <a href="{{route('home')}}" class="header__logo text-white">
+                        <h1 class="display-6">{{config('app.name', 'Laravel') }}</h1>
                     </a>
                     <!-- end header logo -->
 
