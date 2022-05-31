@@ -445,9 +445,9 @@ $this->route('user')
 
 #### Filmes em Exibição:
 
-- [ ] Qualquer utilizador pode ver quais os filmes em exibição, e as sessos dos mesmos;
+- [x] Qualquer utilizador pode ver quais os filmes em exibição, e as sessos dos mesmos;
 
-- [ ] Pesquisar (filtrar) filmes;
+- [x] Pesquisar (filtrar) filmes;
 
 #### Compra de Bilhetes:
 

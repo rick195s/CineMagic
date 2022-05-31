@@ -1,0 +1,16 @@
+.body{
+    background-color: #222e3c;
+}
+
+.card, .nav-link {
+    background-color: transparent !important;
+    border: 0 !important;
+}
+
+.nav-link.active{
+    color: white !important;
+}
+
+.nav-tabs{
+    border: 0;
+}

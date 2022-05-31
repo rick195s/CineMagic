@@ -33,10 +33,11 @@ class Genero extends Model
     ];
 
     protected $primaryKey = "code";
+    protected $keyType = 'string';
 
     // relation generos 1:n filmes
     public function filmes()
     {
-        return $this->hasMany(Filme::class);
+        return $this->hasMany(Filme::class, "genero_code", "code");
     }
 }
