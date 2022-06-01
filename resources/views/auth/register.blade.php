@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-
+@section('title', __('Register'))
 @section('content')
 
 <!-- registration form -->

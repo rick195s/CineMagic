@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-
+@section('title', __('Login'))
 @section('content')
 <!-- authorization form -->
 <form method="POST" class="sign__form" action="{{ route('login') }}">
