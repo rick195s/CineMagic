@@ -14,3 +14,9 @@
 .nav-tabs{
     border: 0;
 }
+
+.form-control:focus{
+    background-color: #222e3c ;
+    box-shadow: none;
+    color: white;
+}
