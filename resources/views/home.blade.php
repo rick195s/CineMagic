@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', __('Home'))
 @section('content')
 
 @if (session('status'))

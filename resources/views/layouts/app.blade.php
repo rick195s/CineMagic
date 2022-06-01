@@ -52,6 +52,12 @@
                             <a class="dopdown-toggle header__nav-link" href="{{route('home') }}">{{__('Home')}}</a>
                         </li>
 
+                        @if (auth()->user()->isAdmin())
+                        <li class="header__nav-item">
+                            <a class="dopdown-toggle header__nav-link" href="{{route('admin.index') }}">{{__('Dashboard')}}</a>
+                        </li>
+                        @endif
+
                     </ul>
                     <!-- end header nav -->
 
@@ -85,14 +91,16 @@
                         @else
 
                         <a id="dropdownUser" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ Auth::user()->foto_url ? asset('storage/fotos/' .
-                                    Auth::user()->foto_url) : asset('img/default_img.png') }}" alt="mdo" class="rounded img-fluid" width="40" height="40">
-                            <p class="d-none d-sm-inline-block"> {{ explode(' ', Auth::user()->name)[0] }}</p>
+                            <img src="{{ auth()->user()->foto_url ? asset('storage/fotos/' .
+                                    auth()->user()->foto_url) : asset('img/default_img.png') }}" alt="mdo" class="rounded img-fluid" width="40" height="40">
+                            <p class="d-none d-sm-inline-block"> {{ explode(' ', auth()->user()->name)[0] }}</p>
 
                         </a>
                         <div class="dropdown text-end" aria-labelledby="dropdownUser">
                             <ul class="dropdown-menu text-small">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ auth()->user()->isAdmin() ? route('admin.users.edit', auth()->user()->id) : route('client.profile') }}">{{__('Profile')}}</a>
+                                </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
