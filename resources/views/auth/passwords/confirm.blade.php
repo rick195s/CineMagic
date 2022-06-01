@@ -10,7 +10,9 @@
         <img src="{{asset('img/logo.svg')}}" alt="">
     </a>
 
-    {{ __('Please confirm your password before continuing.') }}
+    <span class="text-white">
+        {{ __('Please confirm your password before continuing.') }}
+    </span>
 
     <div class="sign__group">
         <input id="password" placeholder="{{__('Password')}}" type="password" class="form-control sign__input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
