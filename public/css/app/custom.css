@@ -24,3 +24,7 @@
 .sign__group{
     max-width: min-content;
 }
+
+.sign__form{
+    background-color: #212529;
+}
