@@ -5,7 +5,7 @@
 <form method="POST" class="sign__form" action="{{ route('login') }}">
     @csrf
     <a href="index.html" class="sign__logo">
-        <img src="img/logo.svg" alt="">
+        <img src="{{asset('img/logo.svg')}}" alt="">
     </a>
 
     <div class="sign__group">
