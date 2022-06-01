@@ -42,9 +42,18 @@ class Lugar extends Model
         return $this->belongsTo(Sala::class);
     }
 
-    // relation bilhetes 1:1 lugares
-    public function bilhete()
+    // relation bilhetes n:1 lugares
+    public function bilhetes()
     {
-        return $this->hasOne(Bilhete::class);
+        return $this->hasMany(Bilhete::class);
+    }
+
+    public static function lugares_por_fila($lugares)
+    {
+        $lugares_por_fila = [];
+        foreach ($lugares as $lugar) {
+            $lugares_por_fila[$lugar->fila][] = $lugar;
+        }
+        return $lugares_por_fila;
     }
 }

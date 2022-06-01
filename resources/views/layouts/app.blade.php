@@ -14,6 +14,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
+    <!-- Icons da fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js"></script>
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
@@ -51,12 +55,15 @@
                         <li class="header__nav-item">
                             <a class="dopdown-toggle header__nav-link" href="{{route('home') }}">{{__('Home')}}</a>
                         </li>
+                        @auth
 
                         @if (auth()->user()->isAdmin())
                         <li class="header__nav-item">
                             <a class="dopdown-toggle header__nav-link" href="{{route('admin.index') }}">{{__('Dashboard')}}</a>
                         </li>
                         @endif
+
+                        @endauth
 
                     </ul>
                     <!-- end header nav -->
@@ -100,6 +107,9 @@
                             <ul class="dropdown-menu text-small">
                                 <li>
                                     <a class="dropdown-item" href="{{ auth()->user()->isAdmin() ? route('admin.users.edit', auth()->user()->id) : route('client.profile') }}">{{__('Profile')}}</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('change_password.index') }}">{{__('Change Password')}}</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -151,6 +161,7 @@
 
         @include('flash-messages')
         @yield('content')
+
     </div>
 
     <!-- JavaScript Bundle with Popper -->

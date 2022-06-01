@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SessaoFrontController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,8 @@ Route::get('/profile', [ClienteController::class, 'index'])->name('client.profil
 Route::get('/password/change', [ChangePasswordController::class, 'index'])->name('change_password.index');
 Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');
 
+// rotas para escolher o lugar de uma sessao e depois comprar bilhete
+Route::get('/sessao/{sessao}/seat', [SessaoFrontController::class, 'create_ticket'])->name('sessao.seat');
 
 // rotas protegidas (só para admins)
 // rotas com prefixo admin

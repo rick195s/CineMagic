@@ -328,8 +328,6 @@ ou podemos meter na route um middleware can
 
 Dentro de loops foreach nas views conseguimos saber se estamos no primeiro loop ou ultimo atraves de $loop->first, ou last; 
 
-
-
 #### Policies e Gates:
 
 - Sempre que validamos alguma coisa numa policy ou Gate devemos fazer desta forma:
@@ -363,6 +361,10 @@ $this->route('user')
 - Laravel UI instalada.
 
 - Email de recuperar senha a ser enviado
+
+#### Sessoes:
+
+- COMPRAR BILHETE -> um bilhete é adicionado ao carrinho quando o utilizador escolhe um lugar na rota (sessao.seat)
 
 #### Salas:
 
@@ -403,7 +405,7 @@ $this->route('user')
 
 - salas 1:n lugares;
 
-- bilhetes 1:1 lugares;
+- bilhetes n:1 lugares;
 
 - generos 1:n filmes;
 

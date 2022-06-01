@@ -52,4 +52,16 @@ class Sessao extends Model
     {
         return $this->hasMany(Bilhete::class);
     }
+
+    // verificar se um lugar está ocupado
+    public function ocupado($lugar_id)
+    {
+        foreach ($this->bilhetes as $bilhete) {
+            if ($bilhete->lugar_id == $lugar_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -15,7 +15,7 @@ class Bilhete extends Model
         return $this->belongsTo(Sessao::class);
     }
 
-    // relation bilhetes 1:1 lugares
+    // relation bilhetes n:1 lugares
     public function lugar()
     {
         return $this->belongsTo(Lugar::class);

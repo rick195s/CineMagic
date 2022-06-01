@@ -1,5 +1,10 @@
+a{
+    color: white;
+}
+
 .body{
     background-color: #222e3c;
+    color: white;
 }
 
 .card, .nav-link {
@@ -27,4 +32,8 @@
 
 .sign__form{
     background-color: #212529;
+}
+
+.seats:hover{
+    color: #0d6efd;
 }
