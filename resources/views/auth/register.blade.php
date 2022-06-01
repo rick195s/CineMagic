@@ -48,7 +48,7 @@
         {{ __('Register') }}
     </button>
 
-    <span class="sign__text">{{__('Already have an account?')}} <a href="signin.html">{{__('Login')}}</a></span>
+    <span class="sign__text">{{__('Already have an account?')}} <a href="{{route('login')}}">{{__('Login')}}</a></span>
 </form>
 <!-- registration form -->
 
