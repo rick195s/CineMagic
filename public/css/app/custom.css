@@ -20,3 +20,7 @@
     box-shadow: none;
     color: white;
 }
+
+.sign__group{
+    max-width: min-content;
+}

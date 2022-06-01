@@ -29,7 +29,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    @yield('content')
+                    <div class="sign__content">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>
