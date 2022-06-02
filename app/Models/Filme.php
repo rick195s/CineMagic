@@ -48,7 +48,7 @@ class Filme extends Model
     }
 
     // buscar sessoes futuras
-    public function sessoes_futuras()
+    public function sessoesFuturas()
     {
         return $this->sessoes()
             ->whereDate('data', '>=', now()->format('Y-m-d'))

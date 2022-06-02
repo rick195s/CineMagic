@@ -45,7 +45,7 @@ class Sala extends Model
     }
 
     // saber sessoes futuras
-    public function sessoes_futuras()
+    public function sessoesFuturas()
     {
         $now = Carbon::now();
         return $this->sessoes()
@@ -54,7 +54,7 @@ class Sala extends Model
     }
 
     // saber quantas filas existem numa sala
-    public function num_filas()
+    public function numFilas()
     {
         $filas = [];
         foreach ($this->lugares as $lugar) {
@@ -66,7 +66,7 @@ class Sala extends Model
     }
 
     // criar lugares numa sala
-    public function criar_lugares($num_lugares, $num_filas)
+    public function criarLugares($num_lugares, $num_filas)
     {
         $num_lugares_por_fila = ceil($num_lugares / $num_filas);
 
@@ -84,7 +84,7 @@ class Sala extends Model
     }
 
     // remover lugares numa sala
-    public function remover_num_lugares($num)
+    public function removerNumLugares($num)
     {
         $lugares = $this->lugares;
         $count = $lugares->count();
@@ -95,7 +95,7 @@ class Sala extends Model
     }
 
     // remover lugares permanentemente
-    public function remover_permanentemente_lugares()
+    public function removerPermanentementeLugares()
     {
         foreach ($this->lugares as $lugar) {
             $lugar->forceDelete();

@@ -37,7 +37,7 @@ Route::get('/password/change', [ChangePasswordController::class, 'index'])->name
 Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');
 
 // rotas para escolher o lugar de uma sessao e depois comprar bilhete
-Route::get('/sessao/{sessao}/seat', [SessaoFrontController::class, 'select_seat'])->name('sessao.select_seat');
+Route::get('/sessao/{sessao}/seat', [SessaoFrontController::class, 'selectSeat'])->name('sessao.select_seat');
 
 // rotas para filmes no front end
 Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('filmes.show');
@@ -55,7 +55,7 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
 
     // rotas para gerir users no dashboard admin
     Route::resource('users', UserController::class);
-    Route::patch('users/{user}/update_state', [UserController::class, 'update_state'])->name('users.update_state');
+    Route::patch('users/{user}/update_state', [UserController::class, 'updateState'])->name('users.update_state');
 
     // admin dashboard manage salas
     Route::resource('salas', SalaController::class);

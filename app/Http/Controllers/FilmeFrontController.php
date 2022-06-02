@@ -10,7 +10,7 @@ class FilmeFrontController extends Controller
 {
     public function show(Filme $filme)
     {
-        $sessoes = $filme->sessoes_futuras();
+        $sessoes = $filme->sessoesFuturas();
         return view('filme.show', compact('filme', 'sessoes'));
     }
 }

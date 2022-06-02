@@ -103,12 +103,12 @@ class SalaController extends Controller
         //     $sala->remove_num_seats($old_num_lugares - $num_lugares);
         // }
 
-        if ($num_lugares !=  $old_num_lugares || $sala->num_filas() != $validatedData["num_filas"]) {
+        if ($num_lugares !=  $old_num_lugares || $sala->numFilas() != $validatedData["num_filas"]) {
             // se a sala ficar com mais lugares apagamos os lugares existentes e criamos novos
             // podemos apagar permanentemente os lugares anteriores porque só é possivel editar a sala se não
             // houver sessoes futuras na mesma
-            $sala->remover_permanentemente_lugares();
-            $sala->criar_lugares($num_lugares, $validatedData["num_filas"]);
+            $sala->removerPermanentementeLugares();
+            $sala->criarLugares($num_lugares, $validatedData["num_filas"]);
         }
 
         $sala->update($validatedData);

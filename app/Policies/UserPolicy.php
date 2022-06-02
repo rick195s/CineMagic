@@ -26,7 +26,7 @@ class UserPolicy
     /**
      * Só os administradores é que podem ver perfis no dashboard
      * e não podem ver perfis de Clientes
-     * 
+     *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $searchedUser
      * @return \Illuminate\Auth\Access\Response|bool
@@ -86,7 +86,7 @@ class UserPolicy
      * @param  \App\Models\User  $userModified
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update_state(User $user, User $userModified)
+    public function updateState(User $user, User $userModified)
     {
         if (!$user->isAdmin()) {
             return $this->deny(__("Only the admins can block or unlock users"));

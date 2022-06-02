@@ -12,7 +12,7 @@ class SessaoFrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function select_seat(Sessao $sessao)
+    public function selectSeat(Sessao $sessao)
     {
         // esta policy verifica se o user está logado
         $this->authorize('select_seat', $sessao);
@@ -22,7 +22,7 @@ class SessaoFrontController extends Controller
         }
 
         $lugares = $sala ?  $sessao->sala->lugares : [];
-        $filas = Lugar::lugares_por_fila($lugares);
+        $filas = Lugar::lugaresPorFila($lugares);
         return view('sessao.create_ticket', compact('sessao', 'sala', 'filas'));
     }
 }

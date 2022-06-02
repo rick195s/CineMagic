@@ -48,7 +48,7 @@ class Lugar extends Model
         return $this->hasMany(Bilhete::class);
     }
 
-    public static function lugares_por_fila($lugares)
+    public static function lugaresPorFila($lugares)
     {
         $lugares_por_fila = [];
         foreach ($lugares as $lugar) {

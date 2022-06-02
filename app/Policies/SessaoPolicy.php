@@ -92,7 +92,7 @@ class SessaoPolicy
         //
     }
 
-    public function select_seat(User $user, Sessao $sessao)
+    public function selectSeat(User $user, Sessao $sessao)
     {
         return true;
     }
