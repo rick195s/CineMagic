@@ -2,12 +2,6 @@
 @section('title', __('Home'))
 @section('content')
 
-@if (session('status'))
-<div class="alert alert-success" role="alert">
-    {{ session('status') }}
-</div>
-@endif
-
 <section class="home">
 
     <!-- home bg -->
@@ -43,7 +37,7 @@
                                 </a>
                             </div>
                             <div class="card__content">
-                                <h3 class="card__title"><a href="#">{{$destaque->titulo}}</a></h3>
+                                <h3 class="card__title"><a href="{{ route('filmes.show', $destaque->id) }}">{{$destaque->titulo}}</a></h3>
                                 <span class="card__category">
                                     <a href="#">{{$destaque->genero->nome}}</a>
                                 </span>
@@ -114,6 +108,7 @@
                     <div class="col-6 col-sm-12 col-lg-6">
                         <div class="card border-0 rounded bg-transparent card--list">
                             <div class="row">
+
                                 <div class="col-12 col-sm-4">
                                     <div class="card__cover">
                                         <img src="{{asset('storage/cartazes/'.$filme->cartaz_url)}}" alt="">
@@ -122,10 +117,9 @@
                                         </a>
                                     </div>
                                 </div>
-
                                 <div class="col-12 col-sm-8">
                                     <div class="card__content">
-                                        <h3 class="card__title"><a href="#">{{ $filme->titulo }}</a></h3>
+                                        <h3 class="card__title"><a href="{{ route('filmes.show', $filme->id) }}">{{ $filme->titulo }}</a></h3>
                                         <span class="card__category">
                                             <a href="#">{{ $genero_nome }}</a>
 

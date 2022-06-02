@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FilmeFrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessaoFrontController;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,10 @@ Route::post('/password/change', [ChangePasswordController::class, 'update'])->na
 
 // rotas para escolher o lugar de uma sessao e depois comprar bilhete
 Route::get('/sessao/{sessao}/seat', [SessaoFrontController::class, 'select_seat'])->name('sessao.select_seat');
+
+// rotas para filmes no front end
+Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('filmes.show');
+
 
 // rotas protegidas (só para admins)
 // rotas com prefixo admin
