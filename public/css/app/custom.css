@@ -56,3 +56,8 @@ a{
 .main{
     margin-top: 95px;
 }
+
+.accordion{
+    max-height: 500px;
+    height: 400px;
+}

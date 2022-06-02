@@ -69,49 +69,7 @@
             <!-- end player -->
 
 
-            <!-- accordion -->
-            <div class="my-5 col-12 col-xl-8">
-                <div class="accordion" id="accordion">
-                    @if ($sessoes->count() == 0)
-                    <h2>{{__('There are no Sessions for this movie')}}</h2>
-                    @else
-                    @foreach ($sessoes as $sessao)
-                    <div class="accordion__card">
-                        <div class="card-header" id="heading{{$loop->index}}">
-                            <button type="button" data-toggle="collapse" data-target="#collapse{{$loop->index}}" aria-expanded="{{$loop->first ? true : false }}" aria-controls="collapse{{$loop->index}}">
-                                @if ($loop->first)
-                                <span>{{__('Next Session')}}</span>
 
-                                @endif
-                                <span>{{date('d F Y', strtotime( $sessao->data)) }}, {{ date('H:i', strtotime($sessao->horario_inicio)) }}</span>
-                            </button>
-                        </div>
-
-                        <div id="collapse{{$loop->index}}" class="collapse {{$loop->first ? 'show' : '' }}" aria-labelledby="heading{{$loop->index}}" data-parent="#accordion">
-                            <div class="card-body">
-                                <table class="accordion__list">
-                                    <tbody>
-                                        <tr>
-                                            @if ($sessao->sala)
-                                            <td>{{__('Movie Theater')}}:</td>
-                                            <td>{{$sessao->sala->nome}}</td>
-                                            @else
-                                            <td>{{__('Movie Theater Not Found')}}</td>
-                                            @endif
-
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    @endif
-
-                </div>
-            </div>
-            <!-- end accordion -->
 
             <div class="col-12">
                 <div class="details__wrap">
@@ -146,5 +104,178 @@
     <!-- end details content -->
 </section>
 <!-- end details -->
+
+
+<!-- content -->
+<section class="content">
+    <div class="content__head">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- content title -->
+                    <h2 class="content__title">{{__('Sessions')}}</h2>
+                    <!-- end content title -->
+
+                    <!-- content tabs nav -->
+                    <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">{{__('Future Sessions')}}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">5 {{__('Last Sessions')}}</a>
+                        </li>
+
+                    </ul>
+                    <!-- end content tabs nav -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 col-lg-8 col-xl-8">
+                <!-- content tabs -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- accordion -->
+                                <div class="accordion " id="accordion">
+                                    @if ($sessoes_futuras->count() == 0)
+                                    <h2>{{__('There are no Sessions for this movie')}}</h2>
+                                    @else
+                                    @foreach ($sessoes_futuras as $sessao)
+                                    <div class="accordion__card">
+                                        <div class="card-header" id="heading{{$loop->index}}">
+                                            <button type="button" data-toggle="collapse" data-target="#collapse{{$loop->index}}" aria-expanded="{{$loop->first ? true : false }}" aria-controls="collapse{{$loop->index}}">
+                                                @if ($loop->first)
+                                                <span>{{__('Next Session')}}</span>
+
+                                                @endif
+                                                <span>{{date('d F Y', strtotime( $sessao->data)) }}, {{ date('H:i', strtotime($sessao->horario_inicio)) }}</span>
+                                            </button>
+                                        </div>
+
+                                        <div id="collapse{{$loop->index}}" class="collapse {{$loop->first ? 'show' : '' }}" aria-labelledby="heading{{$loop->index}}" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <table class="accordion__list">
+                                                    <tbody>
+                                                        <tr>
+                                                            @if ($sessao->sala)
+                                                            <td>{{__('Movie Theater')}}:</td>
+                                                            <td>{{$sessao->sala->nome}}</td>
+                                                            @else
+                                                            <td>{{__('Movie Theater Not Found')}}</td>
+                                                            @endif
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @endif
+                                </div>
+                                <!-- end accordion -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+                        <!-- accordion -->
+                        <div class="accordion " id="accordion">
+                            @if ($sessoes_passadas->count() == 0)
+                            <h2>{{__('There are no Sessions for this movie')}}</h2>
+                            @else
+                            @foreach ($sessoes_passadas as $sessao)
+                            <div class="accordion__card">
+                                <div class="card-header" id="heading{{$loop->index}}">
+                                    <button type="button" data-toggle="collapse" data-target="#collapse{{$loop->index}}" aria-expanded="{{$loop->first ? true : false }}" aria-controls="collapse{{$loop->index}}">
+                                        @if ($loop->first)
+                                        <span>{{__('Next Session')}}</span>
+
+                                        @endif
+                                        <span>{{date('d F Y', strtotime( $sessao->data)) }}, {{ date('H:i', strtotime($sessao->horario_inicio)) }}</span>
+                                    </button>
+                                </div>
+
+                                <div id="collapse{{$loop->index}}" class="collapse {{$loop->first ? 'show' : '' }}" aria-labelledby="heading{{$loop->index}}" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <table class="accordion__list">
+                                            <tbody>
+                                                <tr>
+                                                    @if ($sessao->sala)
+                                                    <td>{{__('Movie Theater')}}:</td>
+                                                    <td>{{$sessao->sala->nome}}</td>
+                                                    @else
+                                                    <td>{{__('Movie Theater Not Found')}}</td>
+                                                    @endif
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif
+                        </div>
+                        <!-- end accordion -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- sidebar -->
+            <div class="col-12 col-lg-4 col-xl-4">
+                <div class="row">
+                    <!-- section title -->
+                    <div class="col-12">
+                        <h2 class="section__title section__title--sidebar">{{__('You may also like...')}}</h2>
+                    </div>
+                    <!-- end section title -->
+
+                    @foreach ($destaques as $destaque)
+
+                    <!-- card -->
+                    <div class="col-6 col-sm-4 col-lg-6">
+                        <div class="card">
+                            <div class="card__cover">
+                                <img src="{{asset('storage/cartazes/'.$destaque->cartaz_url)}}" alt="">
+                                <a href="{{$destaque->trailer_url}}" target="_blank" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                            <div class="card__content">
+                                <h3 class="card__title"><a href="{{ route('filmes.show', $destaque->id) }}">{{ $destaque->titulo }}</a></h3>
+                                <span class="card__category">
+                                    <a href="#">{{ $destaque->genero->nome }}</a>
+                                </span>
+                                <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+
+                    @endforeach
+
+                </div>
+            </div>
+            <!-- end sidebar -->
+        </div>
+    </div>
+</section>
+<!-- end content -->
 
 @endsection

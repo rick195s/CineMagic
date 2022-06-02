@@ -475,7 +475,7 @@ $this->route('user')
 
 #### Escolha de Lugares:
 
-- [ ] Cada lugar está associado a um bilhete unico, ou a zero bilhetes quando o lugar ainda esta vazio;
+- [x] Cada lugar está associado a um bilhete unico numa sessao, ou a zero bilhetes quando o lugar ainda esta vazio;
 
 - [ ] Quando um utilizador adicionar um bilhete ao carrinho, tem de escolher o lugar que quer;
 

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Filme;
-use App\Models\Sessao;
-use Illuminate\Http\Request;
 
 class FilmeFrontController extends Controller
 {
     public function show(Filme $filme)
     {
-        $sessoes = $filme->sessoesFuturas();
-        return view('filme.show', compact('filme', 'sessoes'));
+        $destaques = Filme::take(2)->get();
+        $sessoes_futuras = $filme->sessoesFuturas();
+        $sessoes_passadas = $filme->sessoesPassadas();
+        return view('filme.show', compact('filme', 'sessoes_futuras', 'destaques', 'sessoes_passadas'));
     }
 }

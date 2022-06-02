@@ -58,4 +58,17 @@ class Filme extends Model
             ->orderBy('horario_inicio', 'asc')
             ->get();
     }
+
+    // buscar sessoes passadas
+    public function sessoesPassadas()
+    {
+        return $this->sessoes()
+            ->whereDate('data', '=', now()->format('Y-m-d'))
+            ->whereTime('horario_inicio', '<', now()->format('H:i:s'))
+            ->orWhereDate('data', '<', now()->format('Y-m-d'))
+            ->orderBy('data', 'desc')
+            ->orderBy('horario_inicio', 'desc')
+            ->take(5)
+            ->get();
+    }
 }
