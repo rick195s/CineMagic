@@ -72,6 +72,7 @@
     "Only admins and employees can view movie theaters": "Apenas os administradores e funcionários podem ver salas de cinema",
     "Only movie theaters without future sessions can be updated": "Apenas salas de cinema sem sessões futuras podem ser alteradas",
     "Only movie theaters without future sessions can be deleted": "Apenas salas de cinema sem sessões futuras podem ser eliminadas",
+    "Movie theater not found for this session": "Sala de Cinema não encontrada para esta sessão",
 
     "seats": "lugares",
     "Number of Seats": "Número de lugares",

@@ -91,4 +91,12 @@ class SessaoPolicy
     {
         //
     }
+
+    public function create_ticket(User $user, Sessao $sessao)
+    {
+        if ($sessao->sala == null) {
+            return $this->deny(__('Movie theater not found for this session'));
+        }
+        return true;
+    }
 }

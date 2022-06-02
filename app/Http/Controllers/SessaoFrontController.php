@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Lugar;
 use App\Models\Sessao;
-use Illuminate\Http\Request;
 
 class SessaoFrontController extends Controller
 {
@@ -15,9 +14,9 @@ class SessaoFrontController extends Controller
      */
     public function create_ticket(Sessao $sessao)
     {
+        $this->authorize('create_ticket', $sessao);
         $sala = $sessao->sala;
-        $lugares = $sessao->sala->lugares;
-
+        $lugares = $sala ?  $sessao->sala->lugares : [];
         $filas = Lugar::lugares_por_fila($lugares);
         return view('sessao.create_ticket', compact('sessao', 'sala', 'filas'));
     }
