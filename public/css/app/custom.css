@@ -37,3 +37,22 @@ a{
 .seats:hover{
     color: #0d6efd;
 }
+
+.alert-danger{
+    background-color: #d24d59;
+    border-color: #d24d59;
+    color: white;
+}
+
+.alert{
+    margin-top:95px;
+    margin-bottom:0;
+}
+
+.home{
+    margin-top: 0;
+}
+
+.main{
+    margin-top: 95px;
+}

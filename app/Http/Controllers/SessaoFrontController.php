@@ -12,10 +12,15 @@ class SessaoFrontController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create_ticket(Sessao $sessao)
+    public function select_seat(Sessao $sessao)
     {
-        $this->authorize('create_ticket', $sessao);
+        // esta policy verifica se o user está logado
+        $this->authorize('select_seat', $sessao);
         $sala = $sessao->sala;
+        if ($sala == null) {
+            return redirect()->back()->with('error', __('Movie theater not found for this session'));
+        }
+
         $lugares = $sala ?  $sessao->sala->lugares : [];
         $filas = Lugar::lugares_por_fila($lugares);
         return view('sessao.create_ticket', compact('sessao', 'sala', 'filas'));

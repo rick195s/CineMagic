@@ -159,26 +159,30 @@
         </header>
         <!-- end header -->
 
-        @include('flash-messages')
-        @yield('content')
+        <div class="main">
+            @include('flash-messages')
 
-    </div>
+            <!-- content -->
+            @yield('content')
+            <!-- end content -->
 
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <!-- JS -->
-    <script src="{{ asset('js/app/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{ asset('js/app/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('js/app/owl.carousel.min.js')}}"></script>
-    <script src="{{ asset('js/app/jquery.mousewheel.min.js')}}"></script>
-    <script src="{{ asset('js/app/jquery.mCustomScrollbar.min.js')}}"></script>
-    <script src="{{ asset('js/app/wNumb.js')}}"></script>
-    <script src="{{ asset('js/app/nouislider.min.js')}}"></script>
-    <script src="{{ asset('js/app/plyr.min.js')}}"></script>
-    <script src="{{ asset('js/app/jquery.morelines.min.js')}}"></script>
-    <script src="{{ asset('js/app/photoswipe.min.js')}}"></script>
-    <script src="{{ asset('js/app/photoswipe-ui-default.min.js')}}"></script>
-    <script src="{{ asset('js/app/main.js')}}"></script>
+        </div>
+
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <!-- JS -->
+        <script src="{{ asset('js/app/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{ asset('js/app/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{ asset('js/app/owl.carousel.min.js')}}"></script>
+        <script src="{{ asset('js/app/jquery.mousewheel.min.js')}}"></script>
+        <script src="{{ asset('js/app/jquery.mCustomScrollbar.min.js')}}"></script>
+        <script src="{{ asset('js/app/wNumb.js')}}"></script>
+        <script src="{{ asset('js/app/nouislider.min.js')}}"></script>
+        <script src="{{ asset('js/app/plyr.min.js')}}"></script>
+        <script src="{{ asset('js/app/jquery.morelines.min.js')}}"></script>
+        <script src="{{ asset('js/app/photoswipe.min.js')}}"></script>
+        <script src="{{ asset('js/app/photoswipe-ui-default.min.js')}}"></script>
+        <script src="{{ asset('js/app/main.js')}}"></script>
 </body>
 
 </html>

@@ -5,8 +5,6 @@
 @section('content')
 
 
-
-
 <!-- content -->
 <section class="home">
 
@@ -15,10 +13,16 @@
         <div class="item home__cover" data-bg="{{asset('storage/cartazes/'.$sessao->filme->cartaz_url)}}"></div>
     </div>
     <!-- end home bg -->
-    <div class="container">
+    <div class="container ">
+        <div class="row">
+            <div class="col-12 my-4">
+                <h1 class="">{{ __('Select the seat for the session') }}</h1>
+
+            </div>
+        </div>
         <!-- content tabs -->
-        <div class="sign__form" id="myTabContent">
-            <div class="row">
+        <div class="sign__form">
+            <div class="row ">
                 <div class="col-md-4">
                     <h2>{{$sessao->filme->titulo}}</h2>
                     <div class="card__cover w-75">
@@ -63,7 +67,6 @@
                 </div>
 
             </div>
-
         </div>
         <!-- end content tabs -->
     </div>

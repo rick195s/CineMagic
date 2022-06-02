@@ -36,7 +36,7 @@ Route::get('/password/change', [ChangePasswordController::class, 'index'])->name
 Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');
 
 // rotas para escolher o lugar de uma sessao e depois comprar bilhete
-Route::get('/sessao/{sessao}/seat', [SessaoFrontController::class, 'create_ticket'])->name('sessao.seat');
+Route::get('/sessao/{sessao}/seat', [SessaoFrontController::class, 'select_seat'])->name('sessao.select_seat');
 
 // rotas protegidas (só para admins)
 // rotas com prefixo admin
