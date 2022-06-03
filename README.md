@@ -366,7 +366,8 @@ $this->route('user')
 
 - Um utilizador primeiro adiciona a sessao que quer comprar ao carrinho e só quando for fazer checkout é que seleciona o ou os lugares que quer.
 - Uma sessao unica só é adicionada uma vez ao carrinho. Se o utilizador quiser comprar varios bilhetes de uma sessao, o que vai ter de fazer é selecionar varios lugares quando tiver no checkout
-- Um user só pode adicionar uma sessao unica ao carrinho 
+- Um user só pode adicionar uma sessao unica ao carrinho;
+- Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos
 
 #### Salas:
 
@@ -463,6 +464,8 @@ $this->route('user')
 #### Compra de Bilhetes:
 
 - [ ] Adicionar ou remover bilhetes para qualquer sesssao (ver especificacoes no enunciado);
+
+- [ ] Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos;
 
 - [ ] Qualquer utilizador pode adicionar coisas ao carrinho;
 

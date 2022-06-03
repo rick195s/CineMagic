@@ -53,7 +53,7 @@ class Filme extends Model
         return $this->sessoes()
             ->where(function ($query) {
                 $query->whereDate('data', '=', now()->format('Y-m-d'))
-                    ->whereTime('horario_inicio', '>=', now()->format('H:i:s'))
+                    ->whereTime('horario_inicio', '>=', now()->subMinutes(5)->format('H:i:s'))
                     ->orWhereDate('data', '>', now()->format('Y-m-d'));
             })
             ->orderBy('data', 'asc')
@@ -69,7 +69,7 @@ class Filme extends Model
         return $this->sessoes()
             ->where(function ($query) {
                 $query->whereDate('data', '=', now()->format('Y-m-d'))
-                    ->whereTime('horario_inicio', '<', now()->format('H:i:s'))
+                    ->whereTime('horario_inicio', '<', now()->addMinutes(5)->format('H:i:s'))
                     ->orWhereDate('data', '<', now()->format('Y-m-d'));
             })
             ->orderBy('data', 'desc')
