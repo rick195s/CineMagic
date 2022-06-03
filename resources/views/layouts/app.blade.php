@@ -71,13 +71,15 @@
 
                     <!-- header auth -->
                     <div class="header__auth">
-                        <button class="header__search-btn" type="button">
-                            <i class="icon ion-ios-search"></i>
+                        <button class="text-light mx-3" style="font-size: 26px;" type="button">
+                            <i class="icon ion-ios-cart "></i>
                         </button>
 
-                        <button class="header__search-btn" type="button">
-                            <i class="icon ion-ios-cart"></i>
+
+                        <button class="text-light header__search-btn" type="button">
+                            <i class="icon ion-ios-search "></i>
                         </button>
+
 
                         <!-- Authentication Links -->
                         @guest
