@@ -9,8 +9,10 @@ class FilmeFrontController extends Controller
     public function show(Filme $filme)
     {
         $destaques = Filme::take(2)->get();
-        $sessoes_futuras = $filme->sessoesFuturas();
-        $sessoes_passadas = $filme->sessoesPassadas();
-        return view('filme.show', compact('filme', 'sessoes_futuras', 'destaques', 'sessoes_passadas'));
+        $conj_sessoes = [];
+        $conj_sessoes[__('Future Sessions')] = $filme->sessoesFuturas();
+        $conj_sessoes[__('Last Sessions')] = $filme->sessoesPassadas();
+
+        return view('filme.show', compact('filme', 'conj_sessoes', 'destaques'));
     }
 }

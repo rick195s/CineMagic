@@ -63,7 +63,7 @@ class SalaPolicy
             return $this->deny(__("Only admins can update movie theaters"));
         }
 
-        if ($sala->sessoes && $sala->sessoes->count() > 0) {
+        if ($sala->sessoes && count($sala->sessoes ?? []) > 0) {
             return $this->deny(__("Only movie theaters without future sessions can be updated"));
         }
 
@@ -83,7 +83,7 @@ class SalaPolicy
             return $this->deny(__("Only admins can delete movie theaters"));
         }
 
-        if ($sala->sessoes && $sala->sessoes_futuras->count() > 0) {
+        if ($sala->sessoes && count($sala->sessoesFuturas ?? [])  > 0) {
             return $this->deny(__("Only movie theaters without future sessions can be deleted"));
         }
 

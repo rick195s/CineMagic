@@ -56,6 +56,7 @@ class Filme extends Model
             ->orWhereDate('data', '>', now()->format('Y-m-d'))
             ->orderBy('data', 'asc')
             ->orderBy('horario_inicio', 'asc')
+            ->take(5)
             ->get();
     }
 

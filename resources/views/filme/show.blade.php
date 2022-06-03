@@ -70,35 +70,6 @@
 
 
 
-
-            <div class="col-12">
-                <div class="details__wrap">
-                    <!-- availables -->
-                    <div class="details__devices">
-                        <span class="details__devices-title">Available on devices:</span>
-                        <ul class="details__devices-list">
-                            <li><i class="icon ion-logo-apple"></i><span>IOS</span></li>
-                            <li><i class="icon ion-logo-android"></i><span>Android</span></li>
-                            <li><i class="icon ion-logo-windows"></i><span>Windows</span></li>
-                            <li><i class="icon ion-md-tv"></i><span>Smart TV</span></li>
-                        </ul>
-                    </div>
-                    <!-- end availables -->
-
-                    <!-- share -->
-                    <div class="details__share">
-                        <span class="details__share-title">Share with friends:</span>
-
-                        <ul class="details__share-list">
-                            <li class="facebook"><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
-                            <li class="instagram"><a href="#"><i class="icon ion-logo-instagram"></i></a></li>
-                            <li class="twitter"><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
-                            <li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- end share -->
-                </div>
-            </div>
         </div>
     </div>
     <!-- end details content -->
@@ -118,18 +89,32 @@
 
                     <!-- content tabs nav -->
                     <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+                        @foreach ($conj_sessoes as $tipo_sessoes => $sessoes)
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">{{__('Future Sessions')}}</a>
+                            <a class="nav-link {{ $loop->first ? 'active' : ''}} " data-toggle="tab" href="#tab-{{$loop->index}}" role="tab" aria-controls="tab-{{$loop->index}}" aria-selected="{{$loop->first ? 'true' : 'false'}}">5 {{$tipo_sessoes}}</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">5 {{__('Last Sessions')}}</a>
-                        </li>
+                        @endforeach
 
                     </ul>
                     <!-- end content tabs nav -->
 
+                    <!-- content mobile tabs nav -->
+                    <div class="content__mobile-tabs" id="content__mobile-tabs">
+                        <div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <input type="button">
+                            <span></span>
+                        </div>
 
+                        <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+                            <ul class="nav nav-tabs" role="tablist">
+                                @foreach ($conj_sessoes as $tipo_sessoes => $sessoes)
+                                <li class="nav-item"><a class="nav-link {{ $loop->first ? 'active' : ''}}" id="{{$loop->index}}-tab" data-toggle="tab" href="#tab-{{$loop->index}}" role="tab" aria-controls="tab-{{$loop->index}}" aria-selected="{{$loop->first ? 'true' : 'false'}}">5 {{$tipo_sessoes}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end content mobile tabs nav -->
                 </div>
             </div>
         </div>
@@ -141,15 +126,17 @@
             <div class="col-12 col-lg-8 col-xl-8">
                 <!-- content tabs -->
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+                    @foreach ($conj_sessoes as $sessoes)
+
+                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }} " id="tab-{{$loop->index}}" role="tabpanel" aria-labelledby="{{$loop->index}}-tab">
                         <div class="row">
                             <div class="col-12">
                                 <!-- accordion -->
                                 <div class="accordion " id="accordion">
-                                    @if ($sessoes_futuras->count() == 0)
+                                    @if (count($sessoes) == 0)
                                     <h2>{{__('There are no Sessions for this movie')}}</h2>
                                     @else
-                                    @foreach ($sessoes_futuras as $sessao)
+                                    @foreach ($sessoes as $sessao)
                                     <div class="accordion__card">
                                         <div class="card-header" id="heading{{$loop->index}}">
                                             <button type="button" data-toggle="collapse" data-target="#collapse{{$loop->index}}" aria-expanded="{{$loop->first ? true : false }}" aria-controls="collapse{{$loop->index}}">
@@ -188,51 +175,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
-                        <!-- accordion -->
-                        <div class="accordion " id="accordion">
-                            @if ($sessoes_passadas->count() == 0)
-                            <h2>{{__('There are no Sessions for this movie')}}</h2>
-                            @else
-                            @foreach ($sessoes_passadas as $sessao)
-                            <div class="accordion__card">
-                                <div class="card-header" id="heading{{$loop->index}}">
-                                    <button type="button" data-toggle="collapse" data-target="#collapse{{$loop->index}}" aria-expanded="{{$loop->first ? true : false }}" aria-controls="collapse{{$loop->index}}">
-                                        @if ($loop->first)
-                                        <span>{{__('Next Session')}}</span>
-
-                                        @endif
-                                        <span>{{date('d F Y', strtotime( $sessao->data)) }}, {{ date('H:i', strtotime($sessao->horario_inicio)) }}</span>
-                                    </button>
-                                </div>
-
-                                <div id="collapse{{$loop->index}}" class="collapse {{$loop->first ? 'show' : '' }}" aria-labelledby="heading{{$loop->index}}" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <table class="accordion__list">
-                                            <tbody>
-                                                <tr>
-                                                    @if ($sessao->sala)
-                                                    <td>{{__('Movie Theater')}}:</td>
-                                                    <td>{{$sessao->sala->nome}}</td>
-                                                    @else
-                                                    <td>{{__('Movie Theater Not Found')}}</td>
-                                                    @endif
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                            @endif
-                        </div>
-                        <!-- end accordion -->
-
-                    </div>
-
+                    @endforeach
                 </div>
 
             </div>
