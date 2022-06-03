@@ -58,3 +58,8 @@ a{
     z-index: 50;
     
 }
+
+.accordion__list tbody tr:hover{
+    background-color: transparent;
+    cursor:default;
+}

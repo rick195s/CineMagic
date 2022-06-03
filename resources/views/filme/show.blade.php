@@ -153,13 +153,18 @@
                                                     <tr>
                                                         @isset ($salas[$sessao->sala_id])
                                                         <td>{{__('Movie Theater')}}:</td>
-                                                        <td>{{$salas[$sessao->sala_id]->nome}}</td>
+                                                        <td class="text-end">{{$salas[$sessao->sala_id]->nome}}</td>
                                                         @else
                                                         <td>{{__('Movie Theater Not Found')}}</td>
                                                         @endif
-
                                                     </tr>
-
+                                                    <tr>
+                                                        <td colspan="2" class="text-end">
+                                                            <a class="text-white btn btn-sm bg-success" href="{{route('carrinho.adicionar', $sessao->id)}}">
+                                                                {{__('Add to Cart')}}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>

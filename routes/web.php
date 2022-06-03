@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SessaoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FilmeFrontController;
 use App\Http\Controllers\HomeController;
@@ -41,6 +42,9 @@ Route::get('/sessoes/{sessao}/seat', [SessaoFrontController::class, 'selectSeat'
 
 // rotas para filmes no front end
 Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('filmes.show');
+
+// rotas relacionadas com a gestão do carrinho
+Route::get('/carrinho/{sessao}', [CarrinhoController::class, 'adicionar'])->name('carrinho.adicionar');
 
 
 // rotas protegidas (só para admins)

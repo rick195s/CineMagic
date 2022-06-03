@@ -364,7 +364,9 @@ $this->route('user')
 
 #### Sessoes:
 
-- COMPRAR BILHETE -> um bilhete é adicionado ao carrinho quando o utilizador escolhe um lugar na rota (sessao.seat)
+- Um utilizador primeiro adiciona a sessao que quer comprar ao carrinho e só quando for fazer checkout é que seleciona o ou os lugares que quer.
+- Uma sessao unica só é adicionada uma vez ao carrinho. Se o utilizador quiser comprar varios bilhetes de uma sessao, o que vai ter de fazer é selecionar varios lugares quando tiver no checkout
+- Um user só pode adicionar uma sessao unica ao carrinho 
 
 #### Salas:
 
@@ -390,6 +392,7 @@ $this->route('user')
 
 - IsAdmin;
 - UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
+- carrinho. Este middleware vai criar uma variavel global carrinho com as informações do carrinho presente na session(). Sempre que uma vista precisar de ir buscar informação ao carrinho essa vista vai precisar de ter o middleware carrinho. (DUVIDAAAA)
 
 #### Controllers:
 
