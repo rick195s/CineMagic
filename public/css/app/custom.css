@@ -48,13 +48,13 @@ a{
     padding-top: 50px;
 }
 
-.alert{
-    margin-top:0;
-    margin-bottom:35px;
-    z-index: 2;
-}
 
 .accordion{
     max-height: 500px;
     height: 400px;
+}
+
+.toast-container{
+    z-index: 50;
+    
 }

@@ -38,6 +38,7 @@
 </head>
 
 <body class="body">
+
     <div id="app">
         <!-- header -->
         <header class="header container-fluid">
@@ -72,6 +73,10 @@
                     <div class="header__auth">
                         <button class="header__search-btn" type="button">
                             <i class="icon ion-ios-search"></i>
+                        </button>
+
+                        <button class="header__search-btn" type="button">
+                            <i class="icon ion-ios-cart"></i>
                         </button>
 
                         <!-- Authentication Links -->
@@ -159,9 +164,9 @@
         </header>
         <!-- end header -->
 
+        @include('flash-messages')
 
         <section class="home ">
-            @include('flash-messages')
 
             @yield('home')
         </section>
@@ -169,6 +174,7 @@
         <section class="content">
             @yield('content')
         </section>
+
 
 
         <!-- JavaScript Bundle with Popper -->
