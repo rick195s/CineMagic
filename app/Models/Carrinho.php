@@ -11,13 +11,6 @@ class Carrinho extends Model
 
     public $items = [];
 
-    public function __construct(Carrinho $carrinho = null)
-    {
-        if ($carrinho) {
-            $this->items = $carrinho->items;
-        }
-    }
-
     public function adicionar(Sessao $sessao)
     {
         // Uma sessao unica só é adicionada uma vez. Se o utilizador quiser 
