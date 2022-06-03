@@ -37,7 +37,7 @@ Route::get('/password/change', [ChangePasswordController::class, 'index'])->name
 Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');
 
 // rotas para escolher o lugar de uma sessao e depois comprar bilhete
-Route::get('/sessao/{sessao}/seat', [SessaoFrontController::class, 'selectSeat'])->name('sessao.select_seat');
+Route::get('/sessoes/{sessao}/seat', [SessaoFrontController::class, 'selectSeat'])->name('sessao.select_seat');
 
 // rotas para filmes no front end
 Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('filmes.show');

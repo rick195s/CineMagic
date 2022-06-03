@@ -44,17 +44,14 @@ a{
     color: white;
 }
 
-.alert{
-    margin-top:95px;
-    margin-bottom:0;
-}
-
 .home{
-    margin-top: 0;
+    padding-top: 50px;
 }
 
-.main{
-    margin-top: 95px;
+.alert{
+    margin-top:0;
+    margin-bottom:35px;
+    z-index: 2;
 }
 
 .accordion{
