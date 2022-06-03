@@ -51,9 +51,11 @@ class Filme extends Model
     public function sessoesFuturas()
     {
         return $this->sessoes()
-            ->whereDate('data', '=', now()->format('Y-m-d'))
-            ->whereTime('horario_inicio', '>=', now()->format('H:i:s'))
-            ->orWhereDate('data', '>', now()->format('Y-m-d'))
+            ->where(function ($query) {
+                $query->whereDate('data', '=', now()->format('Y-m-d'))
+                    ->whereTime('horario_inicio', '>=', now()->format('H:i:s'))
+                    ->orWhereDate('data', '>', now()->format('Y-m-d'));
+            })
             ->orderBy('data', 'asc')
             ->orderBy('horario_inicio', 'asc')
             ->take(5)
@@ -63,10 +65,13 @@ class Filme extends Model
     // buscar sessoes passadas
     public function sessoesPassadas()
     {
+
         return $this->sessoes()
-            ->whereDate('data', '=', now()->format('Y-m-d'))
-            ->whereTime('horario_inicio', '<', now()->format('H:i:s'))
-            ->orWhereDate('data', '<', now()->format('Y-m-d'))
+            ->where(function ($query) {
+                $query->whereDate('data', '=', now()->format('Y-m-d'))
+                    ->whereTime('horario_inicio', '<', now()->format('H:i:s'))
+                    ->orWhereDate('data', '<', now()->format('Y-m-d'));
+            })
             ->orderBy('data', 'desc')
             ->orderBy('horario_inicio', 'desc')
             ->take(5)
