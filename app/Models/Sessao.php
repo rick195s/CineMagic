@@ -64,4 +64,29 @@ class Sessao extends Model
 
         return false;
     }
+
+    // saber quais as salas usadas num conjunto de sessoes
+    // (funcao utilizada para diminuir o numero de vezes que sao feitas
+    // querys à base de dados)
+    public static function salasDasSessoes($conj_sessoes)
+    {
+        // saber quais salas é que são precisas
+        $id_salas = [];
+        foreach ($conj_sessoes as $sessoes) {
+            foreach ($sessoes as $sessao) {
+                $id_salas[] = $sessao->sala_id;
+            }
+        }
+        $id_salas = array_unique($id_salas);
+
+        // obter as salas
+        $salas = Sala::whereIn('id', $id_salas)->get();
+
+        // organizar as salas por id de sala
+        $salas_por_id = [];
+        foreach ($salas as $sala) {
+            $salas_por_id[$sala->id] = $sala;
+        }
+        return $salas_por_id;
+    }
 }

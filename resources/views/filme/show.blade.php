@@ -151,9 +151,9 @@
                                             <table class="accordion__list">
                                                 <tbody>
                                                     <tr>
-                                                        @if ($sessao->sala)
+                                                        @isset ($salas[$sessao->sala_id])
                                                         <td>{{__('Movie Theater')}}:</td>
-                                                        <td>{{$sessao->sala->nome}}</td>
+                                                        <td>{{$salas[$sessao->sala_id]->nome}}</td>
                                                         @else
                                                         <td>{{__('Movie Theater Not Found')}}</td>
                                                         @endif
