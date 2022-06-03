@@ -130,7 +130,7 @@
                     <div class="row">
                         <div class="col-12">
                             <!-- accordion -->
-                            <div class="accordion " id="accordion">
+                            <div class="accordion " id="accordion{{$loop->index}}">
                                 @if (count($sessoes) == 0)
                                 <h2>{{__('There are no Sessions for this movie')}}</h2>
                                 @else
@@ -146,7 +146,7 @@
                                         </button>
                                     </div>
 
-                                    <div id="collapse{{$loop->index}}" class="collapse {{$loop->first ? 'show' : '' }}" aria-labelledby="heading{{$loop->index}}" data-parent="#accordion">
+                                    <div id="collapse{{$loop->index}}" class="collapse {{$loop->first ? 'show' : '' }}" aria-labelledby="heading{{$loop->index}}" data-parent="#accordion{{$loop->parent->index}}">
                                         <div class="card-body">
                                             <table class="accordion__list">
                                                 <tbody>
