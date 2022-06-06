@@ -88,7 +88,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <p class="mb-1">{{__('Tickets')}}:</p>
+                                    <p class="mb-1">{{__('seats')}}:</p>
                                 </div>
                             </div>
 
@@ -112,7 +112,13 @@
                                                 <p class="small fw-normal mb-0">{{__('Per Ticket')}}</p>
 
                                             </div>
+                                            <form action="{{ route('carrinho.delete_lugar', [$sessao_id, $lugar->id]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
 
+                                                <button type="submit" style="color: #cecece;"><i class="fas fa-trash-alt"></i></button>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

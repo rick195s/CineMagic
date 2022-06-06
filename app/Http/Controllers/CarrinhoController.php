@@ -77,11 +77,24 @@ class CarrinhoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function removerSessao(Sessao $sessao, Lugar $lugar)
+    public function removerSessao(Sessao $sessao)
     {
         $carrinho = session()->get('carrinho', new Carrinho());
         $carrinho->removerSessao($sessao);
 
         return back()->with('success', __('Session and related seats removed from cart'));
+    }
+
+    /**
+     * Remover um lugar do carrinho 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removerLugar(Sessao $sessao, Lugar $lugar)
+    {
+        $carrinho = session()->get('carrinho', new Carrinho());
+        $carrinho->removerLugar($sessao, $lugar);
+
+        return back()->with('success', __('Seat removed from cart'));
     }
 }

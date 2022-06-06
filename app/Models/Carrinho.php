@@ -68,6 +68,17 @@ class Carrinho extends Model
     }
 
     /**
+     * Remover um lugar do carrinho 
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function removerLugar(Sessao $sessao, Lugar $lugar)
+    {
+        unset($this->lugares[$sessao->id][$lugar->id]);
+        session()->put('carrinho', $this);
+    }
+
+    /**
      * Saber a quantidade de sessoes presentes no carrinho
      *
      * @return \Illuminate\Http\Response
