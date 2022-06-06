@@ -67,6 +67,21 @@ class CarrinhoController extends Controller
 
         $carrinho->adicionarLugar($sessao, $lugar);
 
-        return back()->with('success', __('Ticket added to cart'));
+        return back()->with('success', __('Seat added to cart'));
+    }
+
+
+    /**
+     * Remover uma sessao do carrinho e com isso remover os lugares
+     * todos associados a essa sessao
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removerSessao(Sessao $sessao, Lugar $lugar)
+    {
+        $carrinho = session()->get('carrinho', new Carrinho());
+        $carrinho->removerSessao($sessao);
+
+        return back()->with('success', __('Session and related seats removed from cart'));
     }
 }

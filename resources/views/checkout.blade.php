@@ -73,7 +73,13 @@
                                                 </a>
 
                                             </div>
-                                            <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                            <form action="{{ route('carrinho.delete_sessao', [$sessao->id]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" style="color: #cecece;"><i class="fas fa-trash-alt"></i></button>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +112,7 @@
                                                 <p class="small fw-normal mb-0">{{__('Per Ticket')}}</p>
 
                                             </div>
-                                            <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+
                                         </div>
                                     </div>
                                 </div>

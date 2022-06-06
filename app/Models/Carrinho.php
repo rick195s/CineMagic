@@ -25,6 +25,11 @@ class Carrinho extends Model
     public $lugares = [];
 
 
+    /**
+     * Adicionar uma sessao ao carrinho
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function adicionarSessao(Sessao $sessao)
     {
         // Uma sessao unica só é adicionada uma vez. Se o utilizador quiser 
@@ -36,6 +41,11 @@ class Carrinho extends Model
         session()->put('carrinho', $this);
     }
 
+    /**
+     * Adicionar um lugar ao carrinho
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function adicionarLugar(Sessao $sessao, Lugar $lugar)
     {
         if (!isset($this->lugares[$sessao->id][$lugar->id])) {
@@ -44,11 +54,34 @@ class Carrinho extends Model
         session()->put('carrinho', $this);
     }
 
+    /**
+     * Remover uma sessao do carrinho e com isso remover os lugares
+     * todos associados a essa sessao
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removerSessao(Sessao $sessao)
+    {
+        unset($this->sessoes[$sessao->id]);
+        unset($this->lugares[$sessao->id]);
+        session()->put('carrinho', $this);
+    }
+
+    /**
+     * Saber a quantidade de sessoes presentes no carrinho
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function quantidade()
     {
         return count($this->sessoes);
     }
 
+    /**
+     * Saber todos os lugares no carrinho
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function todosLugaresAdicionados()
     {
         $todosLugares = [];
