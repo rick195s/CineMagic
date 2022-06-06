@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FilmeFrontController;
 use App\Http\Controllers\HomeController;
@@ -46,6 +47,8 @@ Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('film
 // rotas relacionadas com a gestão do carrinho
 Route::get('/carrinho/{sessao}', [CarrinhoController::class, 'adicionar'])->name('carrinho.adicionar');
 
+// rotas relacionados com o checkout
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 // rotas protegidas (só para admins)
 // rotas com prefixo admin

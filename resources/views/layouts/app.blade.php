@@ -45,6 +45,10 @@
 
         @include('flash-messages')
 
+        <!-- page title -->
+        @yield('page-title')
+        <!-- end page title -->
+
         <section class="home ">
 
             @yield('home')

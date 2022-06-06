@@ -29,12 +29,12 @@
 
             <!-- header auth -->
             <div class="header__auth">
-                <button class="text-light mx-3" style="font-size: 26px;" type="button">
+                <a href="{{ route('checkout.index') }}" class="text-light mx-3" style="font-size: 26px;" type="button">
                     <!-- colocamos aqui o codigo para ir buscar a informacao do carrinho para 
                     nao estarmos a fazer isto em quase todos os controladores  -->
                     {{ Session::has('carrinho') ? Session::get('carrinho')->quantidade() : '0' }}
                     <i class="icon ion-ios-cart "></i>
-                </button>
+                </a>
 
 
                 <button class="text-light header__search-btn" type="button">

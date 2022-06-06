@@ -9,21 +9,32 @@ class Carrinho extends Model
 {
     use HasFactory;
 
-    public $items = [];
+    public $sessoes = [];
+    public $bilhetes = [];
 
     public function adicionar(Sessao $sessao)
     {
         // Uma sessao unica só é adicionada uma vez. Se o utilizador quiser 
         // comprar varios bilhetes de uma sessao, o que vai ter de fazer é 
         // selecionar varios lugares quando tiver no checkout
-        if (!isset($this->items[$sessao->id])) {
-            $this->items[$sessao->id] = $sessao;
+        if (!isset($this->sessoes[$sessao->id])) {
+            $this->sessoes[$sessao->id] = $sessao;
         }
         session()->put('carrinho', $this);
     }
 
     public function quantidade()
     {
-        return count($this->items);
+        return count($this->sessoes) + count($this->bilhetes);
+    }
+
+    public function sessoes()
+    {
+        return $this->sessoes;
+    }
+
+    public function bilhetes()
+    {
+        return $this->bilhetes;
     }
 }

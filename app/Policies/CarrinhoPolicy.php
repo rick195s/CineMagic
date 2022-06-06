@@ -14,7 +14,7 @@ class CarrinhoPolicy
     public function adicionar(?User $user, Carrinho $carrinho, Sessao $sessao)
     {
         // Um user nao pode adicionar a mesma sessao varias vezes ao carrinho
-        if (isset($carrinho->items[$sessao->id])) {
+        if (isset($carrinho->sessoes[$sessao->id])) {
             return $this->deny(__('Session already added to cart'));
         }
 
