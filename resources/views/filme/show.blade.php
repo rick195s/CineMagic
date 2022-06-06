@@ -158,15 +158,20 @@
                                                         <td>{{__('Movie Theater Not Found')}}</td>
                                                         @endif
                                                     </tr>
-                                                    @can('adicionar', [Session::get('carrinho') ?? new App\Models\Carrinho, $sessao])
+
                                                     <tr>
                                                         <td colspan="2" class="text-end">
+                                                            @can('adicionar', [Session::get('carrinho') ?? new App\Models\Carrinho, $sessao])
                                                             <a class="text-white btn btn-sm bg-success" href="{{route('carrinho.adicionar', $sessao->id)}}">
                                                                 {{__('Add to Cart')}}
                                                             </a>
+                                                            @else
+                                                            <a class="disabled btn btn-sm bg-success">
+                                                                {{__('Add to Cart')}}
+                                                            </a>
+                                                            @endcan
                                                         </td>
                                                     </tr>
-                                                    @endcan
                                                 </tbody>
                                             </table>
                                         </div>
