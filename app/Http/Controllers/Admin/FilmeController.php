@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Filme;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateFilmePost;
 use App\Http\Controllers\Controller;
 
 class FilmeController extends Controller
@@ -32,7 +33,8 @@ class FilmeController extends Controller
      */
     public function create()
     {
-        //
+        $filme = new Filme;
+        return view('admin.filmes.create', compact('filme'));
     }
 
     /**
@@ -41,9 +43,20 @@ class FilmeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateFilmePost $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        $filme = Filme::create($validatedData);
+
+        $titulo = $validatedData["titulo"];
+        $genero_code = $validatedData["genero_code"];
+        $ano = $validatedData["ano"];
+        $cartaz_url = $validatedData["cartaz_url"];
+        $sumario = $validatedData["sumario"];
+        $trailer_url = $validatedData["trailer_url"];
+
+        return redirect()->route('admin.salas.index')->with('success', __('Movie created successfully'));
     }
 
     /**
