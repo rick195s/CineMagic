@@ -73,7 +73,7 @@ class UserController extends Controller
 
             DB::commit();
 
-            return back()->with('success', __('User created successfully'));
+            return redirect()->route('admin.users.index')->with('success', __('User created successfully'));
         } catch (\PDOException $e) {
             DB::rollBack();
 
@@ -126,7 +126,7 @@ class UserController extends Controller
 
         $user->update($validatedData);
 
-        return back()->with('success', __('User updated successfully'));
+        return redirect()->route('admin.users.index')->with('success', __('User updated successfully'));
     }
 
     /**
