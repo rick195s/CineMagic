@@ -59,7 +59,7 @@ class UserController extends Controller
             DB::beginTransaction();
 
             if ($request->hasFile('foto_url')) {
-                $path = $request->foto->store('public/fotos');
+                $path = $request->file('foto_url')->store('public/fotos');
                 $validatedData['foto_url'] = basename($path);
             }
 
