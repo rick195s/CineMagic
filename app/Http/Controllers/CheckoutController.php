@@ -18,12 +18,12 @@ class CheckoutController extends Controller
     {
         $conf = Configuracao::first();
         $carrinho = session()->get('carrinho') ?? new Carrinho();
-        $sessoes = $carrinho->sessoes;
-        $bilhetes = $carrinho->bilhetes;
+        [$sessoes, $lugares] = $carrinho->parseItems();
         $preco_bilhete_com_iva = $conf->preco_bilhete_sem_iva * (1 + $conf->percentagem_iva / 100);
-        $total = count((array)$carrinho->bilhetes) * $preco_bilhete_com_iva ?? 0;
+        $total = count((array)$carrinho->lugares) * $preco_bilhete_com_iva ?? 0;
         $total += count((array)$carrinho->sessoes) * $preco_bilhete_com_iva ?? 0;
 
-        return view('checkout', compact('conf', 'preco_bilhete_com_iva', 'sessoes', 'bilhetes', 'total'));
+
+        return view('checkout', compact('conf', 'preco_bilhete_com_iva', 'sessoes', 'lugares', 'total'));
     }
 }
