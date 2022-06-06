@@ -52,4 +52,50 @@ class Sessao extends Model
     {
         return $this->hasMany(Bilhete::class);
     }
+
+    // verificar se um lugar está ocupado
+    public function ocupado($lugar_id)
+    {
+        foreach ($this->bilhetes as $bilhete) {
+            if ($bilhete->lugar_id == $lugar_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // saber quantos lugares tem uma sessao
+    public function num_lugares()
+    {
+        if ($this->sala == null) {
+            return 0;
+        }
+        return $this->sala->lugares->count();
+    }
+
+    // saber quais as salas usadas num conjunto de sessoes
+    // (funcao utilizada para diminuir o numero de vezes que sao feitas
+    // querys à base de dados)
+    public static function salasDasSessoes($conj_sessoes)
+    {
+        // saber quais salas é que são precisas
+        $id_salas = [];
+        foreach ($conj_sessoes as $sessoes) {
+            foreach ($sessoes as $sessao) {
+                $id_salas[] = $sessao->sala_id;
+            }
+        }
+        $id_salas = array_unique($id_salas);
+
+        // obter as salas
+        $salas = Sala::whereIn('id', $id_salas)->get();
+
+        // organizar as salas por id de sala
+        $salas_por_id = [];
+        foreach ($salas as $sala) {
+            $salas_por_id[$sala->id] = $sala;
+        }
+        return $salas_por_id;
+    }
 }

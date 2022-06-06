@@ -91,4 +91,9 @@ class SessaoPolicy
     {
         //
     }
+
+    public function selectSeat(User $user, Sessao $sessao)
+    {
+        return true;
+    }
 }

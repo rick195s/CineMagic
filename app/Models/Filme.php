@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,5 +45,36 @@ class Filme extends Model
     public function genero()
     {
         return $this->belongsTo(Genero::class);
+    }
+
+    // buscar sessoes futuras
+    public function sessoesFuturas()
+    {
+        return $this->sessoes()
+            ->where(function ($query) {
+                $query->whereDate('data', '=', now()->format('Y-m-d'))
+                    ->whereTime('horario_inicio', '>=', now()->subMinutes(5)->format('H:i:s'))
+                    ->orWhereDate('data', '>', now()->format('Y-m-d'));
+            })
+            ->orderBy('data', 'asc')
+            ->orderBy('horario_inicio', 'asc')
+            ->take(5)
+            ->get();
+    }
+
+    // buscar sessoes passadas
+    public function sessoesPassadas()
+    {
+
+        return $this->sessoes()
+            ->where(function ($query) {
+                $query->whereDate('data', '=', now()->format('Y-m-d'))
+                    ->whereTime('horario_inicio', '<', now()->addMinutes(5)->format('H:i:s'))
+                    ->orWhereDate('data', '<', now()->format('Y-m-d'));
+            })
+            ->orderBy('data', 'desc')
+            ->orderBy('horario_inicio', 'desc')
+            ->take(5)
+            ->get();
     }
 }

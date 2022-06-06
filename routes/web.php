@@ -6,8 +6,11 @@ use App\Http\Controllers\Admin\SessaoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FilmeFrontController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SessaoFrontController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,15 @@ Route::get('/profile', [ClienteController::class, 'index'])->name('client.profil
 Route::get('/password/change', [ChangePasswordController::class, 'index'])->name('change_password.index');
 Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');
 
+// rotas para escolher o lugar de uma sessao e depois comprar bilhete
+Route::get('/sessoes/{sessao}/seat', [SessaoFrontController::class, 'selectSeat'])->name('sessao.select_seat');
+
+// rotas para filmes no front end
+Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('filmes.show');
+
+// rotas relacionadas com a gestão do carrinho
+Route::get('/carrinho/{sessao}', [CarrinhoController::class, 'adicionar'])->name('carrinho.adicionar');
+
 
 // rotas protegidas (só para admins)
 // rotas com prefixo admin
@@ -47,7 +59,7 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
 
     // rotas para gerir users no dashboard admin
     Route::resource('users', UserController::class);
-    Route::patch('users/{user}/update_state', [UserController::class, 'update_state'])->name('users.update_state');
+    Route::patch('users/{user}/update_state', [UserController::class, 'updateState'])->name('users.update_state');
 
     // admin dashboard manage salas
     Route::resource('salas', SalaController::class);

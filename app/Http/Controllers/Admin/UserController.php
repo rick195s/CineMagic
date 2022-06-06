@@ -136,7 +136,7 @@ class UserController extends Controller
      * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update_state(Request $request, User $user)
+    public function updateState(Request $request, User $user)
     {
         $this->authorize('update_state', $user);
         $user->bloqueado = !$user->bloqueado;

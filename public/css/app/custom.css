@@ -1,5 +1,10 @@
+a{
+    color: white;
+}
+
 .body{
     background-color: #222e3c;
+    color: white;
 }
 
 .card, .nav-link {
@@ -27,4 +32,34 @@
 
 .sign__form{
     background-color: #212529;
+}
+
+.seats:hover{
+    color: #0d6efd;
+}
+
+.alert-danger{
+    background-color: #d24d59;
+    border-color: #d24d59;
+    color: white;
+}
+
+.home{
+    padding-top: 50px;
+}
+
+
+.accordion{
+    max-height: 500px;
+    height: 400px;
+}
+
+.toast-container{
+    z-index: 50;
+    
+}
+
+.accordion__list tbody tr:hover{
+    background-color: transparent;
+    cursor:default;
 }

@@ -328,8 +328,6 @@ ou podemos meter na route um middleware can
 
 Dentro de loops foreach nas views conseguimos saber se estamos no primeiro loop ou ultimo atraves de $loop->first, ou last; 
 
-
-
 #### Policies e Gates:
 
 - Sempre que validamos alguma coisa numa policy ou Gate devemos fazer desta forma:
@@ -364,6 +362,23 @@ $this->route('user')
 
 - Email de recuperar senha a ser enviado
 
+- Saber quais filmes têm sessões futuras: 
+  
+  ```
+  Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->get();
+  
+  
+  ```
+  
+  
+
+#### Sessoes:
+
+- Um utilizador primeiro adiciona a sessao que quer comprar ao carrinho e só quando for fazer checkout é que seleciona o ou os lugares que quer.
+- Uma sessao unica só é adicionada uma vez ao carrinho. Se o utilizador quiser comprar varios bilhetes de uma sessao, o que vai ter de fazer é selecionar varios lugares quando tiver no checkout
+- Um user só pode adicionar uma sessao unica ao carrinho;
+- Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos
+
 #### Salas:
 
 - Podemos permitir que uma sala seja alterada mesmo tendo sessoes anteriores se quando alterarmos uma sala criarmos uma copia dessa sala.
@@ -388,6 +403,7 @@ $this->route('user')
 
 - IsAdmin;
 - UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
+- carrinho. Este middleware vai criar uma variavel global carrinho com as informações do carrinho presente na session(). Sempre que uma vista precisar de ir buscar informação ao carrinho essa vista vai precisar de ter o middleware carrinho. (DUVIDAAAA)
 
 #### Controllers:
 
@@ -403,7 +419,7 @@ $this->route('user')
 
 - salas 1:n lugares;
 
-- bilhetes 1:1 lugares;
+- bilhetes n:1 lugares;
 
 - generos 1:n filmes;
 
@@ -459,6 +475,8 @@ $this->route('user')
 
 - [ ] Adicionar ou remover bilhetes para qualquer sesssao (ver especificacoes no enunciado);
 
+- [x] Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos;
+
 - [ ] Qualquer utilizador pode adicionar coisas ao carrinho;
 
 - [ ] Só clientes registados é que podem finalizar uma compra;
@@ -473,7 +491,7 @@ $this->route('user')
 
 #### Escolha de Lugares:
 
-- [ ] Cada lugar está associado a um bilhete unico, ou a zero bilhetes quando o lugar ainda esta vazio;
+- [x] Cada lugar está associado a um bilhete unico numa sessao, ou a zero bilhetes quando o lugar ainda esta vazio;
 
 - [ ] Quando um utilizador adicionar um bilhete ao carrinho, tem de escolher o lugar que quer;
 
