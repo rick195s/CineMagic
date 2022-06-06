@@ -25,15 +25,13 @@ class CreateFilmePost extends FormRequest
      */
     public function rules()
     {
-        $Filme = Filme::find($this->route('filme'));
-
         return [
-            'titulo' => ['required', 'max:125', Rule::unique("filmes")->ignore($filme->id ?? null)],
-            'genero_code' => 'required','max:125',
+            'titulo' => 'required|max:255',
+            'genero_code' => 'required', 'max:20',
             'ano' => 'required|numeric|min:1800|max:3000',
-            'cartaz_url' => 'required',
-            'sumario' => 'required','max:255',
-            'trailer_url' => 'required',
+            'cartaz_url' => 'nullable|image|max:8192',
+            'sumario' => 'required|max:500',
+            'trailer_url' => 'required|url',
         ];
     }
 
@@ -42,7 +40,7 @@ class CreateFilmePost extends FormRequest
         return [
             'titulo' => __('Title'),
             'genero_code' => __('Gender'),
-            'ano' => __('Year of Release'),
+            'ano' => __('Release Year'),
             'cartaz_url' => __('Movie Poster'),
             'sumario' => __('Summary'),
             'trailer_url' => __('Movie Trailer'),
