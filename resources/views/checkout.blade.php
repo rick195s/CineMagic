@@ -102,7 +102,7 @@
                                                 <img src="{{asset('storage/cartazes/'.$sessoes[$sessao_id]->filme->cartaz_url)}}" class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                             </div>
                                             <div class="ms-3">
-                                                <h5>{{$sessoes[$sessao_id]->filme->titulo}}</h5>
+                                                <h5>{{ __('Seat') }} {{$lugar->fila}}{{ $lugar->posicao }}</h5>
                                                 <p class="small mb-0">{{date('d F Y', strtotime($sessoes[$sessao_id]->data)) }}, {{ date('H:i', strtotime($sessoes[$sessao_id]->horario_inicio)) }}</p>
                                             </div>
                                         </div>
