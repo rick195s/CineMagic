@@ -21,8 +21,7 @@ class CheckoutController extends Controller
         $sessoes = $carrinho->sessoes;
         $lugares_por_sessao = $carrinho->lugares;
         $preco_bilhete_com_iva = $conf->preco_bilhete_sem_iva * (1 + $conf->percentagem_iva / 100);
-        $total = count((array)$carrinho->lugares) * $preco_bilhete_com_iva ?? 0;
-        $total += count((array)$carrinho->sessoes) * $preco_bilhete_com_iva ?? 0;
+        $total = count($carrinho->todosLugaresAdicionados()) * $preco_bilhete_com_iva ?? 0;
 
         return view('checkout', compact('conf', 'preco_bilhete_com_iva', 'sessoes', 'lugares_por_sessao', 'total'));
     }
