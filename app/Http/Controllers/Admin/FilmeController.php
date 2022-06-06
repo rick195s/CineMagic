@@ -6,6 +6,7 @@ use App\Models\Filme;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateFilmePost;
 use App\Http\Controllers\Controller;
+use App\Models\Genero;
 
 class FilmeController extends Controller
 {
@@ -34,7 +35,8 @@ class FilmeController extends Controller
     public function create()
     {
         $filme = new Filme;
-        return view('admin.filmes.create', compact('filme'));
+        $generos = Genero::all();
+        return view('admin.filmes.create', compact('filme', 'generos'));
     }
 
     /**
@@ -46,8 +48,14 @@ class FilmeController extends Controller
     public function store(CreateFilmePost $request)
     {
         $validatedData = $request->validated();
+
+        if ($request->hasFile('cartaz_url')) {
+            $path = $request->file('cartaz_url')->store('public/cartazes');
+            $validatedData['cartaz_url'] = basename($path);
+        }
+
         Filme::create($validatedData);
-        return redirect()->route('admin.salas.index')->with('success', __('Movie created successfully'));
+        return redirect()->route('admin.filmes.index')->with('success', __('Movie created successfully'));
     }
 
     /**
