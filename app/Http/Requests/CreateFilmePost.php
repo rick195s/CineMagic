@@ -31,7 +31,7 @@ class CreateFilmePost extends FormRequest
             // o genero_code enviado pelo form tem de estar na tabela genero
             'genero_code' => ['required', 'max:20', Rule::in(Genero::all()->pluck('code')->toArray())],
             'ano' => 'required|numeric|min:1800|max:3000',
-            'cartaz_url' => 'nullable|image|max:8192',
+            'cartaz_url' => 'required|nullable|image|max:8192',
             'sumario' => 'required|max:500',
             'trailer_url' => 'required|url',
         ];

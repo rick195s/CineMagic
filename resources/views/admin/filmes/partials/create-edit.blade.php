@@ -77,7 +77,7 @@
     <label for="cartaz_url" class="col-md-4 col-form-label text-md-end">{{__('Movie Poster')}}</label>
 
     <div class="col-md-6">
-        <input id="cartaz_url" type="file" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url">
+        <input id="cartaz_url" type="file" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url" required>
 
         @error('cartaz_url')
         <span class="small text-danger" role="alert">
