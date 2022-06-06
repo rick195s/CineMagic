@@ -12,13 +12,21 @@ class Carrinho extends Model
     public $sessoes = [];
     public $bilhetes = [];
 
-    public function adicionar(Sessao $sessao)
+    public function adicionarSessao(Sessao $sessao)
     {
         // Uma sessao unica só é adicionada uma vez. Se o utilizador quiser 
         // comprar varios bilhetes de uma sessao, o que vai ter de fazer é 
         // selecionar varios lugares quando tiver no checkout
         if (!isset($this->sessoes[$sessao->id])) {
             $this->sessoes[$sessao->id] = $sessao;
+        }
+        session()->put('carrinho', $this);
+    }
+
+    public function adicionarBilhete(Bilhete $bilhete)
+    {
+        if (!isset($this->bilhetes[$bilhete->id])) {
+            $this->bilhetes[$bilhete->id] = $bilhete;
         }
         session()->put('carrinho', $this);
     }

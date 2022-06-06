@@ -368,8 +368,6 @@ $this->route('user')
   Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->get();
   ```
 
-
-
 #### Carrinho:
 
 - Um utilizador primeiro adiciona a sessao que quer comprar ao carrinho e só quando for fazer checkout é que seleciona o ou os lugares que quer.
@@ -379,8 +377,6 @@ $this->route('user')
   O carrinho vai ter um array com sessoes e outro array com bilhetes. Sempre que o utilizador for fazer checkout o que tem de fazer é "transformar" uma sessao em x bilhetes. 
 
 - Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos
-
-
 
 #### Salas:
 
