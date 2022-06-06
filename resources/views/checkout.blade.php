@@ -133,7 +133,10 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <h5 class="mb-0">{{__('Payment details')}}</h5>
-                                        <img src="{{asset('storage/fotos/'.Auth::user()->foto_url)}}" class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
+                                        @auth
+                                        <img src="{{ Auth::user()->foto_url ? asset('storage/fotos/' .
+                                    auth()->user()->foto_url) : asset('img/default_img.png') }}" class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
+                                        @endauth
                                     </div>
 
                                     <p class="small mb-2">Card type</p>
