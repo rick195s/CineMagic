@@ -362,6 +362,16 @@ $this->route('user')
 
 - Email de recuperar senha a ser enviado
 
+- Saber quais filmes têm sessões futuras: 
+  
+  ```
+  Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->get();
+  
+  
+  ```
+  
+  
+
 #### Sessoes:
 
 - Um utilizador primeiro adiciona a sessao que quer comprar ao carrinho e só quando for fazer checkout é que seleciona o ou os lugares que quer.
@@ -465,7 +475,7 @@ $this->route('user')
 
 - [ ] Adicionar ou remover bilhetes para qualquer sesssao (ver especificacoes no enunciado);
 
-- [ ] Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos;
+- [x] Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos;
 
 - [ ] Qualquer utilizador pode adicionar coisas ao carrinho;
 

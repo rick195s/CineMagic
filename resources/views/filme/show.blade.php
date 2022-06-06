@@ -142,7 +142,7 @@
                                             <span>{{__('Next Session')}}</span>
 
                                             @endif
-                                            <span>{{date('d F Y', strtotime( $sessao->data)) }}, {{ date('H:i', strtotime($sessao->horario_inicio)) }}</span>
+                                            <span>{{date('d F Y', strtotime($sessao->data)) }}, {{ date('H:i', strtotime($sessao->horario_inicio)) }}</span>
                                         </button>
                                     </div>
 
@@ -158,6 +158,7 @@
                                                         <td>{{__('Movie Theater Not Found')}}</td>
                                                         @endif
                                                     </tr>
+                                                    @can('adicionar', [Session::get('carrinho') ?? new App\Models\Carrinho, $sessao])
                                                     <tr>
                                                         <td colspan="2" class="text-end">
                                                             <a class="text-white btn btn-sm bg-success" href="{{route('carrinho.adicionar', $sessao->id)}}">
@@ -165,6 +166,7 @@
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endcan
                                                 </tbody>
                                             </table>
                                         </div>

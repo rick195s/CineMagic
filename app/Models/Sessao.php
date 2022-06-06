@@ -65,6 +65,15 @@ class Sessao extends Model
         return false;
     }
 
+    // saber quantos lugares tem uma sessao
+    public function num_lugares()
+    {
+        if ($this->sala == null) {
+            return 0;
+        }
+        return $this->sala->lugares->count();
+    }
+
     // saber quais as salas usadas num conjunto de sessoes
     // (funcao utilizada para diminuir o numero de vezes que sao feitas
     // querys à base de dados)
