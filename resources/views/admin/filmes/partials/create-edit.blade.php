@@ -15,7 +15,13 @@
     <label for="genero_code" class="col-md-4 col-form-label text-md-end">{{ __('Movie Gender') }}</label>
 
     <div class="col-md-6">
-        <input id="genero_code" value="{{old('genero_code', $filme->genero_code)}}" type="text" class="form-control @error('genero_code') is-invalid @enderror" name="genero_code" required>
+        <select name="genero_code" required class="form-control @error('genero_code') is-invalid @enderror" id="genero_code">
+            @foreach ($generos as $genero)
+            <option value="{{$genero->code}}" {{ old('genero_code') ==  $genero->code ? 'selected' : ''}}>
+                {{$genero->nome}}
+            </option>
+            @endforeach
+        </select>
 
         @error('genero_code')
         <span class="small text-danger" role="alert">
@@ -42,8 +48,9 @@
     <label for="sumario" class="col-md-4 col-form-label text-md-end">{{ __('Summary') }}</label>
 
     <div class="col-md-6">
-        <input id="sumario" value="{{old('sumario', $filme->sumario)}}" type="text" class="form-control @error('sumario') is-invalid @enderror" name="sumario" required>
+        <textarea id="sumario" value="{{old('sumario', $filme->sumario)}}" type="text" class="form-control @error('sumario') is-invalid @enderror" name="sumario" required cols="30" rows="10">
 
+        </textarea>
         @error('sumario')
         <span class="small text-danger" role="alert">
             <strong>{{ $message }}</strong>
@@ -53,7 +60,7 @@
 </div>
 
 <div class="row mb-3">
-    <label for="trailer_url" class="col-md-4 col-form-label text-md-end">{{ __('Link Trailer') }}</label>
+    <label for="trailer_url" class="col-md-4 col-form-label text-md-end">{{ __('Movie Trailer') }}</label>
 
     <div class="col-md-6">
         <input id="trailer_url" value="{{old('trailer_url', $filme->trailer_url)}}" type="text" class="form-control @error('trailer_url') is-invalid @enderror" name="trailer_url" required>
@@ -67,7 +74,7 @@
 </div>
 
 <div class="row mb-3">
-    <label for="cartaz_url" class="col-md-4 col-form-label text-md-end">{{__('Upload Photo')}}</label>
+    <label for="cartaz_url" class="col-md-4 col-form-label text-md-end">{{__('Movie Poster')}}</label>
 
     <div class="col-md-6">
         <input id="cartaz_url" type="file" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url">
