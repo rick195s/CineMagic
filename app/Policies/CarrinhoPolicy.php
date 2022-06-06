@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Carrinho;
+use App\Models\Lugar;
 use App\Models\Sessao;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -11,7 +12,7 @@ class CarrinhoPolicy
 {
     use HandlesAuthorization;
 
-    public function adicionar(?User $user, Carrinho $carrinho, Sessao $sessao)
+    public function adicionarSessao(?User $user, Carrinho $carrinho, Sessao $sessao)
     {
         // Um user nao pode adicionar a mesma sessao varias vezes ao carrinho
         if (isset($carrinho->sessoes[$sessao->id])) {
@@ -31,6 +32,22 @@ class CarrinhoPolicy
         ) {
             return $this->deny(__('Cannot add old sessions to cart'));
         }
+
+        return true;
+    }
+
+    public function adicionarLugar(User $user, Carrinho $carrinho, Sessao $sessao, Lugar $lugar)
+    {
+        // Um user nao pode adicionar o mesmo lugar para a mesma sessao varias vezes ao carrinho
+        if (isset($carrinho->lugares[$sessao->id][$lugar->id])) {
+            return $this->deny(__('Seat already added to cart'));
+        }
+
+        // Um user nao pode adicionar o lugar ao carrinho se ele ja tiver um bilhete para a sessao associado
+        if ($sessao->ocupado($lugar->id)) {
+            return $this->deny(__('Seat already reserved'));
+        }
+
 
         return true;
     }
