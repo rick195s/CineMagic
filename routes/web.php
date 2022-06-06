@@ -45,8 +45,8 @@ Route::get('/sessoes/{sessao}/seat', [SessaoFrontController::class, 'selectSeat'
 Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('filmes.show');
 
 // rotas relacionadas com a gestão do carrinho
-Route::get('/carrinho/sessao/{sessao}', [CarrinhoController::class, 'addSessao'])->name('carrinho.add_sessao');
-Route::get('/carrinho/lugar/{lugar}', [CarrinhoController::class, 'addLugar'])->name('carrinho.add_lugar');
+Route::get('/carrinho/{sessao}', [CarrinhoController::class, 'adicionarSessao'])->name('carrinho.add_sessao');
+Route::get('/carrinho/{sessao}/{lugar}', [CarrinhoController::class, 'adicionarLugar'])->name('carrinho.add_lugar');
 
 // rotas relacionados com o checkout
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');

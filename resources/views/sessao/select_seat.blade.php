@@ -52,19 +52,19 @@
                 @foreach ($lugares as $lugar)
                 <div class="col-2 mx-1">
                     <div class="fa-4x">
-                        @if ($sessao->ocupado($lugar->id))
-                        <span class="fa-layers text-muted fa-fw">
-                            <i data-fa-transform="shrink-2" class="fas fa-couch"></i>
-                            <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11 up-2" style="color:black; font-weight:900">{{$lugar->posicao}}</span>
-                        </span>
-                        @else
-                        <a href="" class="seats">
+                        @can ('adicionarLugar', [Session::get('carrinho') ?? new App\Models\Carrinho, $sessao,$lugar])
+                        <a href="{{ route('carrinho.add_lugar', [$sessao->id, $lugar->id]) }}" class="seats">
                             <span class="fa-layers  fa-fw">
                                 <i data-fa-transform="shrink-2" class="fas fa-couch"></i>
                                 <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11 up-2" style="color:black; font-weight:900">{{$lugar->posicao}}</span>
                             </span>
                         </a>
-                        @endif
+                        @else
+                        <span class="fa-layers text-muted fa-fw">
+                            <i data-fa-transform="shrink-2" class="fas fa-couch"></i>
+                            <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-11 up-2" style="color:black; font-weight:900">{{$lugar->posicao}}</span>
+                        </span>
+                        @endcan
 
                     </div>
 
