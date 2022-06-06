@@ -46,16 +46,7 @@ class FilmeController extends Controller
     public function store(CreateFilmePost $request)
     {
         $validatedData = $request->validated();
-
-        $filme = Filme::create($validatedData);
-
-        $titulo = $validatedData["titulo"];
-        $genero_code = $validatedData["genero_code"];
-        $ano = $validatedData["ano"];
-        $cartaz_url = $validatedData["cartaz_url"];
-        $sumario = $validatedData["sumario"];
-        $trailer_url = $validatedData["trailer_url"];
-
+        Filme::create($validatedData);
         return redirect()->route('admin.salas.index')->with('success', __('Movie created successfully'));
     }
 
