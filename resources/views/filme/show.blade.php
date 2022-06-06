@@ -161,7 +161,7 @@
 
                                                     <tr>
                                                         <td colspan="2" class="text-end">
-                                                            @can('adicionar', [Session::get('carrinho') ?? new App\Models\Carrinho, $sessao])
+                                                            @can('adicionarSessao', [Session::get('carrinho') ?? new App\Models\Carrinho, $sessao])
                                                             <a class="text-white btn btn-sm bg-success" href="{{route('carrinho.add_sessao', $sessao->id)}}">
                                                                 {{__('Add to Cart')}}
                                                             </a>
