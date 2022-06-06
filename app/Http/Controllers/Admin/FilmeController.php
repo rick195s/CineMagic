@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Filme;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateFilmePost;
 use App\Http\Controllers\Controller;
 
 class FilmeController extends Controller
@@ -42,38 +43,20 @@ class FilmeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateFilmePost $request)
     {
-        // o metodo authorize dentro do CreateUser já verifica se o utilizador
-        // atual tem as permissoes necessarias
         $validatedData = $request->validated();
-        $validatedData['password'] = Hash::make($validatedData['password']);
 
+        $filme = Filme::create($validatedData);
 
-        try {
-            DB::beginTransaction();
+        $titulo = $validatedData["titulo"];
+        $genero_code = $validatedData["genero_code"];
+        $ano = $validatedData["ano"];
+        $cartaz_url = $validatedData["cartaz_url"];
+        $sumario = $validatedData["sumario"];
+        $trailer_url = $validatedData["trailer_url"];
 
-            if ($request->hasFile('foto_url')) {
-                $path = $request->foto->store('public/fotos');
-                $validatedData['foto_url'] = basename($path);
-            }
-
-            $user = User::create($validatedData);
-
-
-            if ($validatedData['tipo'] == "C") {
-                $validatedData['id'] = $user->id;
-                Cliente::create($validatedData);
-            }
-
-            DB::commit();
-
-            return back()->with('success', __('User created successfully'));
-        } catch (\PDOException $e) {
-            DB::rollBack();
-
-            return back()->with('error', __('Error creating user'));
-        }
+        return redirect()->route('admin.salas.index')->with('success', __('Movie created successfully'));
     }
 
     /**
