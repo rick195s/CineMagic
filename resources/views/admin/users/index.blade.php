@@ -40,7 +40,7 @@
                             <td class="d-none d-xl-table-cell">{{ $user->email }}</td>
                             <td class="d-none d-xl-table-cell">{{ $user->tipo  }}</td>
                             <td>
-                                @can('update_state', $user)
+                                @can('updateState', $user)
                                 <form action="{{ route('admin.users.update_state', $user->id)}}" method="post">
                                     @csrf
                                     @method('PATCH')
