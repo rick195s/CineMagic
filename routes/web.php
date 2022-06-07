@@ -50,7 +50,7 @@ Route::get('/carrinho/{sessao}', [CarrinhoController::class, 'adicionarSessao'])
 Route::get('/carrinho/{sessao}/{lugar}', [CarrinhoController::class, 'adicionarLugar'])->name('carrinho.add_lugar');
 Route::delete('/carrinho/delete/{sessao}', [CarrinhoController::class, 'removerSessao'])->name('carrinho.delete_sessao');
 Route::delete('/carrinho/delete/{sessao}/{lugar}', [CarrinhoController::class, 'removerLugar'])->name('carrinho.delete_lugar');
-
+Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('carrinho.empty');
 
 // rotas protegidas (só para admins)
 // rotas com prefixo admin

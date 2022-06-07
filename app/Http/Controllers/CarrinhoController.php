@@ -97,4 +97,17 @@ class CarrinhoController extends Controller
 
         return back()->with('success', __('Seat removed from cart'));
     }
+
+    /**
+     * Limpar o carrinho
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function limpar()
+    {
+        $carrinho = session()->get('carrinho', new Carrinho());
+        $carrinho->limpar();
+
+        return back()->with('success', __('Cart cleared'));
+    }
 }

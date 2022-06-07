@@ -106,6 +106,16 @@ class Carrinho extends Model
     }
 
     /**
+     * Saber se o carrinho esta vazio
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function vazio()
+    {
+        return $this->num_sessoes() == 0 && $this->num_lugares() == 0;
+    }
+
+    /**
      * Saber todos os lugares no carrinho
      *
      * @return \Illuminate\Http\Response
@@ -119,5 +129,17 @@ class Carrinho extends Model
             }
         }
         return $todosLugares;
+    }
+
+    /**
+     * Limpar o carrinho todo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function limpar()
+    {
+        $this->sessoes = [];
+        $this->lugares = [];
+        session()->put('carrinho', $this);
     }
 }

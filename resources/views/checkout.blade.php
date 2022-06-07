@@ -30,11 +30,12 @@
 
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col">
-
+            @if (Session::has('carrinho') && !Session::get('carrinho')->vazio())
             <div class="card">
                 <div class="card-body p-4">
 
                     <div class="row">
+
 
                         <div class="col-lg-7">
                             <h5 class="mb-3"><a href="{{ route('home') }}"><i class="fas fa-long-arrow-alt-left me-2"></i>{{__('Continue shopping')}}</a></h5>
@@ -135,7 +136,20 @@
                             @endforeach
                             @endforeach
 
+
+                            <div class="card mb-3 mb-lg-0">
+                                <div class="card-body">
+                                    <form action="{{route('carrinho.empty')}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-white btn btn-sm bg-danger">
+                                            {{ __('Empty Cart') }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="col-lg-5">
 
                             <div class="card bg-primary text-white rounded-3">
@@ -184,6 +198,15 @@
 
                 </div>
             </div>
+            @else
+
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <h2><a href="{{ route('home') }}"><i class="fas fa-long-arrow-alt-left me-2"></i>{{__('Cart is empty')}}</a></h2>
+                </div>
+            </div>
+            @endif
+
         </div>
     </div>
 </div>
