@@ -377,8 +377,6 @@ $this->route('user')
   O carrinho vai ter um array com sessoes e outro array com lugares. Sempre que o utilizador for fazer checkout o que tem de fazer é "transformar" uma sessao em x bilhetes. 
 
 - Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos
-  
-  
 
 #### Salas:
 
@@ -482,7 +480,7 @@ $this->route('user')
 
 - [x] Só clientes registados é que podem finalizar uma compra;
 
-- [ ] Se uma compra for feita com sucesso a aplicação cria um recibo e gera os bilhetes relativos à compra e limpa o carrinho de compras;
+- [x] Se uma compra for feita com sucesso a aplicação cria um recibo e gera os bilhetes relativos à compra e limpa o carrinho de compras;
 
 - [x] Se der erro na compra o carrinho fica como está e o cliente tem de ser avisado;
 
