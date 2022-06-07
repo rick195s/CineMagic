@@ -486,7 +486,7 @@ $this->route('user')
 
 - [ ] Se der erro na compra o carrinho fica como está e o cliente tem de ser avisado;
 
-- [ ] Apagar ou adicionar bilhetes ao carrinho;
+- [x] Apagar ou adicionar lugares ao carrinho;
 
 - [ ] Limpar o carrinho de compras por completo;
 

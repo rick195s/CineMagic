@@ -86,9 +86,23 @@ class Carrinho extends Model
      *
      * @return \Illuminate\Http\Response
      */
-    public function quantidade()
+    public function num_sessoes()
     {
         return count($this->sessoes);
+    }
+
+    /**
+     * Saber a quantidade de lugares presentes no carrinho
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function num_lugares()
+    {
+        $num_lugares = 0;
+        foreach ($this->lugares as $lugares) {
+            $num_lugares += count($lugares);
+        }
+        return $num_lugares;
     }
 
     /**
