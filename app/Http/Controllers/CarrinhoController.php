@@ -17,16 +17,30 @@ class CarrinhoController extends Controller
      */
     public function index()
     {
-        $this->middleware('auth');
+
         $conf = Configuracao::first();
-        $carrinho = session()->get('carrinho') ?? new Carrinho();
+        $carrinho = session()->get('carrinho', new Carrinho());
         $sessoes = $carrinho->sessoes;
         $lugares_por_sessao = $carrinho->lugares;
         $preco_bilhete_com_iva = $conf->preco_bilhete_sem_iva * (1 + $conf->percentagem_iva / 100);
         $total = count($carrinho->todosLugaresAdicionados()) * $preco_bilhete_com_iva ?? 0;
 
-        return view('checkout', compact('conf', 'preco_bilhete_com_iva', 'sessoes', 'lugares_por_sessao', 'total'));
+        return view('checkout', compact('conf', 'preco_bilhete_com_iva', 'sessoes', 'lugares_por_sessao', 'total', 'carrinho'));
     }
+
+    /**
+     * Confirmar uma compra
+     * Esta funcao vai ser responsavel por criar bilhetes e fazer as operacoes
+     * relacionadas com a compra de bilhetes
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmarCompra()
+    {
+        $carrinho = session()->get('carrinho', new Carrinho());
+        $this->authorize('confirmarCompra', $carrinho);
+    }
+
 
     /**
      * Adiciona uma sessao ao carrinho

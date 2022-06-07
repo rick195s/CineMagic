@@ -46,12 +46,12 @@ Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('film
 
 // rotas relacionadas com a gestão do carrinho
 Route::get('/carrinho/checkout', [CarrinhoController::class, 'index'])->name('checkout.index');
+Route::post('/carrinho/checkout', [CarrinhoController::class, 'confirmarCompra'])->name('carrinho.checkout')->middleware('auth');
 Route::get('/carrinho/{sessao}', [CarrinhoController::class, 'adicionarSessao'])->name('carrinho.add_sessao');
 Route::get('/carrinho/{sessao}/{lugar}', [CarrinhoController::class, 'adicionarLugar'])->name('carrinho.add_lugar');
 Route::delete('/carrinho/delete/{sessao}', [CarrinhoController::class, 'removerSessao'])->name('carrinho.delete_sessao');
 Route::delete('/carrinho/delete/{sessao}/{lugar}', [CarrinhoController::class, 'removerLugar'])->name('carrinho.delete_lugar');
 Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('carrinho.empty');
-
 // rotas protegidas (só para admins)
 // rotas com prefixo admin
 // rotas com o prefixo admin. no seu nome

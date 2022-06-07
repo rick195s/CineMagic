@@ -30,7 +30,7 @@
 
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col">
-            @if (Session::has('carrinho') && !Session::get('carrinho')->vazio())
+            @if (!$carrinho->vazio())
             <div class="card">
                 <div class="card-body p-4">
 
@@ -153,9 +153,11 @@
 
                         </div>
 
+
                         <div class="col-lg-5">
 
                             <div class="card bg-primary text-white rounded-3">
+                                @if ($carrinho->num_lugares() > 0)
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <h5 class="mb-0">{{__('Payment details')}}</h5>
@@ -186,13 +188,25 @@
                                         <p class="mb-2">{{ number_format($total, 2)}}€</p>
                                     </div>
 
-                                    <button type="button" class="btn btn-info btn-block btn-lg">
-                                        <div class="d-flex justify-content-between">
+                                    @can('confirmarCompra', $carrinho)
+                                    <form action="{{ route('carrinho.checkout') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-block btn-lg">
                                             <span>{{__('Confirm')}} <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                        </div>
-                                    </button>
+                                        </button>
+                                    </form>
+                                    @else
+                                    <a href="{{ route('login') }}" class="btn btn-primary btn-block btn-lg">
+                                        <span>{{__('Login')}} <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                    </a>
+                                    @endcan
 
                                 </div>
+                                @else
+                                <div class="card-body">
+                                    <h1>{{__('Before checking out you first need to select a seat')}}</h1>
+                                </div>
+                                @endif
                             </div>
 
                         </div>

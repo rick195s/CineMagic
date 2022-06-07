@@ -48,4 +48,14 @@ class CarrinhoPolicy
 
         return true;
     }
+
+    public function confirmarCompra(User $user, Carrinho $carrinho)
+    {
+
+        if ($carrinho->vazio()) {
+            return $this->deny(__('Cart is empty'));
+        }
+
+        return true;
+    }
 }
