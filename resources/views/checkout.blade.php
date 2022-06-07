@@ -98,12 +98,19 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex flex-row align-items-center">
+                                            @isset($sessoes[$sessao_id])
                                             <div>
                                                 <img src="{{asset('storage/cartazes/'.$sessoes[$sessao_id]->filme->cartaz_url)}}" class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                             </div>
+                                            @endisset
                                             <div class="ms-3">
                                                 <h5>{{ __('Seat') }} {{$lugar->fila}}{{ $lugar->posicao }}</h5>
-                                                <p class="small mb-0">{{date('d F Y', strtotime($sessoes[$sessao_id]->data)) }}, {{ date('H:i', strtotime($sessoes[$sessao_id]->horario_inicio)) }}</p>
+                                                @isset($sessoes[$sessao_id])
+                                                <p class="small mb-0">
+                                                    {{ date('d F Y', strtotime($sessoes[$sessao_id]->data)) }},
+                                                    {{ date('H:i', strtotime($sessoes[$sessao_id]->horario_inicio)) }}
+                                                </p>
+                                                @endisset
                                             </div>
                                         </div>
                                         <div class="d-flex flex-row align-items-center">

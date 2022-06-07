@@ -37,8 +37,8 @@ class Carrinho extends Model
         // selecionar varios lugares quando tiver no checkout
         if (!isset($this->sessoes[$sessao->id])) {
             $this->sessoes[$sessao->id] = $sessao;
+            session()->put('carrinho', $this);
         }
-        session()->put('carrinho', $this);
     }
 
     /**
@@ -48,10 +48,13 @@ class Carrinho extends Model
      */
     public function adicionarLugar(Sessao $sessao, Lugar $lugar)
     {
+        // adicionamos sessao porque podemos adicionar lugar ao carrinho sem 
+        // primeiro termos adicionado uma sessao
+        $this->adicionarSessao($sessao);
         if (!isset($this->lugares[$sessao->id][$lugar->id])) {
             $this->lugares[$sessao->id][$lugar->id] = $lugar;
+            session()->put('carrinho', $this);
         }
-        session()->put('carrinho', $this);
     }
 
     /**
