@@ -65,6 +65,22 @@ class Sessao extends Model
         return false;
     }
 
+    // verificar se a sessao ainda esta disponivel
+    // (se nao comecou há mais de 5 minutos)
+    public function disponivel()
+    {
+        $data_atual = now()->format('Y-m-d');
+        $hora_atual = now()->addMinutes(5)->format('H:i:s');
+
+        if ($this->data < $data_atual) {
+            return false;
+        } elseif ($this->data == $data_atual && $this->horario_inicio < $hora_atual) {
+            return false;
+        }
+
+        return true;
+    }
+
     // saber quantos lugares tem uma sessao
     public function num_lugares()
     {

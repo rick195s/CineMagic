@@ -92,8 +92,11 @@ class SessaoPolicy
         //
     }
 
-    public function selectSeat(User $user, Sessao $sessao)
+    public function selectSeat(?User $user, Sessao $sessao)
     {
+        if (!$sessao->disponivel()) {
+            return $this->deny(__('Cannot add old sessions to cart'));
+        }
         return true;
     }
 }

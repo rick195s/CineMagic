@@ -26,17 +26,14 @@ class CarrinhoPolicy
 
         // Um user só pode adicionar a sessão ao carrinho se tiver começado há menos de 5 minutos. 
         // Se já começõu há mais de 5 minutos, não pode adicionar
-        if (
-            $sessao->data < now()->format('Y-m-d')
-            || ($sessao->data == now()->format('Y-m-d') && $sessao->horario_inicio <= now()->subMinutes(5)->format('H:i:s'))
-        ) {
+        if (!$sessao->disponivel()) {
             return $this->deny(__('Cannot add old sessions to cart'));
         }
 
         return true;
     }
 
-    public function adicionarLugar(User $user, Carrinho $carrinho, Sessao $sessao, Lugar $lugar)
+    public function adicionarLugar(?User $user, Carrinho $carrinho, Sessao $sessao, Lugar $lugar)
     {
         // Um user nao pode adicionar o mesmo lugar para a mesma sessao varias vezes ao carrinho
         if (isset($carrinho->lugares[$sessao->id][$lugar->id])) {
