@@ -16,6 +16,37 @@ $(document).ready(function () {
 	});
 
 	/*==============================
+	Checkout fields
+	==============================*/
+	$("#paymentType").change(function() {
+		switch ($(this).val()) {
+			case "VISA":
+				$('#otherFieldDiv').show();
+				$('#otherField').attr('required', '');
+				$('#otherField').attr('data-error', 'This field is required.');		
+				break;
+
+			case "MBWAY":
+				$('#otherFieldDiv').show();
+				$('#otherField').attr('required', '');
+				$('#otherField').attr('data-error', 'This field is required.');		
+				break;
+
+			case "PAYPAL":
+				$('#otherFieldDiv').show();
+				$('#otherField').attr('required', '');
+				$('#otherField').attr('data-error', 'This field is required.');		
+				break;
+
+			default:
+				break;
+		}
+		
+	  });
+	  $("#paymentType").trigger("change");
+	  
+
+	/*==============================
 	Search
 	==============================*/
 	$('.header__search-btn').on('click', function() {

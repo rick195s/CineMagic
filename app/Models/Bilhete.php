@@ -9,6 +9,21 @@ class Bilhete extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+
+    protected $fillable = [
+        'sessao_id',
+        'recibo_id',
+        'lugar_id',
+        'cliente_id',
+        'preco_sem_iva',
+        'estado'
+    ];
+
     // relation sessoes 1:n bilhetes
     public function sessao()
     {

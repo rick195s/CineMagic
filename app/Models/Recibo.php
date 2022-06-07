@@ -38,6 +38,22 @@ class Recibo extends Model
         'updated_at',
     ];
 
+    public function __construct($nif, $tipo_pagamento, $ref_pagamento, $num_lugares)
+    {
+        $conf = Configuracao::first();
+
+        $preco_bilhete_com_iva = $conf->preco_bilhete_sem_iva * (1 + $conf->percentagem_iva / 100);
+        $this->preco_total_sem_iva = $conf->preco_bilhete_sem_iva * $num_lugares;
+        $this->preco_total_com_iva = $preco_bilhete_com_iva  * $num_lugares;
+        $this->iva = $this->preco_total_com_iva - $this->preco_total_sem_iva;
+        $this->cliente_id = auth()->user()->cliente->id;
+        $this->nome_cliente = auth()->user()->name;
+        $this->nif = $nif;
+        $this->tipo_pagamento = $tipo_pagamento;
+        $this->ref_pagamento = $ref_pagamento;
+        $this->data = now()->format('Y-m-d');
+    }
+
     // relation clients 1:n recibos
     public function cliente()
     {

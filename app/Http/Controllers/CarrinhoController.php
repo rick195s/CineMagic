@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckoutPost;
+use App\Models\Bilhete;
 use App\Models\Carrinho;
 use App\Models\Configuracao;
 use App\Models\Lugar;
+use App\Models\Recibo;
 use App\Models\Sessao;
+use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Request;
 
 class CarrinhoController extends Controller
 {
@@ -17,7 +22,6 @@ class CarrinhoController extends Controller
      */
     public function index()
     {
-
         $conf = Configuracao::first();
         $carrinho = session()->get('carrinho', new Carrinho());
         $sessoes = $carrinho->sessoes;
@@ -25,7 +29,7 @@ class CarrinhoController extends Controller
         $preco_bilhete_com_iva = $conf->preco_bilhete_sem_iva * (1 + $conf->percentagem_iva / 100);
         $total = count($carrinho->todosLugaresAdicionados()) * $preco_bilhete_com_iva ?? 0;
 
-        return view('checkout', compact('conf', 'preco_bilhete_com_iva', 'sessoes', 'lugares_por_sessao', 'total', 'carrinho'));
+        return view('checkout.index', compact('conf', 'preco_bilhete_com_iva', 'sessoes', 'lugares_por_sessao', 'total', 'carrinho'));
     }
 
     /**
@@ -35,10 +39,44 @@ class CarrinhoController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function confirmarCompra()
+    public function confirmarCompra(CheckoutPost $request)
     {
         $carrinho = session()->get('carrinho', new Carrinho());
-        $this->authorize('confirmarCompra', $carrinho);
+
+        try {
+            $this->authorize('confirmarCompra', $carrinho);
+        } catch (AuthorizationException $th) {
+            return back()->with('error', $th->getMessage());
+        }
+        $validatedData = $request->validated();
+
+        $user = auth()->user();
+
+        $recibo = new Recibo(
+            $validatedData['nif'],
+            $validatedData['tipo_pagamento'],
+            $validatedData['ref_pagamento'],
+            $carrinho->num_lugares()
+        );
+        //TODO 
+        // criar pdf do recibo
+        $recibo->save();
+
+        foreach ($carrinho->lugares as $sessao_id => $lugares_por_sessao) {
+            foreach ($lugares_por_sessao as $lugar) {
+                Bilhete::create([
+                    'sessao_id' => $sessao_id,
+                    'lugar_id' => $lugar->id,
+                    'cliente_id' => $user->cliente->id,
+                    'recibo_id' => $recibo->id,
+                    'preco_sem_iva' => Configuracao::first()->preco_bilhete_sem_iva,
+                ]);
+            }
+        }
+
+        $carrinho->limpar();
+
+        return redirect()->route('home')->with('success', __('Purchase completed successfully'));
     }
 
 

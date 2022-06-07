@@ -480,11 +480,11 @@ $this->route('user')
 
 - [x] Qualquer utilizador pode adicionar coisas ao carrinho;
 
-- [ ] Só clientes registados é que podem finalizar uma compra;
+- [x] Só clientes registados é que podem finalizar uma compra;
 
 - [ ] Se uma compra for feita com sucesso a aplicação cria um recibo e gera os bilhetes relativos à compra e limpa o carrinho de compras;
 
-- [ ] Se der erro na compra o carrinho fica como está e o cliente tem de ser avisado;
+- [x] Se der erro na compra o carrinho fica como está e o cliente tem de ser avisado;
 
 - [x] Apagar ou adicionar lugares ao carrinho;
 

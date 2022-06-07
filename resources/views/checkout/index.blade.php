@@ -168,38 +168,13 @@
                                     </div>
 
                                     <p class="small mb-2">Card type</p>
-                                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-mastercard fa-2x me-2"></i></a>
-                                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
-                                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-amex fa-2x me-2"></i></a>
-                                    <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
-
-                                    <form class="mt-4">
-                                        <div class="form-outline form-white mb-4">
-                                            <label class="form-label" for="typeName">{{__('NIF')}}</label>
-                                            <input type="number" name="nif" id="typeName" class="form-control form-control-lg" placeholder="756231562" />
-
-                                        </div>
-                                    </form>
-
-                                    <hr class="my-4">
-
-                                    <div class="d-flex justify-content-between mb-4">
-                                        <p class="mb-2">{{__('Total(With IVA)')}}</p>
-                                        <p class="mb-2">{{ number_format($total, 2)}}€</p>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
+                                        <a href="#!" type="submit" class="text-white mx-3"><img src="https://play-lh.googleusercontent.com/nDKhDELMEjag8qJ9aKAjfTSzWZKVg3tY2OZ-eo8Jp8hxYDgifCFQoNOqxDwTaAW-O8o" height="30px" width="30px"></a>
+                                        <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
                                     </div>
 
-                                    @can('confirmarCompra', $carrinho)
-                                    <form action="{{ route('carrinho.checkout') }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary btn-block btn-lg">
-                                            <span>{{__('Confirm')}} <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                        </button>
-                                    </form>
-                                    @else
-                                    <a href="{{ route('login') }}" class="btn btn-primary btn-block btn-lg">
-                                        <span>{{__('Login')}} <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                    </a>
-                                    @endcan
+                                    @include('checkout.partials.form')
 
                                 </div>
                                 @else

@@ -56,6 +56,9 @@ class CarrinhoPolicy
             return $this->deny(__('Cart is empty'));
         }
 
+        if (!$user->isClient()) {
+            return $this->deny(__('You must be a client to buy tickets'));
+        }
         return true;
     }
 }
