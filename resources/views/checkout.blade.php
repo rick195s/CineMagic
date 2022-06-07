@@ -41,10 +41,23 @@
                             <h5 class="mb-3"><a href="{{ route('home') }}"><i class="fas fa-long-arrow-alt-left me-2"></i>{{__('Continue shopping')}}</a></h5>
                             <hr>
 
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <div>
+                            <div class=" row  mb-4">
+                                <div class="col-12 col-sm-6">
                                     <p class="mb-1">{{__('Cart')}}</p>
+
                                 </div>
+
+                                <div class="col-12 col-sm-6 d-flex justify-content-end">
+                                    <form action="{{route('carrinho.empty')}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-white btn btn-sm bg-danger">
+                                            {{ __('Empty Cart') }}
+                                        </button>
+                                    </form>
+
+                                </div>
+
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center">
@@ -137,17 +150,7 @@
                             @endforeach
 
 
-                            <div class="card mb-3 mb-lg-0">
-                                <div class="card-body">
-                                    <form action="{{route('carrinho.empty')}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="text-white btn btn-sm bg-danger">
-                                            {{ __('Empty Cart') }}
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="col-lg-5">

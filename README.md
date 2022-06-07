@@ -474,7 +474,7 @@ $this->route('user')
 
 #### Compra de Bilhetes:
 
-- [ ] Adicionar ou remover bilhetes para qualquer sesssao (ver especificacoes no enunciado);
+- [x] Adicionar ou remover lugares para qualquer sesssao (ver especificacoes no enunciado);
 
 - [x] Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos;
 
@@ -488,13 +488,13 @@ $this->route('user')
 
 - [x] Apagar ou adicionar lugares ao carrinho;
 
-- [ ] Limpar o carrinho de compras por completo;
+- [x] Limpar o carrinho de compras por completo;
 
 #### Escolha de Lugares:
 
 - [x] Cada lugar está associado a um bilhete unico numa sessao, ou a zero bilhetes quando o lugar ainda esta vazio;
 
-- [ ] Quando um utilizador adicionar um bilhete ao carrinho, tem de escolher o lugar que quer;
+- [x] Quando um utilizador adicionar um bilhete ao carrinho, tem de escolher o lugar que quer;
 
 #### Historico, recibos e bilhetes:
 
