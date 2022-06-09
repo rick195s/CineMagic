@@ -542,9 +542,9 @@ $this->route('user')
 
 - [x] Para cada sala tem de ser possivel definir os lugares que a sala tem.
 
-- [ ] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
+- [x] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
 
-- [ ] Para cada filme deve ser possivel fazer upload do cartaz:
+- [x] Para cada filme deve ser possivel fazer upload do cartaz:
 
 - [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
 
