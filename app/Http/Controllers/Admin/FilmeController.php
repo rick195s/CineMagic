@@ -79,7 +79,7 @@ class FilmeController extends Controller
     public function edit(Filme $filme)
     {
         $generos = Genero::all();
-        return view('admin.filmes.edit', compact('filme','generos'));
+        return view('admin.filmes.edit', compact('filme', 'generos'));
     }
 
     /**
@@ -111,6 +111,9 @@ class FilmeController extends Controller
      */
     public function destroy(Filme $filme)
     {
+        if ($filme->cartaz_url != null) {
+            Storage::delete('public/cartazes/' . $filme->cartaz_url);
+        }
         $filme->delete();
         return redirect()->route('admin.filmes.index')->with('success', __('Movie deleted successfully'));
     }
