@@ -74,7 +74,7 @@
 </div>
 
 <div class="row mb-3">
-    <label for="cartaz_url" class="col-md-4 col-form-label text-md-end">{{__('Movie Poster')}}</label>
+    <label for="cartaz_url" class="col-md-4 col-form-label text-md-end">{{__('Upload Photo')}}</label>
 
     <div class="col-md-6">
         <input id="cartaz_url" type="file" class="form-control @error('cartaz_url') is-invalid @enderror" name="cartaz_url" required>

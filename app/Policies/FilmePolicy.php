@@ -79,7 +79,7 @@ class FilmePolicy
             return $this->deny(__("Only admins can delete movies"));
         }
 
-        if ($filme->sessoes) {
+        if ($filme->sessoes && $filme->sessoes->count()) {
             return $this->deny(__("Only movies without sessions can be deleted"));
         }
 
