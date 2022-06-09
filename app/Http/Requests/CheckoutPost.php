@@ -74,9 +74,6 @@ class CheckoutPost extends FormRequest
                     $this->ref_pagamento = $data['phone_number'];
                     break;
             }
-
-            $validator->setData($data);
-            $this->merge(["dwq" => "dwq"]);
         });
     }
 
