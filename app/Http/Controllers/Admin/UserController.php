@@ -114,6 +114,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserPost $request, User $user)
     {
+
         // o metodo authorize dentro do UpdateUser já verifica se o utilizador
         // atual tem as permissoes necessarias
         $validatedData = $request->validated();
