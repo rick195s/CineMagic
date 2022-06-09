@@ -29,17 +29,17 @@
         @enderror
     </div>
 
-    <div class="form-outline form-white mb-4">
-        <label class="form-label" for="typeName">{{__('Payment Reference')}}</label>
+    <!-- ---------------------VISA-----------------  -->
+    @include('checkout.partials.visa-inputs')
+    <!-- ---------------------END VISA-----------------  -->
 
-        <input class="form-control form-control-lg @error('ref_pagamento') is-invalid @enderror" type="text" name="ref_pagamento" value="{{ old('ref_pagamento', Auth::user()->cliente ? Auth::user()->cliente->ref_pagamento ?? '' : '') }}" />
+    <!-- ---------------------PAYPAL-----------------  -->
+    @include('checkout.partials.paypal-inputs')
+    <!-- ---------------------END PAYPAL-----------------  -->
 
-        @error('ref_pagamento')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-    </div>
+    <!-- ---------------------MBWAY-----------------  -->
+    @include('checkout.partials.mbway-inputs')
+    <!-- ---------------------END MBWAY-----------------  -->
 
     <hr class="my-4">
 

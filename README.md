@@ -368,6 +368,10 @@ $this->route('user')
   Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->get();
   ```
 
+#### Rules:
+
+- Rule Payment: serve para verificar os pagamentos;
+
 #### Carrinho:
 
 - Um utilizador pode adicionar um lugar ao carrinho sem ter previamente selecionado a sessao.
@@ -496,7 +500,7 @@ $this->route('user')
 
 #### Historico, recibos e bilhetes:
 
-- [ ] Registar o recibo após o pagamento da compra;
+- [x] Registar o recibo após o pagamento da compra;
 
 - [ ] Enviar o recibo automaticamente por email ao cliente;
 

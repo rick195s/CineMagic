@@ -48,13 +48,15 @@ class CarrinhoController extends Controller
         } catch (AuthorizationException $th) {
             return back()->with('error', $th->getMessage());
         }
+
         $validatedData = $request->validated();
 
         $user = auth()->user();
-
         $recibo = new Recibo(
-            $validatedData['nif'],
+            $validatedData['nif'] ?? '',
             $validatedData['tipo_pagamento'],
+            // $validatedData['ref_pagamento'] é adicionado no CheckoutPost FormRequest
+            // porque o ref_pagamento depende da forma de pagamento
             $validatedData['ref_pagamento'],
             $carrinho->num_lugares()
         );

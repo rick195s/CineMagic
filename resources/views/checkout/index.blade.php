@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('title', __('Checkout'))
+@section('scripts')
+<script src="{{ asset('js/app/checkout.js')}}"></script>
+@endsection
 
 @section('page-title')
 <section class="section section--first section--bg" data-bg="{{ asset('img/section.jpg')}}">
