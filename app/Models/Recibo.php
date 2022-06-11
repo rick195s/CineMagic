@@ -38,7 +38,7 @@ class Recibo extends Model
         'updated_at',
     ];
 
-    public function __construct($nif, $tipo_pagamento, $ref_pagamento, $num_lugares)
+    public function __construct($nif = null, $tipo_pagamento = null, $ref_pagamento = null, $num_lugares = null)
     {
         $conf = Configuracao::first();
 
