@@ -23,6 +23,6 @@ class SessaoFrontController extends Controller
 
         $lugares = $sala ?  $sessao->sala->lugares : [];
         $filas = Lugar::lugaresPorFila($lugares);
-        return view('sessao.select_seat', compact('sessao', 'sala', 'filas'));
+        return view('sessoes.select_seat', compact('sessao', 'sala', 'filas'));
     }
 }

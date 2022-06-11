@@ -20,6 +20,6 @@ class FilmeFrontController extends Controller
         // com salas iguais
         $salas = Sessao::salasDasSessoes($conj_sessoes);
 
-        return view('filme.show', compact('filme', 'conj_sessoes', 'destaques', 'salas'));
+        return view('filmes.show', compact('filme', 'conj_sessoes', 'destaques', 'salas'));
     }
 }
