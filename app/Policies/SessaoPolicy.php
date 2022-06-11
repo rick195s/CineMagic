@@ -95,7 +95,12 @@ class SessaoPolicy
     public function selectSeat(?User $user, Sessao $sessao)
     {
         if (!$sessao->disponivel()) {
-            return $this->deny(__('Cannot add old sessions to cart'));
+            return $this->deny(__('Cannot select seats for old sessions'));
+        }
+
+        // Um user so pode adicionar sessoes ao carrinho se a sessao nao estiver ja cheia
+        if ($sessao->num_lugares() == $sessao->bilhetes->count()) {
+            return $this->deny(__('Session is full'));
         }
         return true;
     }
