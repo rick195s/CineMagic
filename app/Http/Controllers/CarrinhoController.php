@@ -12,6 +12,9 @@ use App\Models\Sessao;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\PDF;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CarrinhoController extends Controller
 {
@@ -36,11 +39,12 @@ class CarrinhoController extends Controller
      * Confirmar uma compra
      * Esta funcao vai ser responsavel por criar bilhetes e fazer as operacoes
      * relacionadas com a compra de bilhetes
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function confirmarCompra(CheckoutPost $request)
     {
+
         $carrinho = session()->get('carrinho', new Carrinho());
 
         try {
@@ -51,6 +55,7 @@ class CarrinhoController extends Controller
 
         $validatedData = $request->validated();
 
+
         $user = auth()->user();
         $recibo = new Recibo(
             $validatedData['nif'] ?? '',
@@ -60,8 +65,7 @@ class CarrinhoController extends Controller
             $validatedData['ref_pagamento'],
             $carrinho->num_lugares()
         );
-        //TODO 
-        // criar pdf do recibo
+
         $recibo->save();
 
         foreach ($carrinho->lugares as $sessao_id => $lugares_por_sessao) {
@@ -76,9 +80,43 @@ class CarrinhoController extends Controller
             }
         }
 
+
+
+        //TODO
+        // enviar email com o recibo
+        // Auth::user()->notify(new InvoicePaid());
+
+        //TODO
+        // criar pdf do recibo
+        $data = [
+            'user' => Auth::user(),
+            'invoice' => $recibo,
+            'bilhetes' => $recibo->bilhetes,
+            'conf' => Configuracao::first(),
+            'tipo_pagamento' => $validatedData['tipo_pagamento'],
+            'ref_pagamento' => $validatedData['ref_pagamento'],
+        ];
+        $this->createInvoicePdf($data);
+
         $carrinho->limpar();
 
         return redirect()->route('home')->with('success', __('Purchase completed successfully'));
+    }
+
+    /**
+     * Criar pdf de recibo e bilhetes
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createInvoicePdf($data)
+    {
+        $pdf = PDF::loadView('pdf.invoice', $data);
+
+        $invoiceFileName =  uniqid(rand(), true) . '.pdf';
+
+        Storage::put('pdf_recibos/' . $invoiceFileName, $pdf->output());
+        $data['invoice']->recibo_pdf_url = $invoiceFileName;
+        $data['invoice']->save();
     }
 
 
@@ -90,7 +128,7 @@ class CarrinhoController extends Controller
     public function adicionarSessao(Sessao $sessao)
     {
         $carrinho = session()->get('carrinho', new Carrinho());
-        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy 
+        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy
         // e enviar para a vista anterior do utilizador
         try {
             $this->authorize('adicionarSessao', [$carrinho, $sessao]);
@@ -111,7 +149,7 @@ class CarrinhoController extends Controller
     public function adicionarLugar(Sessao $sessao, Lugar $lugar)
     {
         $carrinho = session()->get('carrinho', new Carrinho());
-        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy 
+        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy
         // e enviar para a vista anterior do utilizador
         try {
             $this->authorize('adicionarLugar', [$carrinho, $sessao, $lugar]);
@@ -140,7 +178,7 @@ class CarrinhoController extends Controller
     }
 
     /**
-     * Remover um lugar do carrinho 
+     * Remover um lugar do carrinho
      *
      * @return \Illuminate\Http\Response
      */

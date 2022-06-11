@@ -240,6 +240,7 @@
                                         <div class="email"><a
                                                 href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                         </div>
+
                                     </div>
                                 </div>
                             </header>
@@ -250,6 +251,10 @@
                                         <h1 class="invoice-id">{{ __('Invoice num') }}: {{ $invoice->id }}</h1>
                                         <div class="date">{{ __('Date of Invoice') }}:
                                             {{ $invoice->data }}
+                                        </div>
+                                        <div>
+                                            <p>{{ __('Payment details') . ': ' . $tipo_pagamento . ' (' . $ref_pagamento . ')' }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
