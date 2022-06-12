@@ -59,6 +59,6 @@ class Bilhete extends Model
             "user" => Auth::user(),
             "bilhete" => $this,
         ]);
-        return $pdf->output();
+        return $pdf;
     }
 }

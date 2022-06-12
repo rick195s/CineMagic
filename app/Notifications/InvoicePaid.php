@@ -55,7 +55,7 @@ class InvoicePaid extends Notification
 
         foreach ($bilhetes as $bilhete) {
             $ticketFileName =  $this->recibo->id . '-' . $bilhete->lugar->fila . '-' . $bilhete->lugar->posicao . '.pdf';
-            $mail->attachData($bilhete->criarPdf(), $ticketFileName);
+            $mail->attachData($bilhete->criarPdf()->output(), $ticketFileName);
         }
 
         return $mail;
