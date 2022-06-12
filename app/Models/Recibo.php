@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
