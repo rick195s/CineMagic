@@ -18,7 +18,6 @@
         body {
             font-family: Helvetica, sans-serif;
             margin-top: 20px;
-            background-color: #f7f7ff;
         }
 
         #invoice {
@@ -74,8 +73,6 @@
         }
 
         .invoice main .thanks {
-            margin-top: -100px;
-            font-size: 2em;
             margin-bottom: 50px
         }
 
@@ -311,7 +308,11 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <div class="thanks">Thank you!</div>
+
+                                <div class="thanks">
+                                    <h3>{{ __('Thank you for choosing us!') }}</h3>
+                                </div>
+
 
                             </main>
                         </div>
