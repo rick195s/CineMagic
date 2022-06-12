@@ -89,9 +89,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $this->authorize('view', $user);
-        dump($user);
-        return view('home');
+        return view('admin.users.edit', compact('user'));
     }
 
     /**

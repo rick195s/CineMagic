@@ -36,7 +36,10 @@
                                 @foreach ($sessao->bilhetes as $bilhete)
                                     <tr>
                                         <td>{{ $bilhete->id }}</td>
-                                        <td>{{ $bilhete->cliente->user->name }}</td>
+                                        <td>
+                                            <a
+                                                href="{{ route('admin.users.show', $bilhete->cliente->user->id) }}">{{ $bilhete->cliente->user->name }}</a>
+                                        </td>
                                         <td>
                                             @if (!$bilhete->usado())
                                                 <form action="{{ route('admin.bilhetes.use', $bilhete->id) }}"
