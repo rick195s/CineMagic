@@ -508,7 +508,7 @@ $this->route('user')
 
 - [x] Gerar recibo em PDF e armazenar permanentemente (POLICIES);
 
-- [ ] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo;
+- [x] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo;
 
 - [ ] Os bilhetes têm de estar sempre acessiceis em formato HTML (POLICIES);
 

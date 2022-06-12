@@ -43,14 +43,22 @@ class InvoicePaid extends Notification
     public function toMail($notifiable)
     {
         $path = storage_path('app/pdf_recibos/' . $this->recibo->recibo_pdf_url);
+        $bilhetes = $this->recibo->bilhetes;
 
-        return (new MailMessage)
+        $mail = (new MailMessage)
             ->greeting(__('Purchase successful!'))
             ->line(__('Ticket purchase was completed. You can now see your tickets in your profile.'))
             ->line(__('Show the tickets QRCode in the movie theater to get access to the session.'))
             ->action(__('View Invoice and Tickets'), url('/'))
             ->line(__('Thank you for choosing us!'))
             ->attach($path);
+
+        foreach ($bilhetes as $bilhete) {
+            $ticketFileName =  $this->recibo->id . '-' . $bilhete->lugar->fila . '-' . $bilhete->lugar->posicao . '.pdf';
+            $mail->attachData($bilhete->criarPdf(), $ticketFileName);
+        }
+
+        return $mail;
     }
 
     /**

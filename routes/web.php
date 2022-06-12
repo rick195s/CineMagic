@@ -52,6 +52,8 @@ Route::get('/carrinho/{sessao}/{lugar}', [CarrinhoController::class, 'adicionarL
 Route::delete('/carrinho/delete/{sessao}', [CarrinhoController::class, 'removerSessao'])->name('carrinho.delete_sessao');
 Route::delete('/carrinho/delete/{sessao}/{lugar}', [CarrinhoController::class, 'removerLugar'])->name('carrinho.delete_lugar');
 Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('carrinho.empty');
+
+
 // rotas protegidas (só para admins)
 // rotas com prefixo admin
 // rotas com o prefixo admin. no seu nome
@@ -75,3 +77,5 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     // admin dashboard manage sessoes
     Route::resource('sessoes', SessaoController::class);
 });
+
+// rotas protegidas so para funcionarios

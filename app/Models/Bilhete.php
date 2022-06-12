@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Bilhete extends Model
 {
@@ -46,5 +48,17 @@ class Bilhete extends Model
     public function recibo()
     {
         return $this->belongsTo(Recibo::class);
+    }
+
+    /**
+     * Criar um pdf do bilhete
+     */
+    public function criarPdf()
+    {
+        $pdf = PDF::loadView('pdf.ticket', [
+            "user" => Auth::user(),
+            "bilhete" => $this,
+        ]);
+        return $pdf->output();
     }
 }

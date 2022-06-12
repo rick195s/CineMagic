@@ -11,9 +11,6 @@ use App\Models\Recibo;
 use App\Models\Sessao;
 use App\Notifications\InvoicePaid;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\PDF;
-use Illuminate\Support\Facades\Auth;
 
 class CarrinhoController extends Controller
 {
