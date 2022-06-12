@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class Recibo extends Model
 {
@@ -64,5 +67,29 @@ class Recibo extends Model
     public function bilhetes()
     {
         return $this->hasMany(Bilhete::class);
+    }
+
+    /*
+     * Criar pdf do recibo
+     *
+     * */
+    public function criarPdf()
+    {
+        $data = [
+            'user' => Auth::user(),
+            'recibo' => $this,
+            'bilhetes' => $this->bilhetes,
+            'conf' => Configuracao::first(),
+            'tipo_pagamento' => $this->tipo_pagamento,
+            'ref_pagamento' => $this->ref_pagamento,
+        ];
+
+        $pdf = PDF::loadView('pdf.invoice', $data);
+
+        $invoiceFileName =  uniqid(rand(), true) . '.pdf';
+
+        Storage::put('pdf_recibos/' . $invoiceFileName, $pdf->output());
+        $data['recibo']->recibo_pdf_url = $invoiceFileName;
+        $data['recibo']->save();
     }
 }

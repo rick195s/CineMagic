@@ -9,13 +9,11 @@ use App\Models\Configuracao;
 use App\Models\Lugar;
 use App\Models\Recibo;
 use App\Models\Sessao;
-use App\Models\User;
 use App\Notifications\InvoicePaid;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class CarrinhoController extends Controller
 {
@@ -83,15 +81,7 @@ class CarrinhoController extends Controller
 
         //TODO
         // criar pdf do recibo
-        $data = [
-            'user' => $user,
-            'recibo' => $recibo,
-            'bilhetes' => $recibo->bilhetes,
-            'conf' => Configuracao::first(),
-            'tipo_pagamento' => $validatedData['tipo_pagamento'],
-            'ref_pagamento' => $validatedData['ref_pagamento'],
-        ];
-        $this->createInvoicePdf($data);
+        $recibo->criarPdf();
 
         //TODO
         // enviar email com o recibo
@@ -101,23 +91,6 @@ class CarrinhoController extends Controller
 
         return redirect()->route('home')->with('success', __('Purchase completed successfully'));
     }
-
-    /**
-     * Criar pdf de recibo e bilhetes
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createInvoicePdf($data)
-    {
-        $pdf = PDF::loadView('pdf.invoice', $data);
-
-        $invoiceFileName =  uniqid(rand(), true) . '.pdf';
-
-        Storage::put('pdf_recibos/' . $invoiceFileName, $pdf->output());
-        $data['recibo']->recibo_pdf_url = $invoiceFileName;
-        $data['recibo']->save();
-    }
-
 
     /**
      * Adiciona uma sessao ao carrinho
