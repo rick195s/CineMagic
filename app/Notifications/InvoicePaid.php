@@ -11,14 +11,16 @@ class InvoicePaid extends Notification
 {
     use Queueable;
 
+    protected $recibo;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($recibo)
     {
-        //
+        $this->recibo = $recibo;
     }
 
     /**
@@ -40,7 +42,7 @@ class InvoicePaid extends Notification
      */
     public function toMail($notifiable)
     {
-        $path = storage_path('app/pdf_recibos/example.jpg');
+        $path = storage_path('app/pdf_recibos/' . $this->recibo->recibo_pdf_url);
 
         return (new MailMessage)
             ->greeting(__('Purchase successful!'))
@@ -48,7 +50,6 @@ class InvoicePaid extends Notification
             ->line(__('Show the tickets QRCode in the movie theater to get access to the session.'))
             ->action(__('View Invoice and Tickets'), url('/'))
             ->line(__('Thank you for choosing us!'))
-            ->attach($path)
             ->attach($path);
     }
 

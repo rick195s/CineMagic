@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Album example · Bootstrap v5.0</title>
+    <title>{{ __('Invoice num') }}: {{ $recibo->id }}</title>
 
 
     <style>
@@ -248,9 +248,9 @@
                                 <div class="row contacts">
 
                                     <div class="col invoice-to">
-                                        <h1 class="invoice-id">{{ __('Invoice num') }}: {{ $invoice->id }}</h1>
+                                        <h1 class="invoice-id">{{ __('Invoice num') }}: {{ $recibo->id }}</h1>
                                         <div class="date">{{ __('Date of Invoice') }}:
-                                            {{ $invoice->data }}
+                                            {{ $recibo->data }}
                                         </div>
                                         <div>
                                             <p>{{ __('Payment details') . ': ' . $tipo_pagamento . ' (' . $ref_pagamento . ')' }}
@@ -296,18 +296,18 @@
                                         <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">{{ __('Subtotal') }}</td>
-                                            <td>{{ $invoice->preco_total_sem_iva }} €</td>
+                                            <td>{{ $recibo->preco_total_sem_iva }} €</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">{{ __('Taxes') }}</td>
-                                            <td>{{ $invoice->iva }} €
+                                            <td>{{ $recibo->iva }} €
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"></td>
                                             <td colspan="2">{{ __('Total(With IVA)') }}</td>
-                                            <td>{{ $invoice->preco_total_com_iva }} €</td>
+                                            <td>{{ $recibo->preco_total_com_iva }} €</td>
                                         </tr>
                                     </tfoot>
                                 </table>

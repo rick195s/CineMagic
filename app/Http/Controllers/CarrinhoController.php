@@ -10,6 +10,7 @@ use App\Models\Lugar;
 use App\Models\Recibo;
 use App\Models\Sessao;
 use App\Models\User;
+use App\Notifications\InvoicePaid;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\PDF;
@@ -55,8 +56,8 @@ class CarrinhoController extends Controller
 
         $validatedData = $request->validated();
 
-
         $user = auth()->user();
+
         $recibo = new Recibo(
             $validatedData['nif'] ?? '',
             $validatedData['tipo_pagamento'],
@@ -80,23 +81,21 @@ class CarrinhoController extends Controller
             }
         }
 
-
-
-        //TODO
-        // enviar email com o recibo
-        // Auth::user()->notify(new InvoicePaid());
-
         //TODO
         // criar pdf do recibo
         $data = [
-            'user' => Auth::user(),
-            'invoice' => $recibo,
+            'user' => $user,
+            'recibo' => $recibo,
             'bilhetes' => $recibo->bilhetes,
             'conf' => Configuracao::first(),
             'tipo_pagamento' => $validatedData['tipo_pagamento'],
             'ref_pagamento' => $validatedData['ref_pagamento'],
         ];
         $this->createInvoicePdf($data);
+
+        //TODO
+        // enviar email com o recibo
+        $user->notify(new InvoicePaid($recibo));
 
         $carrinho->limpar();
 
@@ -115,8 +114,8 @@ class CarrinhoController extends Controller
         $invoiceFileName =  uniqid(rand(), true) . '.pdf';
 
         Storage::put('pdf_recibos/' . $invoiceFileName, $pdf->output());
-        $data['invoice']->recibo_pdf_url = $invoiceFileName;
-        $data['invoice']->save();
+        $data['recibo']->recibo_pdf_url = $invoiceFileName;
+        $data['recibo']->save();
     }
 
 
