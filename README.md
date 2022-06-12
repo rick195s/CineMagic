@@ -530,9 +530,9 @@ $this->route('user')
 
 - [ ] Se o bilhete for valido a aplicacao deve mostar os detalhes do bilhete e informa que o bilhete é valido.
 
-- [ ] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
+- [x] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
 
-- [ ] O funcionario deve ter um botao na aplicacao que ao clicar confirma o uso do bilhete, colocando o bilhete invalido;
+- [x] O funcionario deve ter um botao na aplicacao que ao clicar confirma o uso do bilhete, colocando o bilhete invalido;
 
 #### Administracao do negocio:
 
