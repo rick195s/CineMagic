@@ -6,6 +6,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Bilhete extends Model
 {
@@ -61,10 +62,14 @@ class Bilhete extends Model
      */
     public function criarPdf()
     {
+        $qrcode = base64_encode(QrCode::format('svg')->size(200)->generate(route('admin.bilhetes.use', $this->id)));
+
         $pdf = PDF::loadView('pdf.ticket', [
             "user" => Auth::user(),
             "bilhete" => $this,
+            "qrcode" => $qrcode
         ]);
+
         return $pdf;
     }
 }

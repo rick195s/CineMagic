@@ -91,5 +91,3 @@ Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(
         Route::resource('sessoes', SessaoController::class)->except('index');
     });
 });
-
-// rotas protegidas so para funcionarios
