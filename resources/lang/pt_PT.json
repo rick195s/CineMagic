@@ -169,7 +169,13 @@
     "Ticket ID": "ID do Bilhete",
 
     "Only employees can access this page": "Apenas funcionários podem aceder à esta página",
-
+    "Cannot manage old sessions": "Não é possível gerir sessões antigas",
+    "Only employees can manage sessions": "Apenas funcionários podem gerir sessões",
+    "Manage": "Gerir",
+    "Scan QRCode": "Ler QRCode",
+    "Mark as Used": "Marcar como Utilizado",
+    "Ticket is now marked as used": "Bilhete marcado como utilizado",
+    "Ticket already used": "Bilhete já utilizado",
 
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Esqueceu-se da sua senha de inicio de sessão? Sem problemas. Apenas necessita de introduzir o seu endereço de e-mail para que possamos lhe enviar um link de redefinição de senha.",
     "Already registered?": "Já possui uma conta?",

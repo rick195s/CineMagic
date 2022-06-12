@@ -6,13 +6,13 @@ use App\Http\Controllers\Admin\SessaoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Admin\BilheteController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FilmeFrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessaoFrontController;
-use App\Policies\DashboardPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +66,8 @@ Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(
 
     // rotas protegidas (só para funcionarios)
     Route::middleware(['isEmployee'])->group(function () {
+        Route::get('sessoes/{sessao}/manage', [SessaoController::class, 'manage'])->name('sessoes.manage');
+        Route::patch('bilhetes/{bilhete}/use', [BilheteController::class, 'use'])->name('bilhetes.use');
     });
 
     // rotas protegidas (só para admins)

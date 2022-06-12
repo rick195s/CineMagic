@@ -50,6 +50,12 @@ class Bilhete extends Model
         return $this->belongsTo(Recibo::class);
     }
 
+    // verificar se o bilhete ja foi usado
+    public function usado()
+    {
+        return $this->estado == 'usado';
+    }
+
     /**
      * Criar um pdf do bilhete
      */

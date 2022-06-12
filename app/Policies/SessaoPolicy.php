@@ -92,6 +92,13 @@ class SessaoPolicy
         //
     }
 
+    /**
+     * Verificar se um utilizador pode selecionar um lugar numa sessao
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Sessao  $sessao
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
     public function selectSeat(?User $user, Sessao $sessao)
     {
         if (!$sessao->disponivel()) {
@@ -101,6 +108,25 @@ class SessaoPolicy
         // Um user so pode adicionar sessoes ao carrinho se a sessao nao estiver ja cheia
         if ($sessao->num_lugares() == $sessao->bilhetes->count()) {
             return $this->deny(__('Session is full'));
+        }
+        return true;
+    }
+
+    /**
+     * Verificar se um utilizador pode controlar as entradas de uma sessao
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Sessao  $sessao
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function manage(User $user, Sessao $sessao)
+    {
+        if (!$user->isEmployee()) {
+            return $this->deny(__('Only employees can manage sessions'));
+        }
+
+        if (!$sessao->disponivel()) {
+            return $this->deny(__('Cannot manage old sessions'));
         }
         return true;
     }

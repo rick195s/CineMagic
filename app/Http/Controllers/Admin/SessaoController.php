@@ -90,4 +90,15 @@ class SessaoController extends Controller
     {
         //
     }
+
+    /**
+     * Gerir uma sessao
+     *
+     * @param  \App\Models\Sessao  $sessao
+     * @return \Illuminate\Http\Response
+     */
+    public function manage(Sessao $sessao)
+    {
+        return view('admin.sessoes.manage', compact('sessao'));
+    }
 }
