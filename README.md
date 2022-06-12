@@ -360,6 +360,8 @@ $this->route('user')
 
 - Laravel UI instalada.
 
+- Gate de entrar no dashboard criada;
+
 - Email de recuperar senha a ser enviado
 
 - Saber quais filmes têm sessões futuras:

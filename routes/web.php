@@ -12,6 +12,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FilmeFrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessaoFrontController;
+use App\Policies\DashboardPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -53,29 +54,32 @@ Route::delete('/carrinho/delete/{sessao}', [CarrinhoController::class, 'removerS
 Route::delete('/carrinho/delete/{sessao}/{lugar}', [CarrinhoController::class, 'removerLugar'])->name('carrinho.delete_lugar');
 Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('carrinho.empty');
 
-
-// rotas protegidas (só para admins)
-// rotas com prefixo admin
-// rotas com o prefixo admin. no seu nome
-Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
-
+Route::prefix('admin')->name('admin.')->group(function () {
     // admin dashboard main page
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
 
+    Route::middleware(['isEmployee'])->group(function () {
+    });
+    // rotas protegidas (só para admins)
+    // rotas com prefixo admin
+    // rotas com o prefixo admin. no seu nome
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-    // rotas para gerir users no dashboard admin
-    Route::resource('users', UserController::class);
-    Route::patch('users/{user}/update_state', [UserController::class, 'updateState'])->name('users.update_state');
+        Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
 
-    // admin dashboard manage salas
-    Route::resource('salas', SalaController::class);
+        // rotas para gerir users no dashboard admin
+        Route::resource('users', UserController::class);
+        Route::patch('users/{user}/update_state', [UserController::class, 'updateState'])->name('users.update_state');
 
-    // // admin dashboard manage filmes
-    Route::resource('filmes', FilmeController::class);
+        // admin dashboard manage salas
+        Route::resource('salas', SalaController::class);
 
-    // admin dashboard manage sessoes
-    Route::resource('sessoes', SessaoController::class);
+        // // admin dashboard manage filmes
+        Route::resource('filmes', FilmeController::class);
+
+        // admin dashboard manage sessoes
+        Route::resource('sessoes', SessaoController::class);
+    });
 });
 
 // rotas protegidas so para funcionarios
