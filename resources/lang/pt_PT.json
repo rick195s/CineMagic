@@ -44,6 +44,7 @@
     "User Photo": "Foto do Utilizador",
     "Upload Photo": "Carregar Foto",
 
+    "Only admins and employees can view the dashboard": "Apenas os administradores e funcionários podem ver o painel de controlo",
     "Only admins can view employees and admins": "Apenas os administradores podem ver funcionários e administradores",
     "Only admins can view all users": "Apenas os administradores podem ver todos os utilizadores",
     "Admins cannot view clients profiles": "Os administradores não podem ver perfis de clientes",
@@ -69,7 +70,7 @@
     "Only admins can create movie theaters": "Apenas os administradores podem criar salas de cinema",
     "Only admins can update movie theaters": "Apenas os administradores podem alterar salas de cinema",
     "Only admins can delete movie theaters": "Apenas os administradores podem eliminar salas de cinema",
-    "Only admins and employees can view movie theaters": "Apenas os administradores e funcionários podem ver salas de cinema",
+    "Only admins can view movie theaters": "Apenas os administradores podem ver salas de cinema",
     "Only movie theaters without future sessions can be updated": "Apenas salas de cinema sem sessões futuras podem ser alteradas",
     "Only movie theaters without future sessions can be deleted": "Apenas salas de cinema sem sessões futuras podem ser eliminadas",
     "Movie theater not found for this session": "Sala de Cinema não encontrada para esta sessão",

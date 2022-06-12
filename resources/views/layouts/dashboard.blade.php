@@ -11,7 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
     <!-- Scripts -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
     <!-- Styles -->
@@ -33,38 +35,55 @@
 
                 <ul class="sidebar-nav">
                     <li class="sidebar-header">
-                        {{__('Pages')}}
+                        {{ __('Pages') }}
                     </li>
 
-                    <li class="sidebar-item {{Route::currentRouteName() == 'admin.index'? 'active': ''}}">
-                        <a class="sidebar-link" href="{{route('admin.index')}}">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">{{__('Dashboard')}}</span>
+                    <li class="sidebar-item {{ Route::currentRouteName() == 'admin.index' ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('admin.index') }}">
+                            <i class="align-middle" data-feather="sliders"></i> <span
+                                class="align-middle">{{ __('Dashboard') }}</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.users')? 'active': ''}}">
-                        <a class="sidebar-link" href="{{route('admin.users.index')}}">
-                            <i class="align-middle me-2" data-feather="users"></i> <span class="align-middle">{{__('Users')}}</span>
-                        </a>
-                    </li>
+                    @can('viewAny', App\Models\User::class)
+                        <li
+                            class="sidebar-item {{ Str::startsWith(Route::currentRouteName(), 'admin.users') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.users.index') }}">
+                                <i class="align-middle me-2" data-feather="users"></i> <span
+                                    class="align-middle">{{ __('Users') }}</span>
+                            </a>
+                        </li>
+                    @endcan
 
-                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.salas')? 'active': ''}}">
-                        <a class="sidebar-link" href="{{route('admin.salas.index')}}">
-                            <i class="align-middle me-2" data-feather="tv"></i> <span class="align-middle">{{__('Movie Theaters')}}</span>
-                        </a>
-                    </li>
+                    @can('viewAny', App\Models\Sala::class)
+                        <li
+                            class="sidebar-item {{ Str::startsWith(Route::currentRouteName(), 'admin.salas') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.salas.index') }}">
+                                <i class="align-middle me-2" data-feather="tv"></i> <span
+                                    class="align-middle">{{ __('Movie Theaters') }}</span>
+                            </a>
+                        </li>
+                    @endcan
 
-                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.filmes')? 'active': ''}}">
-                        <a class="sidebar-link" href="{{route('admin.filmes.index')}}">
-                            <i class="align-middle me-2" data-feather="film"></i> <span class="align-middle">{{__('Movies')}}</span>
-                        </a>
-                    </li>
+                    @can('viewAny', App\Models\Filme::class)
+                        <li
+                            class="sidebar-item {{ Str::startsWith(Route::currentRouteName(), 'admin.filmes') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.filmes.index') }}">
+                                <i class="align-middle me-2" data-feather="film"></i> <span
+                                    class="align-middle">{{ __('Movies') }}</span>
+                            </a>
+                        </li>
+                    @endcan
 
-                    <li class="sidebar-item {{Str::startsWith( Route::currentRouteName(),'admin.sessoes')? 'active': ''}}">
-                        <a class="sidebar-link" href="{{route('admin.sessoes.index')}}">
-                            <i class="align-middle me-2" data-feather="video"></i> <span class="align-middle">{{__('Sessions')}}</span>
-                        </a>
-                    </li>
+                    @can('viewAny', App\Models\Sessao::class)
+                        <li
+                            class="sidebar-item {{ Str::startsWith(Route::currentRouteName(), 'admin.sessoes') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.sessoes.index') }}">
+                                <i class="align-middle me-2" data-feather="video"></i> <span
+                                    class="align-middle">{{ __('Sessions') }}</span>
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
 
 

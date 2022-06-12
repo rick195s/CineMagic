@@ -54,16 +54,22 @@ Route::delete('/carrinho/delete/{sessao}', [CarrinhoController::class, 'removerS
 Route::delete('/carrinho/delete/{sessao}/{lugar}', [CarrinhoController::class, 'removerLugar'])->name('carrinho.delete_lugar');
 Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('carrinho.empty');
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    // admin dashboard main page
+// rotas em que um empregado e administrador podem ver em comum
+// rotas com prefixo admin
+// rotas com o prefixo admin. no seu nome
+Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(function () {
 
+    // admin dashboard main page
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    Route::get('sessoes', [SessaoController::class, 'index'])->name('sessoes.index');
+
+    // rotas protegidas (só para funcionarios)
     Route::middleware(['isEmployee'])->group(function () {
     });
+
     // rotas protegidas (só para admins)
-    // rotas com prefixo admin
-    // rotas com o prefixo admin. no seu nome
     Route::middleware(['isAdmin'])->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
 
@@ -78,7 +84,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('filmes', FilmeController::class);
 
         // admin dashboard manage sessoes
-        Route::resource('sessoes', SessaoController::class);
+        Route::resource('sessoes', SessaoController::class)->except('index');
     });
 });
 
