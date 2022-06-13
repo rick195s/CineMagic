@@ -24,7 +24,7 @@
                             </a>
                         </div>
 
-                        <table class="table mt-3 table-hover my-0">
+                        <table class="table my-3 table-hover">
                             <thead>
                                 <tr>
                                     <th class="d-none d-xl-table-cell">{{ __('Ticket ID') }}</th>
@@ -33,7 +33,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($sessao->bilhetes as $bilhete)
+                                @foreach ($bilhetes as $bilhete)
                                     <tr>
                                         <td>{{ $bilhete->id }}</td>
                                         <td>
@@ -59,6 +59,7 @@
 
                             </tbody>
                         </table>
+                        {{ $bilhetes->links() }}
 
                     </div>
                 </div>
