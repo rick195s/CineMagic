@@ -109,7 +109,13 @@ class SessaoController extends Controller
      */
     public function manage(Sessao $sessao)
     {
-        $bilhetes = $sessao->bilhetes()->paginate(5);
+        $bilhetes = $sessao->bilhetes()
+            ->join('clientes', 'clientes.id', '=', 'bilhetes.cliente_id')
+            ->join('users', 'users.id', '=', 'clientes.id')
+            ->orderBy('users.name', 'ASC')
+            ->paginate(5);
+
+
         return view('admin.sessoes.manage', compact('sessao', 'bilhetes'));
     }
 }
