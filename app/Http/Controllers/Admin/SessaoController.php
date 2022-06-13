@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Sessao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessaoController extends Controller
 {
@@ -15,13 +16,22 @@ class SessaoController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Mostrar as sessoes todas se o utilizador for admin.
+     * Mostrar so as sessoes que estao disponiveis e que sao do mesmo
+     * dia se o utilizador for funcionario
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $sessoes = Sessao::paginate(15);
+        if (Auth::user()->isAdmin()) {
+            $sessoes = Sessao::orderBy("data", "DESC")->orderBy("horario_inicio", "DESC")->paginate(15);
+        } else {
+            $sessoes = Sessao::where("data", now()->format('Y-m-d'))
+                ->orderBy("data", "DESC")->orderBy("horario_inicio", "DESC")
+                ->paginate(15);
+        }
+
         return view('admin.sessoes.index', compact('sessoes'));
     }
 
