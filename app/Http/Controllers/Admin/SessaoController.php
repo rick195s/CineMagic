@@ -109,6 +109,7 @@ class SessaoController extends Controller
      */
     public function manage(Sessao $sessao)
     {
+        //$this->authorize('manage', $sessao);
         $bilhetes = $sessao->bilhetes()
             ->join('clientes', 'clientes.id', '=', 'bilhetes.cliente_id')
             ->join('users', 'users.id', '=', 'clientes.id')

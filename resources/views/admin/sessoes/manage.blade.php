@@ -2,6 +2,14 @@
 
 @section('title', __('Manage Session') . ' - ' . $sessao->filme->titulo)
 
+@section('scripts')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/instascan.min.js') }}"></script>
+@endsection
+
 @section('content')
 
     <div class="col-12">
@@ -19,7 +27,7 @@
                         </h3>
 
                         <div class=" mt-5">
-                            <a href="" class="btn btn-lg btn-info">
+                            <a data-bs-toggle="modal" href="#qrScannerModal" role="button" class="btn btn-lg btn-info">
                                 {{ __('Scan QRCode') }}
                             </a>
                         </div>
@@ -65,7 +73,42 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    {{-- modal para ler qrcode --}}
+    <div class="modal fade" id="qrScannerModal" aria-hidden="true" aria-labelledby="qrScannerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="preview" width="100%"></video>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#qrScannerModal2" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">Open second modal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="qrScannerModal2" aria-hidden="true" aria-labelledby="qrScannerModalLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qrScannerModalLabel2">Modal 2</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Hide this modal and show the first with the button below.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#qrScannerModal" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">Back to first</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- fim modal para ler qrcode --}}
+
+    <script type="text/javascript" src="{{ asset('js/qrscanner.js') }}"></script>
 
 @endsection

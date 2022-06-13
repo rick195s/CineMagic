@@ -282,6 +282,12 @@ https://github.com/SimpleSoftwareIO/simple-qrcode
 
 https://github.com/barryvdh/laravel-dompdf
 
+#### Scan QRCode:
+
+https://github.com/schmich/instascan
+
+É preciso ativar HTTPS no laragon para ser possivel utilizar a camara nos browsers (provavelmente por questoes de seguranca)
+
 ## Standards:
 
 #### Erros e Validações:
