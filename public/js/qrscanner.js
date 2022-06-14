@@ -39,7 +39,7 @@ function markTicketAsUsed(url) {
         dataType: "json",
         data: {
             '_method': 'PATCH',
-            'sessao_id': $(".sessao_id")[0].value,
+            'sessao_id': $("#sessao_id").value,
         },
         success: (response) => {
             $("#qrScannerModal").modal('hide');

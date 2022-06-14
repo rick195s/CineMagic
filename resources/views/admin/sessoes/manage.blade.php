@@ -25,6 +25,7 @@
                         <h3 class="card-text">
                             {{ $sessao->data . ' ' . $sessao->horario_inicio }}
                         </h3>
+                        <input type="hidden" id="sessao_id" name="sessao_id" value="{{ $sessao->id }}">
 
                         <div class=" mt-5">
                             <a data-bs-toggle="modal" href="#qrScannerModal" role="button" class="btn btn-lg btn-info">
@@ -54,8 +55,6 @@
                                                     method="post">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <input type="hidden" class="sessao_id" name="sessao_id"
-                                                        value="{{ $sessao->id }}">
 
                                                     <button class="btn btn-success">{{ __('Mark as Used') }}</button>
 
