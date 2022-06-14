@@ -6,7 +6,6 @@ $("#qrScannerModal").on('shown.bs.modal', function () {
         mirror: false,
         refractoryPeriod: 1000,
     });
-
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
             scanner.start(cameras[0]);
@@ -36,13 +35,15 @@ function markTicketAsUsed(url) {
         crossDomain: true,
         dataType: "json",
         data: {
-            '_method': 'PATCH'
+            '_method': 'PATCH',
+            'sessao_id': $(".sessao_id")[0].value,
         },
-        success: function (data) {
-            alert("ticket marcado como usado");
+        success: (response) => {
+            console.log(response);
         },
-        error: function(data) {
-            alert("erro ao marcar ticket como usado");
+        error: (response) => {
+            $response = jQuery.parseJSON(response.responseText );
+            console.log($response.message);
         }
     });
 }

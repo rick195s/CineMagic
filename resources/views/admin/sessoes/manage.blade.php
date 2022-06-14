@@ -54,6 +54,8 @@
                                                     method="post">
                                                     @csrf
                                                     @method('PATCH')
+                                                    <input type="hidden" class="sessao_id" name="sessao_id"
+                                                        value="{{ $sessao->id }}">
 
                                                     <button class="btn btn-success">{{ __('Mark as Used') }}</button>
 

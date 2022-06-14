@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Bilhete;
+use App\Models\Sessao;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -16,9 +17,21 @@ class BilhetePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function use(User $user, Bilhete $bilhete)
+    public function use(User $user, Bilhete $bilhete, $sessao_id)
     {
-        return !$bilhete->usado() && $user->isEmployee();
+        if ($bilhete->usado()) {
+            return $this->deny(__('Ticket already used'));
+        }
+
+        if (!$user->isEmployee()) {
+            return $this->deny(__('Only employees can manage sessions'));
+        }
+
+        if ($bilhete->sessao_id != $sessao_id) {
+            return $this->deny(__("Cannot use ticket from a session that you're not managing"));
+        }
+
+        return true;
     }
 
     /**

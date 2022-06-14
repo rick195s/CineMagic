@@ -177,6 +177,7 @@
     "Ticket is now marked as used": "Bilhete marcado como utilizado",
     "Ticket already used": "Bilhete já utilizado",
     "You need to be a client to proceed to checkout": "Você precisa ser um cliente para finalizar a compra",
+    "Cannot use ticket from a session that you're not managing": "Não é possível utilizar um bilhete de uma sessão que não está a controlar",
 
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Esqueceu-se da sua senha de inicio de sessão? Sem problemas. Apenas necessita de introduzir o seu endereço de e-mail para que possamos lhe enviar um link de redefinição de senha.",
     "Already registered?": "Já possui uma conta?",
