@@ -21,7 +21,6 @@
     <div class="row">
         <div class="col-12  d-flex">
             <div class="card flex-fill">
-
                 <table class="table table-hover my-0">
                     <thead>
                         <tr>
@@ -29,6 +28,7 @@
                             <th class="d-none d-xl-table-cell">{{ __('Date') }}</th>
                             <th class="d-none d-xl-table-cell">{{ __('Starting Hour') }}</th>
                             <th class="d-none d-xl-table-cell">{{ __('Screen Room') }}</th>
+                            <th class="d-none d-xl-table-cell">{{ __('Validate') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,10 +39,15 @@
                             <td>{{ $sessao->horario_inicio }}</td>
                             @isset($sessao->sala)
                             <td>{{ $sessao->sala->nome }}</td>
+                            <td>
+                                @can('validateSession', $sessao)
+                                <a href="{{route('admin.sessoes.validate', $sessao->id)}}"
+                                    class="btn align-self-end btn-primary me-1">{{__('Validate')}}</a>
+                                @endcan
+                            </td>
                             @endisset
                         </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>

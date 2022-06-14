@@ -12,7 +12,6 @@
     "Confirm Password": "Confirmar senha",
     "Whoops! Something went wrong.": "Foram encontrados os seguintes erros:",
 
-
     "Change Password": "Alterar a Password",
     "Current Password": "Password atual",
     "New Password": "Nova Password",
@@ -78,6 +77,8 @@
     "Number of Seats": "Número de lugares",
     "Number of Rows": "Número de filas",
     "Select the seat for the session": "Selecione um lugar para a sessão",
+    "Only admins and employees can view all sessions": "Apenas os administradores e funcionários podem ver todas as sessões",
+    "Only admins and employees can validate sessions": "Apenas os administradores e funcionários podem validar sessões",
 
     "Add Movie": "Adicionar Filme",
     "Movie deleted successfully": "Filme eliminado com sucesso!",
@@ -93,6 +94,8 @@
     "Starting Hour": "Hora de Início",
     "Date": "Data",
     "Screen Room": "Sala",
+    "Validate": "Validar",
+    "Session no longer available": "Sessão já não disponível",
 
     "Dashboard": "Painel de Controlo",
     "Settings": "Configurações",
