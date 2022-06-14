@@ -62,7 +62,8 @@ class Bilhete extends Model
      */
     public function criarPdf()
     {
-        $qrcode = base64_encode(QrCode::format('svg')->size(200)->generate(route('admin.bilhetes.use', $this->id)));
+        $https_url = secure_url(route('admin.bilhetes.use', $this->id));
+        $qrcode = base64_encode(QrCode::format('svg')->size(200)->generate($https_url));
 
         $pdf = PDF::loadView('pdf.ticket', [
             "user" => Auth::user(),

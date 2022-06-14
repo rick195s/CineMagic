@@ -46,7 +46,7 @@
                                         <td>{{ $bilhete->id }}</td>
                                         <td>
                                             <a
-                                                href="{{ route('admin.users.show', $bilhete->cliente->user->id) }}">{{ $bilhete->cliente->user->name }}</a>
+                                                href="{{ route('admin.users.show', $bilhete->cliente->id) }}">{{ $bilhete->cliente->user->name }}</a>
                                         </td>
                                         <td>
                                             @if (!$bilhete->usado())

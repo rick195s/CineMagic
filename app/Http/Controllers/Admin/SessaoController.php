@@ -111,11 +111,10 @@ class SessaoController extends Controller
     {
         //$this->authorize('manage', $sessao);
         $bilhetes = $sessao->bilhetes()
-            ->join('clientes', 'clientes.id', '=', 'bilhetes.cliente_id')
-            ->join('users', 'users.id', '=', 'clientes.id')
+            ->select('users.*', 'bilhetes.*')
+            ->join('users', 'bilhetes.cliente_id',  '=', 'users.id')
             ->orderBy('users.name', 'ASC')
             ->paginate(5);
-
 
         return view('admin.sessoes.manage', compact('sessao', 'bilhetes'));
     }

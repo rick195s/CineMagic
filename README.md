@@ -286,7 +286,9 @@ https://github.com/barryvdh/laravel-dompdf
 
 https://github.com/schmich/instascan
 
-É preciso ativar HTTPS no laragon para ser possivel utilizar a camara nos browsers (provavelmente por questoes de seguranca)
+É preciso ativar HTTPS no laragon para ser possivel utilizar a camara nos browsers (provavelmente por questoes de seguranca).
+
+Na criacao do bilhete temos de meter url em https, porque se tivessemos com https ativo e estivessemos a dar scan de um url http, iria haver conflito por estamos a fazer pedido num site https para um sitio http. 
 
 ## Standards:
 
@@ -366,6 +368,8 @@ $this->route('user')
 
 - Laravel UI instalada.
 
+- Para ser possivel utilizar CORS quando se usa ajax para alterar o estado de um bilhete depois de se ler o qrcode tive de ir a config/cors.php e colocar a path que queria em que os CORS fossem permitidos. https://laravel.com/docs/9.x/routing#cors
+
 - Gate de entrar no dashboard criada;
 
 - Email de recuperar senha a ser enviado
@@ -414,7 +418,6 @@ $this->route('user')
 
 - IsAdmin;
 - UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
-- carrinho. Este middleware vai criar uma variavel global carrinho com as informações do carrinho presente na session(). Sempre que uma vista precisar de ir buscar informação ao carrinho essa vista vai precisar de ter o middleware carrinho. (DUVIDAAAA)
 
 #### Controllers:
 
