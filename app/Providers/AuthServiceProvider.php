@@ -16,6 +16,8 @@ use App\Policies\SalaPolicy;
 use App\Policies\SessaoPolicy;
 use App\Policies\CarrinhoPolicy;
 use App\Policies\UserPolicy;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -43,5 +45,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Gate::define('view-dashboard', function (User $user) {
+            if (!$user->isAdmin() && !$user->isEmployee()) {
+                return Response::deny(__("Only admins and employees can view the dashboard"));
+            }
+
+            return true;
+        });
     }
 }

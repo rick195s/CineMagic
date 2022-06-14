@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Hash;
 class ChangePasswordController extends Controller
 {
     /**
-     * Qualquer user pode alterar a sua password 
+     * Qualquer user pode alterar a sua password
      * desde que esteja autenticado
-     * 
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -22,7 +22,7 @@ class ChangePasswordController extends Controller
     }
 
     /**
-     * Alterar a password 
+     * Alterar a password
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -34,7 +34,7 @@ class ChangePasswordController extends Controller
 
 
     /**
-     * Alterar a password 
+     * Alterar a password
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -50,6 +50,6 @@ class ChangePasswordController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect(route('client.profile'))->with('status', __('Password changed successfully!'));
+        return redirect(route('home'))->with('success', __('Password changed successfully!'));
     }
 }

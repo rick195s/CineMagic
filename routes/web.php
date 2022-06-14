@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SessaoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FilmeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Admin\BilheteController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClienteController;
@@ -52,26 +53,41 @@ Route::get('/carrinho/{sessao}/{lugar}', [CarrinhoController::class, 'adicionarL
 Route::delete('/carrinho/delete/{sessao}', [CarrinhoController::class, 'removerSessao'])->name('carrinho.delete_sessao');
 Route::delete('/carrinho/delete/{sessao}/{lugar}', [CarrinhoController::class, 'removerLugar'])->name('carrinho.delete_lugar');
 Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('carrinho.empty');
-// rotas protegidas (só para admins)
+
+// rotas em que um empregado e administrador podem ver em comum
 // rotas com prefixo admin
 // rotas com o prefixo admin. no seu nome
-Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(function () {
 
     // admin dashboard main page
     Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
 
+    Route::get('sessoes', [SessaoController::class, 'index'])->name('sessoes.index');
 
-    // rotas para gerir users no dashboard admin
-    Route::resource('users', UserController::class);
-    Route::patch('users/{user}/update_state', [UserController::class, 'updateState'])->name('users.update_state');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 
-    // admin dashboard manage salas
-    Route::resource('salas', SalaController::class);
+    // rotas protegidas (só para funcionarios)
+    Route::middleware(['isEmployee'])->group(function () {
+        Route::get('sessoes/{sessao}/manage', [SessaoController::class, 'manage'])->name('sessoes.manage');
+        Route::patch('bilhetes/{bilhete}/use', [BilheteController::class, 'use'])->name('bilhetes.use');
+    });
 
-    // // admin dashboard manage filmes
-    Route::resource('filmes', FilmeController::class);
+    // rotas protegidas (só para admins)
+    Route::middleware(['isAdmin'])->group(function () {
 
-    // admin dashboard manage sessoes
-    Route::resource('sessoes', SessaoController::class);
+        Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
+
+        // rotas para gerir users no dashboard admin
+        Route::resource('users', UserController::class)->except('show');
+        Route::patch('users/{user}/update_state', [UserController::class, 'updateState'])->name('users.update_state');
+
+        // admin dashboard manage salas
+        Route::resource('salas', SalaController::class);
+
+        // // admin dashboard manage filmes
+        Route::resource('filmes', FilmeController::class);
+
+        // admin dashboard manage sessoes
+        Route::resource('sessoes', SessaoController::class)->except('index');
+    });
 });

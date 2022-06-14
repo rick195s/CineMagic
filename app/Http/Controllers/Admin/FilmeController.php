@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateFilmePost;
 use App\Http\Controllers\Controller;
 use App\Models\Genero;
+use Illuminate\Support\Facades\Storage;
 
 class FilmeController extends Controller
 {
@@ -77,7 +78,8 @@ class FilmeController extends Controller
      */
     public function edit(Filme $filme)
     {
-        //
+        $generos = Genero::all();
+        return view('admin.filmes.edit', compact('filme', 'generos'));
     }
 
     /**
@@ -87,9 +89,18 @@ class FilmeController extends Controller
      * @param  \App\Models\Filme  $filme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Filme $filme)
+    public function update(CreateFilmePost $request, Filme $filme)
     {
-        //
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('cartaz_url')) {
+            Storage::delete('public/cartazes/' . $filme->cartaz_url);
+            $path = $request->file('cartaz_url')->store('public/cartazes');
+            $validatedData['cartaz_url'] = basename($path);
+        }
+
+        $filme->update($validatedData);
+        return redirect()->route('admin.filmes.index')->with('success', __('Movie Edited successfully'));
     }
 
     /**
@@ -100,6 +111,9 @@ class FilmeController extends Controller
      */
     public function destroy(Filme $filme)
     {
+        if ($filme->cartaz_url != null) {
+            Storage::delete('public/cartazes/' . $filme->cartaz_url);
+        }
         $filme->delete();
         return redirect()->route('admin.filmes.index')->with('success', __('Movie deleted successfully'));
     }

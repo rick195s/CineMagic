@@ -14,7 +14,7 @@ https://laravel.com/docs/7.x/authentication#authentication-quickstart
 
 https://hdtuto.com/article/laravel-8-bootstrap-auth-example-step-by-step
 
-Sempre que se criarem controllers usamos: 
+Sempre que se criarem controllers usamos:
 
     php artisan make:controller NomeController --resource
 
@@ -22,12 +22,12 @@ Sempre que se criarem controllers usamos:
 
 https://laravel.com/docs/8.x/controllers#actions-handled-by-resource-controller
 
-Para usarmos os valores nas Rotas usamos: 
+Para usarmos os valores nas Rotas usamos:
 
     Route::resource('Url', NomeController::class)
 
-A aplicação vai traduzir as strings automaticamente para português porque no ficheiro config/app.php colocamos o locale a pt_PT. 
-Ao colocamos esse parametro o Laravel vai à pasta resources/lang/pt_PT ver as traduções. 
+A aplicação vai traduzir as strings automaticamente para português porque no ficheiro config/app.php colocamos o locale a pt_PT.
+Ao colocamos esse parametro o Laravel vai à pasta resources/lang/pt_PT ver as traduções.
 
 Para usar traducoes que estejam dentro de resources/lang/pt_PT.json podemos usar:
 
@@ -66,7 +66,7 @@ Para vermos se estamos numa rota com um certo nome usamos:
 belongsTo fica sempre no Modelo em que a tabela tem a foreign_key;
 
 Quando se faz uma ligação temos de alterar os dois Modelos ORM que têm ligação entre si.
-    Exemplo: 
+Exemplo:
 
         class User extends Model
         {
@@ -145,7 +145,7 @@ usar num controller:
 
 ```
 __construct(){
-    $this->middleware('isAdmin');   
+    $this->middleware('isAdmin');
 }
 ```
 
@@ -188,7 +188,7 @@ Para criar temos de ir ao ficheiro
 
 App\Providers\AuthServiceProvider.php
 
-e dentro da funcao boot meter 
+e dentro da funcao boot meter
 
 Gate::define('access-dashboard', function ($user) {
 // Only "admin" users can "access-dashboard"
@@ -198,25 +198,25 @@ return $user->admin;
 
 #### Como usar:
 
-    Podemos colocar dentro de controllers:
+Podemos colocar dentro de controllers:
 
 ```
 $this->authorize('view', $bilhete);
 ```
 
-    Podemos usar dentro de middlewares:
+Podemos usar dentro de middlewares:
 
 ```
 route...->middleware('can:view,account');
 ```
 
-    Podemos usar dentro de views:
+Podemos usar dentro de views:
 
 ```
 @can('view, bilhete')
 @endcan
 
-cannot('view, bilhete') 
+cannot('view, bilhete')
 @endcannot
 ```
 
@@ -282,11 +282,19 @@ https://github.com/SimpleSoftwareIO/simple-qrcode
 
 https://github.com/barryvdh/laravel-dompdf
 
+#### Scan QRCode:
+
+https://github.com/schmich/instascan
+
+É preciso ativar HTTPS no laragon para ser possivel utilizar a camara nos browsers (provavelmente por questoes de seguranca).
+
+Na criacao do bilhete temos de meter url em https, porque se tivessemos com https ativo e estivessemos a dar scan de um url http, iria haver conflito por estamos a fazer pedido num site https para um sitio http. 
+
 ## Standards:
 
 #### Erros e Validações:
 
-- Quando for para validar informação enviada no form devemos usar sempre os 
+- Quando for para validar informação enviada no form devemos usar sempre os
 
 - Para enviar erros para uma vista podemos usar:
   
@@ -312,7 +320,7 @@ https://github.com/barryvdh/laravel-dompdf
 
 - Maior parte dos controllers têm de ter o middleware 'auth' no construtor;
 
-- Quando queremos verificar alguma policy ou gate devemos meter isto antes de fazer qualquer operacao num controller: 
+- Quando queremos verificar alguma policy ou gate devemos meter isto antes de fazer qualquer operacao num controller:
 
 ```
 $this->authorize('delete', $user);
@@ -322,11 +330,11 @@ ou podemos meter na route um middleware can
 
 #### Views:
 
-    dentro das views devemos usar sempre @can e @cannot para so mostrar coisas que os utilizadores podem fazer.
+dentro das views devemos usar sempre @can e @cannot para so mostrar coisas que os utilizadores podem fazer.
 
 ##### Loops:
 
-Dentro de loops foreach nas views conseguimos saber se estamos no primeiro loop ou ultimo atraves de $loop->first, ou last; 
+Dentro de loops foreach nas views conseguimos saber se estamos no primeiro loop ou ultimo atraves de $loop->first, ou last;
 
 #### Policies e Gates:
 
@@ -360,13 +368,21 @@ $this->route('user')
 
 - Laravel UI instalada.
 
+- Para ser possivel utilizar CORS quando se usa ajax para alterar o estado de um bilhete depois de se ler o qrcode tive de ir a config/cors.php e colocar a path que queria em que os CORS fossem permitidos. https://laravel.com/docs/9.x/routing#cors
+
+- Gate de entrar no dashboard criada;
+
 - Email de recuperar senha a ser enviado
 
-- Saber quais filmes têm sessões futuras: 
+- Saber quais filmes têm sessões futuras:
   
   ```
   Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->get();
   ```
+
+#### Rules:
+
+- Rule Payment: serve para verificar os pagamentos;
 
 #### Carrinho:
 
@@ -374,7 +390,7 @@ $this->route('user')
 
 - Uma sessao unica só é adicionada uma vez ao carrinho. Se o utilizador quiser comprar varios bilhetes de uma sessao, o que vai ter de fazer é selecionar varios lugares quando tiver no checkout;
   
-  O carrinho vai ter um array com sessoes e outro array com lugares. Sempre que o utilizador for fazer checkout o que tem de fazer é "transformar" uma sessao em x bilhetes. 
+  O carrinho vai ter um array com sessoes e outro array com lugares. Sempre que o utilizador for fazer checkout o que tem de fazer é "transformar" uma sessao em x bilhetes.
 
 - Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos
 
@@ -402,7 +418,6 @@ $this->route('user')
 
 - IsAdmin;
 - UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
-- carrinho. Este middleware vai criar uma variavel global carrinho com as informações do carrinho presente na session(). Sempre que uma vista precisar de ir buscar informação ao carrinho essa vista vai precisar de ter o middleware carrinho. (DUVIDAAAA)
 
 #### Controllers:
 
@@ -454,7 +469,7 @@ $this->route('user')
 
 - [x] Um administrador pode criar utilizadores e clientes;
 
-- [x] Um administrador pode consultar filtrar, alterar utilizadores; 
+- [x] Um administrador pode consultar filtrar, alterar utilizadores;
 
 - [x] Um administrador pode consultar e filtrar a lista de clientes
 
@@ -496,15 +511,15 @@ $this->route('user')
 
 #### Historico, recibos e bilhetes:
 
-- [ ] Registar o recibo após o pagamento da compra;
+- [x] Registar o recibo após o pagamento da compra;
 
-- [ ] Enviar o recibo automaticamente por email ao cliente;
+- [x] Enviar o recibo automaticamente por email ao cliente;
 
 - [ ] Recibo tem de estar sempre disponivel em HTML (POLICIES);
 
-- [ ] Gerar recibo em PDF e armazenar permanentemente (POLICIES);
+- [x] Gerar recibo em PDF e armazenar permanentemente (POLICIES);
 
-- [ ] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo; 
+- [x] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo;
 
 - [ ] Os bilhetes têm de estar sempre acessiceis em formato HTML (POLICIES);
 
@@ -516,7 +531,7 @@ $this->route('user')
 
 #### Controlo de Acesso à sessao:
 
-- [ ] Os funcionarios têm acesso a uma página em que escolherm qual a sessão que estão a controlar; 
+- [ ] Os funcionarios têm acesso a uma página em que escolherm qual a sessão que estão a controlar;
 
 - [ ] Depois de escolherem a sessao que estao a controlar o funcionario pode ter acesso a um leitor de qrcode ou alterar o estado do bilhete manualmente;
 
@@ -524,9 +539,9 @@ $this->route('user')
 
 - [ ] Se o bilhete for valido a aplicacao deve mostar os detalhes do bilhete e informa que o bilhete é valido.
 
-- [ ] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
+- [x] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
 
-- [ ] O funcionario deve ter um botao na aplicacao que ao clicar confirma o uso do bilhete, colocando o bilhete invalido;
+- [x] O funcionario deve ter um botao na aplicacao que ao clicar confirma o uso do bilhete, colocando o bilhete invalido;
 
 #### Administracao do negocio:
 
@@ -538,9 +553,9 @@ $this->route('user')
 
 - [x] Para cada sala tem de ser possivel definir os lugares que a sala tem.
 
-- [ ] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
+- [x] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
 
-- [ ] Para cada filme deve ser possivel fazer upload do cartaz:
+- [x] Para cada filme deve ser possivel fazer upload do cartaz:
 
 - [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
 

@@ -24,8 +24,11 @@ class UserPolicy
     }
 
     /**
-     * Só os administradores é que podem ver perfis no dashboard
-     * e não podem ver perfis de Clientes
+     * Os administradores so podem ver administradores e funcionarios
+     *
+     * Os funcionarios so podem ver os seus próprios dados e dados dos clientes
+     * (precisam de ver os dos clientes porque quando estiverem a controlar uma sessao
+     * eles podem ver os dados dos clientes)
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\User  $searchedUser
@@ -33,14 +36,15 @@ class UserPolicy
      */
     public function view(User $user, User $searchedUser)
     {
-        if (!$user->isAdmin()) {
-            return $this->deny(__("Only admins can view employees and admins"));
+        if ($user->isAdmin() && ($searchedUser->isAdmin() || $searchedUser->isEmployee())) {
+            return true;
         }
 
-        if ($searchedUser->isClient()) {
-            return $this->deny(__("Admins cannot view clients profiles"));
+        if ($user->isEmployee() && ($searchedUser->id == $user->id || $searchedUser->isClient())) {
+            return true;
         }
-        return  true;
+
+        return false;
     }
 
 

@@ -14,6 +14,8 @@ class SessaoFrontController extends Controller
      */
     public function selectSeat(Sessao $sessao)
     {
+
+
         // esta policy verifica se o user está logado
         $this->authorize('selectSeat', $sessao);
         $sala = $sessao->sala;
@@ -23,6 +25,6 @@ class SessaoFrontController extends Controller
 
         $lugares = $sala ?  $sessao->sala->lugares : [];
         $filas = Lugar::lugaresPorFila($lugares);
-        return view('sessao.select_seat', compact('sessao', 'sala', 'filas'));
+        return view('sessoes.select_seat', compact('sessao', 'sala', 'filas'));
     }
 }

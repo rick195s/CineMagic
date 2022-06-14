@@ -75,6 +75,7 @@
         <script src="{{ asset('js/app/photoswipe.min.js')}}"></script>
         <script src="{{ asset('js/app/photoswipe-ui-default.min.js')}}"></script>
         <script src="{{ asset('js/app/main.js')}}"></script>
+        @yield('scripts')
 </body>
 
 </html>

@@ -4,23 +4,25 @@
         <div class="header__content">
 
             <!-- header logo -->
-            <a href="{{route('home')}}" class="header__logo text-white">
-                <h1 class="display-6">{{config('app.name', 'Laravel') }}</h1>
+            <a href="{{ route('home') }}" class="header__logo text-white">
+                <h1 class="display-6">{{ config('app.name', 'Laravel') }}</h1>
             </a>
             <!-- end header logo -->
 
             <!-- header nav -->
             <ul class="header__nav">
                 <li class="header__nav-item">
-                    <a class="dopdown-toggle header__nav-link" href="{{route('home') }}">{{__('Home')}}</a>
+                    <a class="dopdown-toggle header__nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                 </li>
                 @auth
 
-                @if (auth()->user()->isAdmin())
-                <li class="header__nav-item">
-                    <a class="dopdown-toggle header__nav-link" href="{{route('admin.index') }}">{{__('Dashboard')}}</a>
-                </li>
-                @endif
+                    @if (auth()->user()->isAdmin() ||
+                        auth()->user()->isEmployee())
+                        <li class="header__nav-item">
+                            <a class="dopdown-toggle header__nav-link"
+                                href="{{ route('admin.index') }}">{{ __('Dashboard') }}</a>
+                        </li>
+                    @endif
 
                 @endauth
 
@@ -29,8 +31,9 @@
 
             <!-- header auth -->
             <div class="header__auth">
-                <a href="{{ route('checkout.index') }}" class="text-light mx-3" style="font-size: 26px;" type="button">
-                    <!-- colocamos aqui o codigo para ir buscar a informacao do carrinho para 
+                <a href="{{ route('checkout.index') }}" class="text-light mx-3" style="font-size: 26px;"
+                    type="button">
+                    <!-- colocamos aqui o codigo para ir buscar a informacao do carrinho para
                     nao estarmos a fazer isto em quase todos os controladores  -->
                     <small>{{ Session::has('carrinho') ? Session::get('carrinho')->num_sessoes() : '0' }}</small>
                     <i class="icon  ion-ios-cart"></i>
@@ -47,56 +50,59 @@
 
                 <!-- Authentication Links -->
                 @guest
-                <div class="row row d-flex justify-content-between align-items-center text-end text-end">
+                    <div class="row row d-flex justify-content-between align-items-center text-end text-end">
 
-                    @if (Route::has('login'))
-                    <div class="col-4 ">
-                        <a href="{{ route('login') }}" class="btn-primary header__sign-in">
-                            <i class="icon ion-ios-log-in"></i>
-                            <span> {{ __('Login') }}</span>
-                        </a>
-                    </div>
-                    @endif
-                    @if (Route::has('register'))
-                    <div class="col-4">
-                        <a href="{{ route('register') }}" class="d-none d-sm-inline-block">
-                            {{ __('Register') }}
-                        </a>
-                    </div>
-                    @endif
+                        @if (Route::has('login'))
+                            <div class="col-4 ">
+                                <a href="{{ route('login') }}" class="btn-primary header__sign-in">
+                                    <i class="icon ion-ios-log-in"></i>
+                                    <span> {{ __('Login') }}</span>
+                                </a>
+                            </div>
+                        @endif
+                        @if (Route::has('register'))
+                            <div class="col-4">
+                                <a href="{{ route('register') }}" class="d-none d-sm-inline-block">
+                                    {{ __('Register') }}
+                                </a>
+                            </div>
+                        @endif
 
-                </div>
+                    </div>
                 @else
+                    <a id="dropdownUser" class="nav-link dropdown-toggle text-white" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ auth()->user()->foto_url ? asset('storage/fotos/' . auth()->user()->foto_url) : asset('img/default_img.png') }}"
+                            alt="mdo" class="rounded img-fluid" width="40" height="40">
+                        <p class="d-none d-sm-inline-block"> {{ explode(' ', auth()->user()->name)[0] }}</p>
 
-                <a id="dropdownUser" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ auth()->user()->foto_url ? asset('storage/fotos/' .
-                                    auth()->user()->foto_url) : asset('img/default_img.png') }}" alt="mdo" class="rounded img-fluid" width="40" height="40">
-                    <p class="d-none d-sm-inline-block"> {{ explode(' ', auth()->user()->name)[0] }}</p>
+                    </a>
+                    <div class="dropdown text-end" aria-labelledby="dropdownUser">
+                        <ul class="dropdown-menu text-small">
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{ auth()->user()->isAdmin()? route('admin.users.edit', auth()->user()->id): route('client.profile') }}">{{ __('Profile') }}</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{ route('change_password.index') }}">{{ __('Change Password') }}</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                </a>
-                <div class="dropdown text-end" aria-labelledby="dropdownUser">
-                    <ul class="dropdown-menu text-small">
-                        <li>
-                            <a class="dropdown-item" href="{{ auth()->user()->isAdmin() ? route('admin.users.edit', auth()->user()->id) : route('client.profile') }}">{{__('Profile')}}</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('change_password.index') }}">{{__('Change Password')}}</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 @endguest
 
             </div>
@@ -118,9 +124,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="header__search-content">
-                        <input type="text" placeholder="{{__('Search for a movie, TV Series that you are looking for')}}">
+                        <input type="text"
+                            placeholder="{{ __('Search for a movie, TV Series that you are looking for') }}">
 
-                        <button type="button">{{__('search')}}</button>
+                        <button type="button">{{ __('search') }}</button>
                     </div>
                 </div>
             </div>

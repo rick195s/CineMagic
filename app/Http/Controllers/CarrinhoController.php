@@ -9,9 +9,8 @@ use App\Models\Configuracao;
 use App\Models\Lugar;
 use App\Models\Recibo;
 use App\Models\Sessao;
-use App\Models\User;
+use App\Notifications\InvoicePaid;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\Request;
 
 class CarrinhoController extends Controller
 {
@@ -36,11 +35,12 @@ class CarrinhoController extends Controller
      * Confirmar uma compra
      * Esta funcao vai ser responsavel por criar bilhetes e fazer as operacoes
      * relacionadas com a compra de bilhetes
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function confirmarCompra(CheckoutPost $request)
     {
+
         $carrinho = session()->get('carrinho', new Carrinho());
 
         try {
@@ -48,18 +48,20 @@ class CarrinhoController extends Controller
         } catch (AuthorizationException $th) {
             return back()->with('error', $th->getMessage());
         }
+
         $validatedData = $request->validated();
 
         $user = auth()->user();
 
         $recibo = new Recibo(
-            $validatedData['nif'],
+            $validatedData['nif'] ?? '',
             $validatedData['tipo_pagamento'],
+            // $validatedData['ref_pagamento'] é adicionado no CheckoutPost FormRequest
+            // porque o ref_pagamento depende da forma de pagamento
             $validatedData['ref_pagamento'],
             $carrinho->num_lugares()
         );
-        //TODO 
-        // criar pdf do recibo
+
         $recibo->save();
 
         foreach ($carrinho->lugares as $sessao_id => $lugares_por_sessao) {
@@ -74,11 +76,18 @@ class CarrinhoController extends Controller
             }
         }
 
+        //TODO
+        // criar pdf do recibo
+        $recibo->criarPdf();
+
+        //TODO
+        // enviar email com o recibo
+        $user->notify(new InvoicePaid($recibo));
+
         $carrinho->limpar();
 
         return redirect()->route('home')->with('success', __('Purchase completed successfully'));
     }
-
 
     /**
      * Adiciona uma sessao ao carrinho
@@ -88,7 +97,7 @@ class CarrinhoController extends Controller
     public function adicionarSessao(Sessao $sessao)
     {
         $carrinho = session()->get('carrinho', new Carrinho());
-        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy 
+        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy
         // e enviar para a vista anterior do utilizador
         try {
             $this->authorize('adicionarSessao', [$carrinho, $sessao]);
@@ -109,7 +118,7 @@ class CarrinhoController extends Controller
     public function adicionarLugar(Sessao $sessao, Lugar $lugar)
     {
         $carrinho = session()->get('carrinho', new Carrinho());
-        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy 
+        // usamos try catch para conseguirmos apanhar a mensagem de erro enviada pela policy
         // e enviar para a vista anterior do utilizador
         try {
             $this->authorize('adicionarLugar', [$carrinho, $sessao, $lugar]);
@@ -138,7 +147,7 @@ class CarrinhoController extends Controller
     }
 
     /**
-     * Remover um lugar do carrinho 
+     * Remover um lugar do carrinho
      *
      * @return \Illuminate\Http\Response
      */
