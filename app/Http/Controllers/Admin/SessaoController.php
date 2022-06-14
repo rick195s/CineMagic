@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sessao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class SessaoController extends Controller
 {
@@ -109,7 +110,7 @@ class SessaoController extends Controller
      */
     public function manage(Sessao $sessao)
     {
-        //$this->authorize('manage', $sessao);
+        $this->authorize('manage', $sessao);
         $bilhetes = $sessao->bilhetes()
             ->select('users.*', 'bilhetes.*')
             ->join('users', 'bilhetes.cliente_id',  '=', 'users.id')

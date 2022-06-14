@@ -6,6 +6,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Bilhete extends Model
@@ -62,7 +63,15 @@ class Bilhete extends Model
      */
     public function criarPdf()
     {
-        $https_url = secure_url(route('admin.bilhetes.use', $this->id));
+        // forçar https para o link do qr code ter https.
+        // como é preciso ativar o https no servidor laragon para se usar a camera no browser,
+        // o pedido tambem tem de estar em https.
+
+        // Se o url presente no qr code nao estiver em https, o browser ao ler o codigo
+        // vai fazer um pedido http estando atualmente num url https, vai haver conflito
+        URL::forceScheme('https');
+
+        $https_url = route('admin.bilhetes.use', $this->id);
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->generate($https_url));
 
         $pdf = PDF::loadView('pdf.ticket', [
