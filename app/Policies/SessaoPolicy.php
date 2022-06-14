@@ -18,7 +18,7 @@ class SessaoPolicy
      */
     public function viewAny(User $user)
     {
-        if (!$user->isAdmin() && !$user->isFuncionario()) {
+        if (!$user->isAdmin() && !$user->isEmployee()) {
             return $this->deny(__("Only admins and employees can view all sessions"));
         }
         return true;
@@ -130,17 +130,6 @@ class SessaoPolicy
 
         if (!$sessao->disponivel()) {
             return $this->deny(__('Cannot manage old sessions'));
-        }
-        return true;
-    }
-
-    public function validateSession(User $user, Sessao $sessao)
-    {
-        if (!$user->isAdmin() && !$user->isFuncionario()) {
-            return $this->deny(__('Only admins and employees can validate sessions'));
-        }
-        if (!$sessao->disponivel(20)) {
-            return $this->deny(__('Session no longer available'));
         }
         return true;
     }

@@ -531,13 +531,13 @@ $this->route('user')
 
 #### Controlo de Acesso à sessao:
 
-- [ ] Os funcionarios têm acesso a uma página em que escolherm qual a sessão que estão a controlar;
+- [x] Os funcionarios têm acesso a uma página em que escolherm qual a sessão que estão a controlar;
 
-- [ ] Depois de escolherem a sessao que estao a controlar o funcionario pode ter acesso a um leitor de qrcode ou alterar o estado do bilhete manualmente;
+- [x] Depois de escolherem a sessao que estao a controlar o funcionario pode ter acesso a um leitor de qrcode ou alterar o estado do bilhete manualmente;
 
-- [ ] Se o bilhete for invalido a aplicacao avisa o funcionario.
+- [x] Se o bilhete for invalido a aplicacao avisa o funcionario.
 
-- [ ] Se o bilhete for valido a aplicacao deve mostar os detalhes do bilhete e informa que o bilhete é valido.
+- [x] Se o bilhete for valido a aplicacao deve mostar os detalhes do bilhete e informa que o bilhete é valido.
 
 - [x] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
 
