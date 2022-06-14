@@ -39,11 +39,22 @@ function markTicketAsUsed(url) {
             'sessao_id': $(".sessao_id")[0].value,
         },
         success: (response) => {
-            console.log(response);
+            $("#qrScannerModal").modal('hide');
+            $messageModalContent = $('#qrScannerModal2Content');
+            $messageModalContent.removeClass('bg-danger');
+            $messageModalContent.addClass('bg-success');
+            $messageModalContent.find("h3").text(response.message)
+            $('#qrScannerModal2').modal('show');
         },
         error: (response) => {
             $response = jQuery.parseJSON(response.responseText );
-            console.log($response.message);
+
+            $("#qrScannerModal").modal('hide');
+            $messageModalContent = $('#qrScannerModal2Content');
+            $messageModalContent.removeClass('bg-success');
+            $messageModalContent.addClass('bg-danger');
+            $messageModalContent.find("h3").text($response.message)
+            $('#qrScannerModal2').modal('show');
         }
     });
 }

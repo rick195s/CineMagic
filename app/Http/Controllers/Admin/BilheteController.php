@@ -15,7 +15,7 @@ class BilheteController extends Controller
         $validatedData = $request->validate([
             'sessao_id' => 'required|exists:sessoes,id',
         ]);
-        //$this->authorize('use', [$bilhete, $validatedData['sessao_id']]);
+        $this->authorize('use', [$bilhete, $validatedData['sessao_id']]);
         $bilhete->estado = 'usado';
         $bilhete->save();
 

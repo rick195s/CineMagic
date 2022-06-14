@@ -84,27 +84,20 @@
                 <div class="modal-body">
                     <video id="preview" width="100%"></video>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#qrScannerModal2" data-bs-toggle="modal"
-                        data-bs-dismiss="modal">Open second modal</button>
-                </div>
+
             </div>
         </div>
     </div>
     <div class="modal fade" id="qrScannerModal2" aria-hidden="true" aria-labelledby="qrScannerModalLabel2"
         tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="qrScannerModalLabel2">Modal 2</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+            <div class="modal-content" id="qrScannerModal2Content">
                 <div class="modal-body">
-                    Hide this modal and show the first with the button below.
+                    <h3 class="text-white"></h3>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#qrScannerModal" data-bs-toggle="modal"
-                        data-bs-dismiss="modal">Back to first</button>
+                <div class="modal-footer" style="border-top: none">
+                    <button class="btn btn-light" data-bs-target="#qrScannerModal" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">{{ __('Scan another QRCode') }}</button>
                 </div>
             </div>
         </div>
