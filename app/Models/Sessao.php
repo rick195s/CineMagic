@@ -61,10 +61,10 @@ class Sessao extends Model
 
     // verificar se a sessao ainda esta disponivel
     // (se nao comecou há mais de 5 minutos)
-    public function disponivel()
+    public function disponivel($minutos = 5)
     {
         $data_atual = now()->format('Y-m-d');
-        $hora_atual = now()->addMinutes(5)->format('H:i:s');
+        $hora_atual = now()->addMinutes($minutos)->format('H:i:s');
 
         if ($this->data < $data_atual) {
             return false;
