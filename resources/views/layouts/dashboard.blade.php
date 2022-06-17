@@ -39,12 +39,14 @@
                         {{ __('Pages') }}
                     </li>
 
-                    <li class="sidebar-item {{ Route::currentRouteName() == 'admin.index' ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admin.index') }}">
-                            <i class="align-middle" data-feather="sliders"></i> <span
-                                class="align-middle">{{ __('Dashboard') }}</span>
-                        </a>
-                    </li>
+                    @if (auth()->user()->isAdmin())
+                        <li class="sidebar-item {{ Route::currentRouteName() == 'admin.index' ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.index') }}">
+                                <i class="align-middle" data-feather="sliders"></i> <span
+                                    class="align-middle">{{ __('Dashboard') }}</span>
+                            </a>
+                        </li>
+                    @endif
 
                     @can('viewAny', App\Models\User::class)
                         <li

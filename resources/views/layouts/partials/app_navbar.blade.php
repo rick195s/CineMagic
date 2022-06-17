@@ -16,14 +16,18 @@
                 </li>
                 @auth
 
-                    @if (auth()->user()->isAdmin() ||
-                        auth()->user()->isEmployee())
+                    @if (auth()->user()->isAdmin())
                         <li class="header__nav-item">
                             <a class="dopdown-toggle header__nav-link"
                                 href="{{ route('admin.index') }}">{{ __('Dashboard') }}</a>
                         </li>
                     @endif
-
+                    @if (auth()->user()->isEmployee())
+                        <li class="header__nav-item">
+                            <a class="dopdown-toggle header__nav-link"
+                                href="{{ route('admin.sessoes.index') }}">{{ __('Dashboard') }}</a>
+                        </li>
+                    @endif
                 @endauth
 
             </ul>

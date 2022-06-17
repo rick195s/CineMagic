@@ -59,9 +59,6 @@ Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('c
 // rotas com o prefixo admin. no seu nome
 Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(function () {
 
-    // admin dashboard main page
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
-
     Route::get('sessoes', [SessaoController::class, 'index'])->name('sessoes.index');
 
     Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
@@ -74,6 +71,8 @@ Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(
 
     // rotas protegidas (só para admins)
     Route::middleware(['isAdmin'])->group(function () {
+        // admin dashboard main page
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
 
