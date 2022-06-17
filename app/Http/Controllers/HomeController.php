@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $generos = Genero::take(4)->get();
         $filmes_por_genero = [];
         foreach ($generos as $genero) {

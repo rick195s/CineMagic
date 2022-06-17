@@ -79,10 +79,17 @@
                     </a>
                     <div class="dropdown text-end" aria-labelledby="dropdownUser">
                         <ul class="dropdown-menu text-small">
-                            <li>
-                                <a class="dropdown-item"
-                                    href="{{ auth()->user()->isAdmin()? route('admin.users.edit', auth()->user()->id): route('client.profile') }}">{{ __('Profile') }}</a>
-                            </li>
+                            @can('view', auth()->user())
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="{{ route('admin.users.show', auth()->user()->id) }}">{{ __('Profile') }}</a>
+                                </li>
+                            @elsecan("view", auth()->user()->cliente)
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('client.profile') }}">{{ __('Profile') }}</a>
+                                </li>
+                            @endcan
+
                             <li>
                                 <a class="dropdown-item"
                                     href="{{ route('change_password.index') }}">{{ __('Change Password') }}</a>
@@ -91,13 +98,13 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </li>

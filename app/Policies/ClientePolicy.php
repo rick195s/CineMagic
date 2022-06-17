@@ -11,12 +11,12 @@ class ClientePolicy
 
     /**
      * Só os clientes podem ver os seus perfis no front
-     * 
+     *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user)
     {
-        return $user->tipo == 'C';
+        return $user->isClient();
     }
 }
