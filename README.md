@@ -33,7 +33,7 @@ Para usar traducoes que estejam dentro de resources/lang/pt_PT.json podemos usar
 
     dentro de php:
     echo __('Email');
-    
+
     numa view:
     {{ __('Register') }}
 
@@ -61,7 +61,7 @@ Para vermos se estamos numa rota com um certo nome usamos:
 
 ### Relações entre Modelos:
 
-- Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
+-   Para ser mais facil fazer pesquisas à base de dados e organizar os Models do projeto devemos sempre especificar as ligações que temos na base de dadosno codigo dos Modelos ORM, 1:1, 1:n, n:m:;
 
 belongsTo fica sempre no Modelo em que a tabela tem a foreign_key;
 
@@ -76,7 +76,7 @@ Exemplo:
                 return $this->hasOne(Phone::class);
             }
         }
-    
+
         class Phone extends Model
         {
              // A phone always belongs to a user
@@ -288,39 +288,39 @@ https://github.com/schmich/instascan
 
 É preciso ativar HTTPS no laragon para ser possivel utilizar a camara nos browsers (provavelmente por questoes de seguranca).
 
-Na criacao do bilhete temos de meter url em https, porque se tivessemos com https ativo e estivessemos a dar scan de um url http, iria haver conflito por estamos a fazer pedido num site https para um sitio http. 
+Na criacao do bilhete temos de meter url em https, porque se tivessemos com https ativo e estivessemos a dar scan de um url http, iria haver conflito por estamos a fazer pedido num site https para um sitio http.
 
 ## Standards:
 
 #### Erros e Validações:
 
-- Quando for para validar informação enviada no form devemos usar sempre os
+-   Quando for para validar informação enviada no form devemos usar sempre os
 
-- Para enviar erros para uma vista podemos usar:
-  
-  ```
-  ->with('error', 'Mesangem');
-  ```
+-   Para enviar erros para uma vista podemos usar:
+
+    ```
+    ->with('error', 'Mesangem');
+    ```
 
 #### Forms:
 
-- sempre que usarmos forms onde o user tem de inserir dados temos de usar o old();
+-   sempre que usarmos forms onde o user tem de inserir dados temos de usar o old();
 
-- colocar sempre @csrf nos forms;
+-   colocar sempre @csrf nos forms;
 
-- quando queremos usar outros metodos para além do GET e POST devemos especificar o metodo com @method('DELETE');
+-   quando queremos usar outros metodos para além do GET e POST devemos especificar o metodo com @method('DELETE');
 
 #### Routes:
 
-- Rotas de admin têm prefixo de 'admin.';
+-   Rotas de admin têm prefixo de 'admin.';
 
-- Rotas de admin têm de estar dentro de middleware 'isAdmin'
+-   Rotas de admin têm de estar dentro de middleware 'isAdmin'
 
 #### Controllers:
 
-- Maior parte dos controllers têm de ter o middleware 'auth' no construtor;
+-   Maior parte dos controllers têm de ter o middleware 'auth' no construtor;
 
-- Quando queremos verificar alguma policy ou gate devemos meter isto antes de fazer qualquer operacao num controller:
+-   Quando queremos verificar alguma policy ou gate devemos meter isto antes de fazer qualquer operacao num controller:
 
 ```
 $this->authorize('delete', $user);
@@ -338,21 +338,21 @@ Dentro de loops foreach nas views conseguimos saber se estamos no primeiro loop 
 
 #### Policies e Gates:
 
-- Sempre que validamos alguma coisa numa policy ou Gate devemos fazer desta forma:
-  
-  ```
-          if ($user->id == $userToDelete->id) {
-              return $this->deny(__("A User cannot block or unlock himself"));
-          }
-  
-          if (!$user->isAdmin()) {
-              return $this->deny(__("Just the admins can block or unlock users"));
-          }
-  
-          return true;
-  ```
-  
-  ou seja tentamos sempre mostrar mensagens de erro consoante as verificações e no fum damos return de true.
+-   Sempre que validamos alguma coisa numa policy ou Gate devemos fazer desta forma:
+
+    ```
+            if ($user->id == $userToDelete->id) {
+                return $this->deny(__("A User cannot block or unlock himself"));
+            }
+
+            if (!$user->isAdmin()) {
+                return $this->deny(__("Just the admins can block or unlock users"));
+            }
+
+            return true;
+    ```
+
+    ou seja tentamos sempre mostrar mensagens de erro consoante as verificações e no fum damos return de true.
 
 #### Form Request Validator:
 
@@ -366,197 +366,197 @@ $this->route('user')
 
 ## Coisas Importantes (Extras, etc):
 
-- Laravel UI instalada.
+-   Laravel UI instalada.
 
-- Para ser possivel utilizar CORS quando se usa ajax para alterar o estado de um bilhete depois de se ler o qrcode tive de ir a config/cors.php e colocar a path que queria em que os CORS fossem permitidos. https://laravel.com/docs/9.x/routing#cors
+-   Para ser possivel utilizar CORS quando se usa ajax para alterar o estado de um bilhete depois de se ler o qrcode tive de ir a config/cors.php e colocar a path que queria em que os CORS fossem permitidos. https://laravel.com/docs/9.x/routing#cors
 
-- Gate de entrar no dashboard criada;
+-   Gate de entrar no dashboard criada;
 
-- Email de recuperar senha a ser enviado
+-   Email de recuperar senha a ser enviado
 
-- Saber quais filmes têm sessões futuras:
-  
-  ```
-  Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->get();
-  ```
+-   Saber quais filmes têm sessões futuras:
+
+    ```
+    Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->get();
+    ```
 
 #### Rules:
 
-- Rule Payment: serve para verificar os pagamentos;
+-   Rule Payment: serve para verificar os pagamentos;
 
 #### Carrinho:
 
-- Um utilizador pode adicionar um lugar ao carrinho sem ter previamente selecionado a sessao.
+-   Um utilizador pode adicionar um lugar ao carrinho sem ter previamente selecionado a sessao.
 
-- Uma sessao unica só é adicionada uma vez ao carrinho. Se o utilizador quiser comprar varios bilhetes de uma sessao, o que vai ter de fazer é selecionar varios lugares quando tiver no checkout;
-  
-  O carrinho vai ter um array com sessoes e outro array com lugares. Sempre que o utilizador for fazer checkout o que tem de fazer é "transformar" uma sessao em x bilhetes.
+-   Uma sessao unica só é adicionada uma vez ao carrinho. Se o utilizador quiser comprar varios bilhetes de uma sessao, o que vai ter de fazer é selecionar varios lugares quando tiver no checkout;
 
-- Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos
+    O carrinho vai ter um array com sessoes e outro array com lugares. Sempre que o utilizador for fazer checkout o que tem de fazer é "transformar" uma sessao em x bilhetes.
+
+-   Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos
 
 #### Salas:
 
-- Podemos permitir que uma sala seja alterada mesmo tendo sessoes anteriores se quando alterarmos uma sala criarmos uma copia dessa sala.
+-   Podemos permitir que uma sala seja alterada mesmo tendo sessoes anteriores se quando alterarmos uma sala criarmos uma copia dessa sala.
 
-- Ao criar uma sala podemos especificar o numero de lugares que a sala vai ter;
+-   Ao criar uma sala podemos especificar o numero de lugares que a sala vai ter;
 
-- Ao editar uma sala, se aumentarmos o numero de lugares são criados mais lugares. Se diminuirmos o numero de lugares, fazemos soft delete dos lugares a mais, começando a eliminar do fim.
+-   Ao editar uma sala, se aumentarmos o numero de lugares são criados mais lugares. Se diminuirmos o numero de lugares, fazemos soft delete dos lugares a mais, começando a eliminar do fim.
 
-- Cada fila de lugares é composta por 15 lugares no máximo.
+-   Cada fila de lugares é composta por 15 lugares no máximo.
 
-- Só salas sem sessoes futuras é que podem ser eliminadas.
+-   Só salas sem sessoes futuras é que podem ser eliminadas.
 
-- Só salas sem sessoes é que podem ser editadas.
+-   Só salas sem sessoes é que podem ser editadas.
 
-- Número de filas de uma sala não pode ser maior que o número de lugares;
+-   Número de filas de uma sala não pode ser maior que o número de lugares;
 
 #### Filmes:
 
-- Só se podem apagar filmes sem sessoes associadas;
+-   Só se podem apagar filmes sem sessoes associadas;
 
 #### Middlewares:
 
-- IsAdmin;
-- UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
+-   IsAdmin;
+-   UserBlocked; (serve para proibir users de entrarem na web); Este middleware foi colocado no Kernel no grupo web porque vai ser aplicado sempre que um user tentar aceder ao website;
 
 #### Controllers:
 
-- ChangePasswordController (Usado para alterar a password do user);
+-   ChangePasswordController (Usado para alterar a password do user);
 
 #### Relações entre modelos:
 
-- salas 1:n sessoes:
+-   salas 1:n sessoes:
 
-- filmes 1:n sessoes;
+-   filmes 1:n sessoes;
 
-- sessoes 1:n bilhetes;
+-   sessoes 1:n bilhetes;
 
-- salas 1:n lugares;
+-   salas 1:n lugares;
 
-- bilhetes n:1 lugares;
+-   bilhetes n:1 lugares;
 
-- generos 1:n filmes;
+-   generos 1:n filmes;
 
-- clientes 1:n bilhetes;
+-   clientes 1:n bilhetes;
 
-- clientes 1:n recibos;
+-   clientes 1:n recibos;
 
-- clientes 1:1 users;
+-   clientes 1:1 users;
 
-- recibos 1:n bilhetes;
+-   recibos 1:n bilhetes;
 
 ## O que temos de fazer:
 
 #### Autentificação, perfil e gestao de utilizadores:
 
-- [x] Utilizadores não autenticados só podem tentar fazer login e registar-se. Depois de ser registarem um email de verificação tem de ser enviado;
+-   [x] Utilizadores não autenticados só podem tentar fazer login e registar-se. Depois de ser registarem um email de verificação tem de ser enviado;
 
-- [x] Quando uma pessoa cria conta tem de ser criado um cliente;
+-   [x] Quando uma pessoa cria conta tem de ser criado um cliente;
 
-- [x] Só clientes têm acesso ao seu perfil;
+-   [x] Só clientes têm acesso ao seu perfil;
 
-- [x] Os admin podem ver os detalhes do perfil de qualquer user no dashboard excepto clientes; (UserPolicy->view())
+-   [x] Os admin podem ver os detalhes do perfil de qualquer user no dashboard excepto clientes; (UserPolicy->view())
 
-- [x] Os funcionarios não podem ver o seu perfil no dashboard nem no front; (UserPolicy->view(), ClientePolicy-view())
+-   [x] Os funcionarios não podem ver o seu perfil no dashboard nem no front; (UserPolicy->view(), ClientePolicy-view())
 
-- [x] Qualquer user pode alterar a sua password;
+-   [x] Qualquer user pode alterar a sua password;
 
-- [x] Um administrador pode bloquear/desbloquear utilizador/cliente sem ser a ele proprio;
+-   [x] Um administrador pode bloquear/desbloquear utilizador/cliente sem ser a ele proprio;
 
-- [x] Um administrador pode eliminar utilizador/cliente sem ser a ele proprio;
+-   [x] Um administrador pode eliminar utilizador/cliente sem ser a ele proprio;
 
-- [x] Um utilizador depois de ser bloqueado não pode iniciar sessão;
+-   [x] Um utilizador depois de ser bloqueado não pode iniciar sessão;
 
-- [x] Um administrador pode criar utilizadores e clientes;
+-   [x] Um administrador pode criar utilizadores e clientes;
 
-- [x] Um administrador pode consultar filtrar, alterar utilizadores;
+-   [x] Um administrador pode consultar filtrar, alterar utilizadores;
 
-- [x] Um administrador pode consultar e filtrar a lista de clientes
+-   [x] Um administrador pode consultar e filtrar a lista de clientes
 
-- [x] Um administrador não pode aceder ao perfil de um cliente;
+-   [x] Um administrador não pode aceder ao perfil de um cliente;
 
-- [x] Edições da foto dos utilizadores quando sao criados e editados;
+-   [x] Edições da foto dos utilizadores quando sao criados e editados;
 
-- [x] Um administrador só pode mudar o tipo de um user para admin ou funcionario (extra)
+-   [x] Um administrador só pode mudar o tipo de um user para admin ou funcionario (extra)
 
 #### Filmes em Exibição:
 
-- [x] Qualquer utilizador pode ver quais os filmes em exibição, e as sessos dos mesmos;
+-   [x] Qualquer utilizador pode ver quais os filmes em exibição, e as sessos dos mesmos;
 
-- [x] Pesquisar (filtrar) filmes;
+-   [x] Pesquisar (filtrar) filmes;
 
 #### Compra de Bilhetes:
 
-- [x] Adicionar ou remover lugares para qualquer sesssao (ver especificacoes no enunciado);
+-   [x] Adicionar ou remover lugares para qualquer sesssao (ver especificacoes no enunciado);
 
-- [x] Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos;
+-   [x] Um user só pode adicionar uma sessao ao carrinho se ela nao tiver começado até há 5 minutos;
 
-- [x] Qualquer utilizador pode adicionar coisas ao carrinho;
+-   [x] Qualquer utilizador pode adicionar coisas ao carrinho;
 
-- [x] Só clientes registados é que podem finalizar uma compra;
+-   [x] Só clientes registados é que podem finalizar uma compra;
 
-- [x] Se uma compra for feita com sucesso a aplicação cria um recibo e gera os bilhetes relativos à compra e limpa o carrinho de compras;
+-   [x] Se uma compra for feita com sucesso a aplicação cria um recibo e gera os bilhetes relativos à compra e limpa o carrinho de compras;
 
-- [x] Se der erro na compra o carrinho fica como está e o cliente tem de ser avisado;
+-   [x] Se der erro na compra o carrinho fica como está e o cliente tem de ser avisado;
 
-- [x] Apagar ou adicionar lugares ao carrinho;
+-   [x] Apagar ou adicionar lugares ao carrinho;
 
-- [x] Limpar o carrinho de compras por completo;
+-   [x] Limpar o carrinho de compras por completo;
 
 #### Escolha de Lugares:
 
-- [x] Cada lugar está associado a um bilhete unico numa sessao, ou a zero bilhetes quando o lugar ainda esta vazio;
+-   [x] Cada lugar está associado a um bilhete unico numa sessao, ou a zero bilhetes quando o lugar ainda esta vazio;
 
-- [x] Quando um utilizador adicionar um bilhete ao carrinho, tem de escolher o lugar que quer;
+-   [x] Quando um utilizador adicionar um bilhete ao carrinho, tem de escolher o lugar que quer;
 
 #### Historico, recibos e bilhetes:
 
-- [x] Registar o recibo após o pagamento da compra;
+-   [x] Registar o recibo após o pagamento da compra;
 
-- [x] Enviar o recibo automaticamente por email ao cliente;
+-   [x] Enviar o recibo automaticamente por email ao cliente;
 
-- [x] Recibo tem de estar sempre disponivel em HTML (POLICIES);
+-   [x] Recibo tem de estar sempre disponivel em HTML (POLICIES);
 
-- [x] Gerar recibo em PDF e armazenar permanentemente (POLICIES);
+-   [x] Gerar recibo em PDF e armazenar permanentemente (POLICIES);
 
-- [x] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo;
+-   [x] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo;
 
-- [x] Os bilhetes têm de estar sempre acessiceis em formato HTML (POLICIES);
+-   [x] Os bilhetes têm de estar sempre acessiceis em formato HTML (POLICIES);
 
-- [x] Sempre que o utilizador clicar na opção de fazer download do bilhete, um PDF dinamico é gerado e é feito o download do mesmo, depois disso o PDF não é armazenado;
+-   [x] Sempre que o utilizador clicar na opção de fazer download do bilhete, um PDF dinamico é gerado e é feito o download do mesmo, depois disso o PDF não é armazenado;
 
-- [x] Os clientes devem ter acesso ao histórico de todos os recibos, sendo que podem ver o recibo e os bilhetes em HTML ou descarregra em PDF;
+-   [x] Os clientes devem ter acesso ao histórico de todos os recibos, sendo que podem ver o recibo e os bilhetes em HTML ou descarregra em PDF;
 
-- [x] Os clientes têm acesso a todos os bilhetes válidos (os que ainda nao foram usados);
+-   [x] Os clientes têm acesso a todos os bilhetes válidos (os que ainda nao foram usados);
 
 #### Controlo de Acesso à sessao:
 
-- [x] Os funcionarios têm acesso a uma página em que escolherm qual a sessão que estão a controlar;
+-   [x] Os funcionarios têm acesso a uma página em que escolherm qual a sessão que estão a controlar;
 
-- [x] Depois de escolherem a sessao que estao a controlar o funcionario pode ter acesso a um leitor de qrcode ou alterar o estado do bilhete manualmente;
+-   [x] Depois de escolherem a sessao que estao a controlar o funcionario pode ter acesso a um leitor de qrcode ou alterar o estado do bilhete manualmente;
 
-- [x] Se o bilhete for invalido a aplicacao avisa o funcionario.
+-   [x] Se o bilhete for invalido a aplicacao avisa o funcionario.
 
-- [x] Se o bilhete for valido a aplicacao deve mostar os detalhes do bilhete e informa que o bilhete é valido.
+-   [x] Se o bilhete for valido a aplicacao deve mostar os detalhes do bilhete e informa que o bilhete é valido.
 
-- [x] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
+-   [x] O funcionario pode ainda clicar no cliente e ver as informações do mesmo, foto, etc;
 
-- [x] O funcionario deve ter um botao na aplicacao que ao clicar confirma o uso do bilhete, colocando o bilhete invalido;
+-   [x] O funcionario deve ter um botao na aplicacao que ao clicar confirma o uso do bilhete, colocando o bilhete invalido;
 
 #### Administracao do negocio:
 
-- [ ] Os administradores podem gerir filmes, sessoes e outros valores que estao no enunciado.
+-   [ ] Os administradores podem gerir filmes, sessoes e outros valores que estao no enunciado.
 
-- [x] Os administradores podem gerir salas e lugares de salas;
+-   [x] Os administradores podem gerir salas e lugares de salas;
 
-- [x] O admin pode criar, alterar ou apagar (soft delete) as salas.
+-   [x] O admin pode criar, alterar ou apagar (soft delete) as salas.
 
-- [x] Para cada sala tem de ser possivel definir os lugares que a sala tem.
+-   [x] Para cada sala tem de ser possivel definir os lugares que a sala tem.
 
-- [x] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
+-   [x] O admin pode criar, alterar e apagar filmes sem sessao e sessoes.
 
-- [x] Para cada filme deve ser possivel fazer upload do cartaz:
+-   [x] Para cada filme deve ser possivel fazer upload do cartaz:
 
-- [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
+-   [ ] As sessoes so podem ser alteradas ou removidas se ainda nao tiverem nenhum bilhete associado;
 
-- [x] Os admin podem alterar as configurações do preco de bilhete e iva no dashboard;
+-   [x] Os admin podem alterar as configurações do preco de bilhete e iva no dashboard;

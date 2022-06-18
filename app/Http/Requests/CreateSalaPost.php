@@ -25,10 +25,8 @@ class CreateSalaPost extends FormRequest
      */
     public function rules()
     {
-        $sala = Sala::find($this->route('sala')->id);
-
         return [
-            'nome' => ['required', 'max:125', Rule::unique("salas")->ignore($sala->id ?? null)],
+            'nome' => ['required', 'max:125', Rule::unique("salas")->ignore($this->route('sala')->id ?? null)],
             'num_lugares' => 'required|numeric|min:1|max:500',
             'num_filas' => 'required|numeric|min:1|lte:num_lugares',
         ];
