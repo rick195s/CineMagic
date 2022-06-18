@@ -16,7 +16,7 @@ class SessaoController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->authorizeResource(Sessao::class, 'sessao');
+        $this->authorizeResource(Sessao::class);
     }
 
     /**

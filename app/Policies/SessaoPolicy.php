@@ -60,7 +60,15 @@ class SessaoPolicy
      */
     public function update(User $user, Sessao $sessao)
     {
-        //
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Only admins can create sessions"));
+        }
+
+        if ($sessao->bilhetes->count() > 0) {
+            return $this->deny(__("Session has tickets"));
+        }
+
+        return true;
     }
 
     /**
@@ -72,39 +80,15 @@ class SessaoPolicy
      */
     public function delete(User $user, Sessao $sessao)
     {
-        if (!$user->isEmployee()) {
-            return $this->deny(__("Only employees can delete sessions"));
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Only admins can delete sessions"));
         }
 
-        if ($sessao->num_lugares() != 0) {
-            return $this->deny(__("Only sessions without marked seats can be deleted"));
+        if ($sessao->bilhetes->count() > 0) {
+            return $this->deny(__("Session has tickets"));
         }
 
         return true;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Sessao  $sessao
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Sessao $sessao)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Sessao  $sessao
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Sessao $sessao)
-    {
-        //
     }
 
     /**

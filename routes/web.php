@@ -93,6 +93,6 @@ Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(
         Route::resource('filmes', FilmeController::class);
 
         // admin dashboard manage sessoes
-        Route::resource('sessoes', SessaoController::class)->except('index');
+        Route::resource('sessoes', SessaoController::class)->parameters(['sessoes' => 'sessao'])->except('index');
     });
 });

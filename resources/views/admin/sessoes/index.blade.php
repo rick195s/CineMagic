@@ -67,7 +67,7 @@
                                                             class="btn btn-danger"><i data-feather="trash-2"></i> </button>
 
                                                         <form id="delete_sessao_{{ $sessao->id }}"
-                                                            action="{{ route('admin.sessao.destroy', $sessao->id) }}"
+                                                            action="{{ route('admin.sessoes.destroy', $sessao->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
