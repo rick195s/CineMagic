@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\UpdateClientPost;
+use App\Models\Recibo;
 use Illuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
@@ -61,5 +62,17 @@ class ClienteController extends Controller
     {
         $recibos = auth()->user()->cliente->recibos()->paginate(10);
         return view('recibos', compact('recibos'));
+    }
+
+    public function recibo(Recibo $recibo)
+    {
+        if (
+            $recibo->cliente_id != auth()->user()->cliente->id
+            || !$recibo->recibo_pdf_url
+        ) {
+            return redirect()->back()->with('error', __('Recibo not found'));
+        }
+
+        return Storage::download('pdf_recibos/' . $recibo->recibo_pdf_url);
     }
 }

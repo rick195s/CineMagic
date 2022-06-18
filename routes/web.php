@@ -37,6 +37,7 @@ Route::middleware(['isClient'])->group(function () {
     Route::get('/profile', [ClienteController::class, 'index'])->name('client.profile');
     Route::post('/profile', [ClienteController::class, 'update'])->name('client.profile.update');
     Route::get('/recibos', [ClienteController::class, 'recibos'])->name('client.recibos');
+    Route::get('/recibos/{recibo}', [ClienteController::class, 'recibo'])->name('client.recibos.download');
 });
 // rotas para alteração da password
 Route::get('/password/change', [ChangePasswordController::class, 'index'])->name('change_password.index');

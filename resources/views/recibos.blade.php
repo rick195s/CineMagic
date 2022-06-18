@@ -23,7 +23,15 @@
                             <tr>
                                 <td>{{ $recibo->data }}</td>
                                 <td>{{ $recibo->preco_total_com_iva }} €</td>
-                                <td> <a href=" {{ $recibo->recibo_pdf_url }}">Ver</a></td>
+                                <td>
+                                    @if ($recibo->recibo_pdf_url)
+                                        <a href=" {{ route('client.recibos.download', $recibo->id) }}">
+                                            {{ __('See') }}</a>
+                                    @else
+                                        {{ __('There is no invoice url') }}
+                                    @endif
+
+                                </td>
                             </tr>
                         @endforeach
 
