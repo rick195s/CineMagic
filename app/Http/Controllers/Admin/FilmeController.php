@@ -6,6 +6,7 @@ use App\Models\Filme;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateFilmePost;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateFilmePost;
 use App\Models\Genero;
 use Illuminate\Support\Facades\Storage;
 
@@ -89,7 +90,7 @@ class FilmeController extends Controller
      * @param  \App\Models\Filme  $filme
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateFilmePost $request, Filme $filme)
+    public function update(UpdateFilmePost $request, Filme $filme)
     {
         $validatedData = $request->validated();
 
