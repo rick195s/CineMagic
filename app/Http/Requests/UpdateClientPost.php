@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Cliente;
-use App\Models\User;
 use Illuminate\Validation\Rule;
 
 class UpdateClientPost extends FormRequest
@@ -16,7 +15,7 @@ class UpdateClientPost extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('update',Cliente::class);
+        return $this->user()->can('update', Cliente::class);
     }
 
     /**
@@ -28,8 +27,8 @@ class UpdateClientPost extends FormRequest
     {
         return [
             'name' => ['string', 'max:255'],
-            'nif' => ['nullable','numeric','max:9'],
-            'tipo_pagamento' => ['nullable', Rule::in(['MBWAY', 'VISA','NULL','PAYPAL'])],
+            'nif' => ['nullable', 'numeric', 'digits:9'],
+            'tipo_pagamento' => ['nullable', Rule::in(['MBWAY', 'VISA', 'NULL', 'PAYPAL'])],
             'foto_url' => ['nullable', 'image', 'max:8192']
         ];
     }

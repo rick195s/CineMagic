@@ -73,7 +73,7 @@ class UserPolicy
     {
 
         if (!$user->isAdmin()) {
-            return $this->deny(__("Only the fadmins can update users"));
+            return $this->deny(__("Only the admins can update users"));
         }
         if ($userToUpdate->isClient()) {
             return $this->deny(__("Admins cannot update clients"));

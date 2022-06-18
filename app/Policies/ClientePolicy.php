@@ -22,7 +22,6 @@ class ClientePolicy
 
     public function update(User $user)
     {
-
         if (!$user->isClient()) {
             return $this->deny(__("Admins cannot update clients"));
         }

@@ -28,15 +28,17 @@ class ClienteController extends Controller
             return redirect(route('home'))->with('error', __('Access Denied'));
         }
         $user = Auth::user();
-        return view('profile',compact('user'));
+        return view('profile', compact('user'));
     }
 
-    public function update(UpdateClientPost $request, User $user)
+    public function update(UpdateClientPost $request)
     {
 
         // o metodo authorize dentro do UpdateUser já verifica se o utilizador
         // atual tem as permissoes necessarias
         $validatedData = $request->validated();
+
+        $user = auth()->user();
 
         if ($request->hasFile('foto_url')) {
             Storage::delete('public/fotos/' . $user->foto_url);
@@ -44,8 +46,17 @@ class ClienteController extends Controller
             $validatedData['foto_url'] = basename($path);
         }
 
-        $user->update($validatedData);
-        $user->cliente()->update($validatedData);
+        $user->name = $validatedData['name'] ?? $user->name;
+        $user->foto_url = $validatedData['foto_url'] ?? $user->foto_url;
+        $user->update();
+
+
+        $user->cliente()->update(
+            [
+                'nif' => $validatedData['nif'] ?? $user->cliente->nif,
+                'tipo_pagamento' => $validatedData['tipo_pagamento'] ?? $user->cliente->tipo_pagamento
+            ]
+        );
 
         return redirect()->back()->with('success', __('User updated successfully'));
     }
