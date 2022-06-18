@@ -57,7 +57,7 @@
                                                 <td>
 
                                                     @can('update', $sessao)
-                                                        <a href="{{ route('admin.users.edit', $sessao->id) }}"
+                                                        <a href="{{ route('admin.sessoes.edit', $sessao->id) }}"
                                                             class="btn btn-info"><i data-feather="edit"></i> </a>
                                                     @endcan
 

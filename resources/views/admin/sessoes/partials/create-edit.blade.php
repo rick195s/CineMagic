@@ -43,7 +43,7 @@
     <label for="data" class="col-md-4 col-form-label text-md-end">{{ __('Date') }}</label>
 
     <div class="col-md-6">
-        <input id="data" type="date" value="{{ old('data', date('YYYY-MM-DD', $sessao->data)) }}"
+        <input id="data" type="date" value="{{ old('data', $sessao->data) }}"
             class="form-control @error('data') is-invalid @enderror" name="data" required>
 
         @error('data')
@@ -58,8 +58,8 @@
     <label for="horario_inicio" class="col-md-4 col-form-label text-md-end">{{ __('Starting Hour') }}</label>
 
     <div class="col-md-6">
-        <input id="horario_inicio" type="time"
-            value="{{ old('horario_inicio', date('G:i', $sessao->horario_inicio)) }}"
+        <input id="horario_inicio" type="time" step="2"
+            value="{{ old('horario_inicio', $sessao->horario_inicio) }}"
             class="form-control @error('horario_inicio') is-invalid @enderror" name="horario_inicio" required>
 
         @error('horario_inicio')

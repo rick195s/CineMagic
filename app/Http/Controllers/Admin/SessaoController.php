@@ -85,7 +85,9 @@ class SessaoController extends Controller
      */
     public function edit(Sessao $sessao)
     {
-        //
+        $salas = Sala::all();
+        $filmes = Filme::all();
+        return view('admin.sessoes.edit', compact('sessao', 'salas', 'filmes'));
     }
 
     /**
@@ -95,9 +97,12 @@ class SessaoController extends Controller
      * @param  \App\Models\Sessao  $sessao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sessao $sessao)
+    public function update(CreateSessaoPost $request, Sessao $sessao)
     {
-        //
+        $validatedData = $request->validated();
+        $sessao->update($validatedData);
+
+        return redirect()->route('admin.sessoes.index')->with('success', __('Session updated successfully'));
     }
 
     /**

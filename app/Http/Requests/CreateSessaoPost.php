@@ -27,7 +27,7 @@ class CreateSessaoPost extends FormRequest
         return [
             'filme_id' => 'required|exists:filmes,id',
             'sala_id' => 'required|exists:salas,id',
-            'horario_inicio' => 'required|date_format:H:i',
+            'horario_inicio' => 'required|date_format:H:i:s',
             'data' => 'required|date_format:Y-m-d',
         ];
     }
