@@ -55,7 +55,7 @@ class SalaController extends Controller
         // dividimos por 15, porque definimos que cada fila tem 15 lugares
         $num_lugares = $validatedData["num_lugares"];
         $num_filas = $validatedData["num_filas"];
-        $sala->create_seats($num_lugares, $num_filas);
+        $sala->criarLugares($num_lugares, $num_filas);
 
         return redirect()->route('admin.salas.index')->with('success', __('Movie Theater created successfully'));
     }
@@ -90,7 +90,7 @@ class SalaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(CreateSalaPost $request, Sala $sala)
-    {
+    {dd("asdasdasd");
         $validatedData = $request->validated();
 
         $num_lugares = $validatedData["num_lugares"];

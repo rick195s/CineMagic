@@ -28,7 +28,7 @@ class UpdateClientPost extends FormRequest
     {
         return [
             'name' => ['string', 'max:255'],
-            'nif' => ['nullable','max:9'],
+            'nif' => ['nullable','numeric','max:9'],
             'tipo_pagamento' => ['nullable', Rule::in(['MBWAY', 'VISA','NULL','PAYPAL'])],
             'foto_url' => ['nullable', 'image', 'max:8192']
         ];
