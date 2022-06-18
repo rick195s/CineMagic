@@ -99,7 +99,8 @@ class SessaoController extends Controller
      */
     public function destroy(Sessao $sessao)
     {
-        //
+        $sessao->delete();
+        return back()->with('success', __('Session Deleted'));
     }
 
     /**

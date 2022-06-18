@@ -56,13 +56,13 @@
                                         </td>
                                         <td>
 
-
+                                            @can('update', $sessao)
                                             <a href="{{ route('admin.users.edit', $sessao->id)}}"
                                                 class="btn btn-info"><i data-feather="edit"></i> </a>
+                                            @endcan
 
 
-
-
+                                            @can('delete', $sessao)
                                             <button form="delete_sessao_{{$sessao->id}}" class="btn btn-danger"><i
                                                     data-feather="trash-2"></i> </button>
 
@@ -71,7 +71,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
-
+                                            @endcan
                                         </td>
                                     </tr>
                                     @endforeach
