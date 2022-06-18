@@ -85,28 +85,4 @@ class FilmePolicy
 
         return true;
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Filme  $filme
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Filme $filme)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Filme  $filme
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Filme $filme)
-    {
-        //
-    }
 }
