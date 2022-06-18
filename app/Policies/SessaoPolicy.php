@@ -44,7 +44,11 @@ class SessaoPolicy
      */
     public function create(User $user)
     {
-        //
+        if (!$user->isAdmin()) {
+            return $this->deny(__("Only admins can create sessions"));
+        }
+
+        return true;
     }
 
     /**

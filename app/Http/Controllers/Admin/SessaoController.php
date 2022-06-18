@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateSessaoPost;
+use App\Models\Filme;
+use App\Models\Sala;
 use App\Models\Sessao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +46,10 @@ class SessaoController extends Controller
      */
     public function create()
     {
-        //
+        $sessao = new Sessao();
+        $salas = Sala::all();
+        $filmes = Filme::all();
+        return view('admin.sessoes.create', compact('sessao', 'salas', 'filmes'));
     }
 
     /**
@@ -52,9 +58,12 @@ class SessaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSessaoPost $request)
     {
-        //
+        $validatedData = $request->validated();
+        Sessao::create($validatedData);
+
+        return redirect()->route('admin.sessoes.index')->with('success', __('Session created successfully'));
     }
 
     /**
