@@ -60,16 +60,6 @@ class SalaController extends Controller
         return redirect()->route('admin.salas.index')->with('success', __('Movie Theater created successfully'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  Sala $sala
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sala $sala)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

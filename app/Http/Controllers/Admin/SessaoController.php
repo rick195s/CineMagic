@@ -66,16 +66,7 @@ class SessaoController extends Controller
         return redirect()->route('admin.sessoes.index')->with('success', __('Session created successfully'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sessao  $sessao
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sessao $sessao)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

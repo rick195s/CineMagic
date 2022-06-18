@@ -61,17 +61,6 @@ class FilmeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Filme  $filme
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Filme $filme)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Filme  $filme
