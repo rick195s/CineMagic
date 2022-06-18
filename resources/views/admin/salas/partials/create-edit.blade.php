@@ -28,7 +28,7 @@
     <label for="num_filas" class="col-md-4 col-form-label text-md-end">{{ __('Number of Rows') }}</label>
 
     <div class="col-md-6">
-        <input id="num_filas" type="number" value="{{old('num_lugares', $sala->number_of_rows())}}" class="form-control @error('num_filas') is-invalid @enderror" name="num_filas" required>
+        <input id="num_filas" type="number" value="{{old('num_lugares', $sala->numFilas())}}" class="form-control @error('num_filas') is-invalid @enderror" name="num_filas" required>
 
         @error('num_filas')
         <span class="small text-danger" role="alert">

@@ -33,6 +33,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/profile', [ClienteController::class, 'index'])->name('client.profile');
+Route::post('/profile', [ClienteController::class, 'update'])->name('client.profile.update');
 
 
 // rotas para alteração da password
