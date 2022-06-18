@@ -95,7 +95,7 @@
                                     <a class="dropdown-item"
                                         href="{{ route('admin.users.show', auth()->user()->id) }}">{{ __('Profile') }}</a>
                                 </li>
-                            @elsecan("view", auth()->user()->cliente ?? new App\Models\Cliente)
+                            @else
                                 <li>
                                     <a class="dropdown-item" href="{{ route('client.profile') }}">{{ __('Profile') }}</a>
                                 </li>
