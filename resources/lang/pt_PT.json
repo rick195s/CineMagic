@@ -97,6 +97,9 @@
     "Screen Room": "Sala",
     "Validate": "Validar",
     "Session no longer available": "Sessão já não disponível",
+    "Only sessions without marked seats can be deleted": "Apenas sessões sem lugares marcados podem ser apagadas",
+    "Only employees can delete sessions": "Apenas os funcionários podem apagar sessões",
+    "Session Deleted": "Sessão Apagada",
 
     "Dashboard": "Painel de Controlo",
     "Settings": "Configurações",

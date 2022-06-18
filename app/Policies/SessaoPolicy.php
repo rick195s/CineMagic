@@ -68,7 +68,15 @@ class SessaoPolicy
      */
     public function delete(User $user, Sessao $sessao)
     {
-        //
+        if (!$user->isEmployee()) {
+            return $this->deny(__("Only employees can delete sessions"));
+        }
+
+        if ($sessao->num_lugares() != 0) {
+            return $this->deny(__("Only sessions without marked seats can be deleted"));
+        }
+
+        return true;
     }
 
     /**
