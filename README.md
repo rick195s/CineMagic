@@ -515,7 +515,7 @@ $this->route('user')
 
 - [x] Enviar o recibo automaticamente por email ao cliente;
 
-- [ ] Recibo tem de estar sempre disponivel em HTML (POLICIES);
+- [x] Recibo tem de estar sempre disponivel em HTML (POLICIES);
 
 - [x] Gerar recibo em PDF e armazenar permanentemente (POLICIES);
 
@@ -525,7 +525,7 @@ $this->route('user')
 
 - [ ] Sempre que o utilizador clicar na opção de fazer download do bilhete, um PDF dinamico é gerado e é feito o download do mesmo, depois disso o PDF não é armazenado;
 
-- [ ] Os clientes devem ter acesso ao histórico de todos os recibos, sendo que podem ver o recibo e os bilhetes em HTML ou descarregra em PDF;
+- [x] Os clientes devem ter acesso ao histórico de todos os recibos, sendo que podem ver o recibo e os bilhetes em HTML ou descarregra em PDF;
 
 - [ ] Os clientes têm acesso a todos os bilhetes válidos (os que ainda nao foram usados);
 

@@ -256,9 +256,14 @@
                                             {{ date('H:i', strtotime($bilhete->sessao->horario_inicio)) }}
                                         </div>
                                         <div>
+                                            <p>{{ __('Seat') . ': ' . $lugar }}
+                                            </p>
+                                        </div>
+                                        <div>
                                             <p>{{ __('Movie Theater') . ': ' . $bilhete->sessao->sala->nome }}
                                             </p>
                                         </div>
+
 
                                         <div>
                                             <img src="data:image/png;base64, {{ $qrcode }}">

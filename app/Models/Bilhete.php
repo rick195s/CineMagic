@@ -73,10 +73,12 @@ class Bilhete extends Model
 
         $https_url = route('admin.bilhetes.use', $this->id);
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->generate($https_url));
+        $lugar = $this->lugar->fila . $this->lugar->posicao;
 
         $pdf = PDF::loadView('pdf.ticket', [
             "user" => Auth::user(),
             "bilhete" => $this,
+            "lugar" => $lugar,
             "qrcode" => $qrcode
         ]);
 

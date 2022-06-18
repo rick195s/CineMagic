@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\UpdateClientPost;
+use App\Models\Bilhete;
 use App\Models\Recibo;
 use Illuminate\Support\Facades\Storage;
 
@@ -74,5 +75,37 @@ class ClienteController extends Controller
         }
 
         return Storage::download('pdf_recibos/' . $recibo->recibo_pdf_url);
+    }
+
+    public function bilhetes(Recibo $recibo)
+    {
+        if ($recibo->cliente_id != auth()->user()->cliente->id) {
+            return redirect()->back()->with('error', __('Recibo not found'));
+        }
+
+
+        $bilhetes = $recibo->bilhetes->filter(
+            function ($bilhete) {
+                return !$bilhete->usado();
+            }
+        );
+
+        if (count((array)$bilhetes) == 0) {
+            return redirect()->back()->with('error', __('Tickets already used'));
+        }
+
+        return view('bilhetes', compact('bilhetes'));
+    }
+
+    public function bilhete(Bilhete $bilhete)
+    {
+        if (
+            $bilhete->recibo->cliente_id != auth()->user()->cliente->id
+            || $bilhete->usado()
+        ) {
+            return redirect()->back()->with('error', __('Recibo not found'));
+        }
+
+        return $bilhete->criarPdf()->download('bilhete.pdf');
     }
 }

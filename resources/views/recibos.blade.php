@@ -16,6 +16,7 @@
                             <th>{{ __('Date') }}</th>
                             <th>{{ __('Price') }}</th>
                             <th>{{ __('PDF') }}</th>
+                            <th>{{ __('Tickets') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,11 @@
                                     @else
                                         {{ __('There is no invoice url') }}
                                     @endif
+
+                                </td>
+                                <td>
+                                    <a href=" {{ route('client.bilhetes', $recibo->id) }}">
+                                        {{ __('See') }}</a>
 
                                 </td>
                             </tr>
