@@ -521,13 +521,13 @@ $this->route('user')
 
 - [x] Sempre que é feita a compra os bilhetes são gerados e sao enviados no mesmo email que o recibo;
 
-- [ ] Os bilhetes têm de estar sempre acessiceis em formato HTML (POLICIES);
+- [x] Os bilhetes têm de estar sempre acessiceis em formato HTML (POLICIES);
 
-- [ ] Sempre que o utilizador clicar na opção de fazer download do bilhete, um PDF dinamico é gerado e é feito o download do mesmo, depois disso o PDF não é armazenado;
+- [x] Sempre que o utilizador clicar na opção de fazer download do bilhete, um PDF dinamico é gerado e é feito o download do mesmo, depois disso o PDF não é armazenado;
 
 - [x] Os clientes devem ter acesso ao histórico de todos os recibos, sendo que podem ver o recibo e os bilhetes em HTML ou descarregra em PDF;
 
-- [ ] Os clientes têm acesso a todos os bilhetes válidos (os que ainda nao foram usados);
+- [x] Os clientes têm acesso a todos os bilhetes válidos (os que ainda nao foram usados);
 
 #### Controlo de Acesso à sessao:
 
