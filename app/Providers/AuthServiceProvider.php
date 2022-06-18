@@ -10,7 +10,6 @@ use App\Models\Carrinho;
 use App\Models\Sessao;
 use App\Models\User;
 use App\Policies\BilhetePolicy;
-use App\Policies\ClientePolicy;
 use App\Policies\FilmePolicy;
 use App\Policies\SalaPolicy;
 use App\Policies\SessaoPolicy;
@@ -31,7 +30,6 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Sala::class => SalaPolicy::class,
         Bilhete::class => BilhetePolicy::class,
-        Cliente::class => ClientePolicy::class,
         Filme::class => FilmePolicy::class,
         Sessao::class => SessaoPolicy::class,
         Carrinho::class => CarrinhoPolicy::class,

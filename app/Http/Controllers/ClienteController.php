@@ -23,10 +23,6 @@ class ClienteController extends Controller
      */
     public function index()
     {
-
-        if (Auth::user()->cannot('view', Cliente::class)) {
-            return redirect(route('home'))->with('error', __('Access Denied'));
-        }
         $user = Auth::user();
         return view('profile', compact('user'));
     }
@@ -59,5 +55,11 @@ class ClienteController extends Controller
         );
 
         return redirect()->back()->with('success', __('User updated successfully'));
+    }
+
+    public function recibos()
+    {
+        $recibos = auth()->user()->cliente->recibos()->paginate(10);
+        return view('recibos', compact('recibos'));
     }
 }

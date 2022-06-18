@@ -15,7 +15,7 @@ class UpdateClientPost extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('update', Cliente::class);
+        return true;
     }
 
     /**

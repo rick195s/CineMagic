@@ -32,10 +32,12 @@ Auth::routes(['verify' => true]);
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/profile', [ClienteController::class, 'index'])->name('client.profile');
-Route::post('/profile', [ClienteController::class, 'update'])->name('client.profile.update');
 
-
+Route::middleware(['isClient'])->group(function () {
+    Route::get('/profile', [ClienteController::class, 'index'])->name('client.profile');
+    Route::post('/profile', [ClienteController::class, 'update'])->name('client.profile.update');
+    Route::get('/recibos', [ClienteController::class, 'recibos'])->name('client.recibos');
+});
 // rotas para alteração da password
 Route::get('/password/change', [ChangePasswordController::class, 'index'])->name('change_password.index');
 Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');

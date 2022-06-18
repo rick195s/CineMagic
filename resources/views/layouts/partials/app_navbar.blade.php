@@ -28,6 +28,13 @@
                                 href="{{ route('admin.sessoes.index') }}">{{ __('Dashboard') }}</a>
                         </li>
                     @endif
+                    @if (auth()->user()->isClient())
+                        <li class="header__nav-item">
+                            <a class="dopdown-toggle header__nav-link"
+                                href="{{ route('client.recibos') }}">{{ __('Invoice') }}</a>
+                        </li>
+                    @endif
+
                 @endauth
 
             </ul>
@@ -88,7 +95,7 @@
                                     <a class="dropdown-item"
                                         href="{{ route('admin.users.show', auth()->user()->id) }}">{{ __('Profile') }}</a>
                                 </li>
-                            @elsecan("view", auth()->user()->cliente)
+                            @elsecan("view", auth()->user()->cliente ?? new App\Models\Cliente)
                                 <li>
                                     <a class="dropdown-item" href="{{ route('client.profile') }}">{{ __('Profile') }}</a>
                                 </li>
