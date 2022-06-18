@@ -49,7 +49,7 @@ class Recibo extends Model
         $this->preco_total_sem_iva = number_format($conf->preco_bilhete_sem_iva * $num_lugares, 2);
         $this->preco_total_com_iva = number_format($preco_bilhete_com_iva  * $num_lugares, 2);
         $this->iva = number_format($this->preco_total_com_iva - $this->preco_total_sem_iva, 2);
-        $this->cliente_id = auth()->user()->cliente->id;
+        $this->cliente_id = auth()->user()->id;
         $this->nome_cliente = auth()->user()->name;
         $this->nif = $nif;
         $this->tipo_pagamento = $tipo_pagamento;
