@@ -90,7 +90,7 @@ class SalaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(CreateSalaPost $request, Sala $sala)
-    {dd("asdasdasd");
+    {
         $validatedData = $request->validated();
 
         $num_lugares = $validatedData["num_lugares"];
