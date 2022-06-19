@@ -48,11 +48,10 @@ class ClienteController extends Controller
         $user->foto_url = $validatedData['foto_url'] ?? $user->foto_url;
         $user->update();
 
-
         $user->cliente()->update(
             [
                 'nif' => $validatedData['nif'] ?? $user->cliente->nif,
-                'tipo_pagamento' => $validatedData['tipo_pagamento'] ?? $user->cliente->tipo_pagamento
+                'tipo_pagamento' => $validatedData['tipo_pagamento'] ?? $user->cliente->tipo_pagamento,
             ]
         );
 

@@ -14,6 +14,7 @@ use App\Policies\FilmePolicy;
 use App\Policies\SalaPolicy;
 use App\Policies\SessaoPolicy;
 use App\Policies\CarrinhoPolicy;
+use App\Policies\ClientePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
@@ -33,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         Filme::class => FilmePolicy::class,
         Sessao::class => SessaoPolicy::class,
         Carrinho::class => CarrinhoPolicy::class,
+        Cliente::class => ClientePolicy::class,
     ];
 
     /**

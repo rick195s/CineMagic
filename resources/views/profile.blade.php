@@ -43,6 +43,7 @@
             <div class="col-md-6">
                 <select class="form-control @error('tipo_pagamento') is-invalid @enderror" name="tipo_pagamento"
                     id="paymentType">
+                    <option value>{{ __('Select One') }}</option>
                     <option value="VISA"
                         {{ 'VISA' == old('tipo_pagamento', Auth::user()->cliente ? Auth::user()->cliente->tipo_pagamento ?? '' : '') ? 'selected' : '' }}>
                         VISA</option>
@@ -52,9 +53,6 @@
                     <option value="MBWAY"
                         {{ 'MBWAY' == old('tipo_pagamento', Auth::user()->cliente ? Auth::user()->cliente->tipo_pagamento ?? '' : '') ? 'selected' : '' }}>
                         MBWAY</option>
-                    <option value="NULL"
-                        {{ old('tipo_pagamento', Auth::user()->cliente->tipo_pagamento) ? '' : 'selected' }}>
-                        NENHUM</option>
                 </select>
             </div>
 
