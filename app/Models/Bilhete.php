@@ -82,6 +82,8 @@ class Bilhete extends Model
             "qrcode" => $qrcode
         ]);
 
+        URL::forceScheme('http');
+
         return $pdf;
     }
 }

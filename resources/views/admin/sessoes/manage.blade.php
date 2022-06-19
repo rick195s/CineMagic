@@ -16,8 +16,8 @@
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="{{ asset('storage/cartazes/' . $sessao->filme->cartaz_url) }}"
-                        class="img-fluid rounded-start" alt="{{ $sessao->filme->titulo }}">
+                    <img src="{{ asset('storage/cartazes/' . $sessao->filme->cartaz_url) }}" class="img-fluid rounded-start"
+                        alt="{{ $sessao->filme->titulo }}">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body h-100">
@@ -55,6 +55,7 @@
                                                     method="post">
                                                     @csrf
                                                     @method('PATCH')
+                                                    <input type="hidden" name="sessao_id" value="{{ $sessao->id }}">
 
                                                     <button class="btn btn-success">{{ __('Mark as Used') }}</button>
 
@@ -87,8 +88,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="qrScannerModal2" aria-hidden="true" aria-labelledby="qrScannerModalLabel2"
-        tabindex="-1">
+    <div class="modal fade" id="qrScannerModal2" aria-hidden="true" aria-labelledby="qrScannerModalLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" id="qrScannerModal2Content">
                 <div class="modal-body">
