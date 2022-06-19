@@ -90,7 +90,8 @@
                         @foreach ($conj_sessoes as $tipo_sessoes => $sessoes)
                             <li class="nav-item">
                                 <a class="nav-link {{ $loop->first ? 'active' : '' }} " data-toggle="tab"
-                                    href="#tab-{{ $loop->index }}" role="tab" aria-controls="tab-{{ $loop->index }}"
+                                    href="#tab-{{ $loop->index }}" role="tab"
+                                    aria-controls="tab-{{ $loop->index }}"
                                     aria-selected="{{ $loop->first ? 'true' : 'false' }}">5 {{ $tipo_sessoes }}</a>
                             </li>
                         @endforeach
@@ -178,10 +179,12 @@
                                                     <td colspan="2" class="text-end">
                                                         @can('adicionarSessao', [Session::get('carrinho') ?? new
                                                             App\Models\Carrinho(), $sessao])
-                                                            <a class="text-white btn btn-sm bg-success"
-                                                                href="{{ route('carrinho.add_sessao', $sessao->id) }}">
-                                                                {{ __('Add to Cart') }}
-                                                            </a>
+                                                            <form method="POST"
+                                                                action="{{ route('carrinho.add_sessao', $sessao->id) }}">
+                                                                @csrf
+                                                                <button type="submit"
+                                                                    class="text-white btn btn-sm bg-success">{{ __('Add to Cart') }}</button>
+                                                            </form>
                                                         @elsecan('selectSeat', $sessao)
                                                             <a class="text-white btn btn-sm bg-success"
                                                                 href="{{ route('sessao.select_seat', $sessao->id) }}">

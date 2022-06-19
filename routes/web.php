@@ -40,7 +40,10 @@ Route::middleware(['isClient'])->group(function () {
     Route::get('/recibos/{recibo}', [ClienteController::class, 'recibo'])->name('client.recibos.download');
     Route::get('/recibos/{recibo}/bilhetes', [ClienteController::class, 'bilhetes'])->name('client.bilhetes');
     Route::get('/bilhetes/{bilhete}', [ClienteController::class, 'bilhete'])->name('client.bilhetes.download');
+
+    Route::post('/carrinho/checkout', [CarrinhoController::class, 'confirmarCompra'])->name('carrinho.checkout')->middleware('auth');
 });
+
 // rotas para alteração da password
 Route::get('/password/change', [ChangePasswordController::class, 'index'])->name('change_password.index');
 Route::post('/password/change', [ChangePasswordController::class, 'update'])->name('change_password.update');
@@ -53,9 +56,8 @@ Route::get('/filmes/{filme}', [FilmeFrontController::class, 'show'])->name('film
 
 // rotas relacionadas com a gestão do carrinho
 Route::get('/carrinho/checkout', [CarrinhoController::class, 'index'])->name('checkout.index');
-Route::post('/carrinho/checkout', [CarrinhoController::class, 'confirmarCompra'])->name('carrinho.checkout')->middleware('auth');
-Route::get('/carrinho/{sessao}', [CarrinhoController::class, 'adicionarSessao'])->name('carrinho.add_sessao');
-Route::get('/carrinho/{sessao}/{lugar}', [CarrinhoController::class, 'adicionarLugar'])->name('carrinho.add_lugar');
+Route::post('/carrinho/{sessao}', [CarrinhoController::class, 'adicionarSessao'])->name('carrinho.add_sessao');
+Route::post('/carrinho/{sessao}/{lugar}', [CarrinhoController::class, 'adicionarLugar'])->name('carrinho.add_lugar');
 Route::delete('/carrinho/delete/{sessao}', [CarrinhoController::class, 'removerSessao'])->name('carrinho.delete_sessao');
 Route::delete('/carrinho/delete/{sessao}/{lugar}', [CarrinhoController::class, 'removerLugar'])->name('carrinho.delete_lugar');
 Route::delete('/carrinho/empty', [CarrinhoController::class, 'limpar'])->name('carrinho.empty');

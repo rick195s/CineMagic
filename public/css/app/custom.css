@@ -1,5 +1,5 @@
 input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 }
 a{
@@ -38,9 +38,14 @@ a{
     background-color: #212529;
 }
 
+.seats{
+    color: white;
+}
 .seats:hover{
     color: #0d6efd;
 }
+
+
 
 .alert-danger{
     background-color: #d24d59;
@@ -60,7 +65,7 @@ a{
 
 .toast-container{
     z-index: 50;
-    
+
 }
 
 .accordion__list tbody tr:hover{
