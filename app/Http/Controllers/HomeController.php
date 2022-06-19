@@ -25,13 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $generos = Genero::take(4)->get();
         $filmes_por_genero = [];
         foreach ($generos as $genero) {
             $filmes_por_genero[$genero->nome] = $genero->filmes->take(5);
         }
-        $destaques = Filme::take(5)->get();
+
+        $destaques = Filme::with('sessoes')->whereRelation('sessoes', 'data', now()->format('Y-m-d'))->take(5)->get();
         return view('home', compact('destaques', 'filmes_por_genero'));
     }
 }
