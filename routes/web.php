@@ -70,6 +70,7 @@ Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(
     Route::get('sessoes', [SessaoController::class, 'index'])->name('sessoes.index');
 
     Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::match(['put', 'patch'], 'users/{user}', [UserController::class, 'update'])->name('users.update');
 
     // rotas protegidas (só para funcionarios)
     Route::middleware(['isEmployee'])->group(function () {
@@ -85,7 +86,7 @@ Route::middleware('can:view-dashboard')->prefix('admin')->name('admin.')->group(
         Route::post('/settings', [DashboardController::class, 'settings'])->name('settings.update');
 
         // rotas para gerir users no dashboard admin
-        Route::resource('users', UserController::class)->except('show');
+        Route::resource('users', UserController::class)->except('show', 'update');
         Route::patch('users/{user}/update_state', [UserController::class, 'updateState'])->name('users.update_state');
 
         // admin dashboard manage salas

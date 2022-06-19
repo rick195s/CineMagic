@@ -71,6 +71,9 @@ class UserPolicy
      */
     public function update(User $user, User $userToUpdate)
     {
+        if ($user->id == $userToUpdate->id) {
+            return true;
+        }
 
         if (!$user->isAdmin()) {
             return $this->deny(__("Only the admins can update users"));

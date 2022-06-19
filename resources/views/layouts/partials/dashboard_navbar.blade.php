@@ -37,15 +37,8 @@
                             <a class="dropdown-item" href="{{ route('admin.users.show', auth()->user()->id) }}"><i
                                     class="align-middle me-1" data-feather="user"></i> {{ __('Profile') }}</a>
                         @endcan
-
-                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i>
-                            Analytics</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('home') }}"><i class="align-middle me-1"
-                                data-feather="settings"></i>
-                            Settings & Privacy</a>
-                        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i>
-                            Help Center</a>
+                        <a class="dropdown-item"
+                            href="{{ route('change_password.index') }}">{{ __('Change Password') }}</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();

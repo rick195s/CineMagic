@@ -112,7 +112,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserPost $request, User $user)
     {
-
         // o metodo authorize dentro do UpdateUser já verifica se o utilizador
         // atual tem as permissoes necessarias
         $validatedData = $request->validated();
@@ -125,7 +124,8 @@ class UserController extends Controller
 
         $user->update($validatedData);
 
-        return redirect()->route('admin.users.index')->with('success', __('User updated successfully'));
+        return auth()->user()->can('viewAny', User::class) ? redirect()->route('admin.users.index')->with('success', __('User updated successfully')) :
+            redirect()->back()->with('success', __('User updated successfully'));
     }
 
     /**

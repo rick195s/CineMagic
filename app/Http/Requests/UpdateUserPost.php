@@ -26,12 +26,21 @@ class UpdateUserPost extends FormRequest
      */
     public function rules()
     {
-        $user = User::findOrFail($this->route('user'));
+        if ($this->route('user')) {
+            $user = User::findOrFail($this->route('user')->id);
+        }
         return [
             'name' => ['required', 'string', 'max:255'],
             // ignore serve para nao verificarmos se o email inserido é igual ao email do utilizador que estamos a editar
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id),],
-            'tipo' => ['required', Rule::in(['A', 'F'])],
+            'tipo' => [Rule::in(['A', 'F']), function ($attribute, $value, $fail) {
+                if (!auth()->user()->isAdmin()) {
+                    $fail('The ' . $attribute . ' is invalid.');
+                    if (!$value) {
+                        $fail('The ' . $attribute . ' is required.');
+                    }
+                }
+            },],
             'foto_url' => ['nullable', 'image', 'max:8192'],
 
         ];
